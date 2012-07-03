@@ -9,6 +9,8 @@ import static org.apache.commons.lang3.StringUtils.startsWith;
 
 import java.nio.charset.Charset;
 import java.nio.charset.UnsupportedCharsetException;
+import java.text.Format;
+import java.text.ParseException;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
@@ -186,13 +188,26 @@ public class ContextProperties extends Properties {
 	 * @param key
 	 *            the property key.
 	 * 
+	 * @param format
+	 *            the {@link Format} to parse the key values.
+	 * 
 	 * @return the {@link List} from the property or an empty list if no
 	 *         property with the key was found.
+	 * 
+	 * @throws ParseException
+	 *             if there was an error to parse a key value.
 	 */
-	public List<String> listProperty(String key) {
+	public <T> List<T> typedListProperty(String key, Format format)
+			throws ParseException {
+		List<T> list = new ArrayList<T>();
 		String property = getProperty(key);
-		return property == null ? new ArrayList<String>() : asList(split(" ,;",
-				property));
+		if (property == null) {
+			return list;
+		}
+		for (String value : split(property, " ,;")) {
+			addParsedObject(list, format, value);
+		}
+		return list;
 	}
 
 	/**
@@ -201,12 +216,64 @@ public class ContextProperties extends Properties {
 	 * @param key
 	 *            the property key.
 	 * 
+	 * @param format
+	 *            the {@link Format} to parse the key values.
+	 * 
+	 * @param defaultValue
+	 *            the default {@link List}.
+	 * 
+	 * @return the {@link List} from the property or the default list if no
+	 *         property with the key was found.
+	 * 
+	 * @throws ParseException
+	 *             if there was an error to parse a key value.
+	 */
+	public <T> List<T> typedListProperty(String key, Format format,
+			List<T> defaultValue) throws ParseException {
+		List<T> list = new ArrayList<T>();
+		String property = getProperty(key, join(defaultValue, ","));
+		for (String value : split(property, " ,;")) {
+			addParsedObject(list, format, value);
+		}
+		return list;
+	}
+
+	@SuppressWarnings("unchecked")
+	private <T> void addParsedObject(List<T> list, Format format, String value)
+			throws ParseException {
+		list.add((T) format.parseObject(value));
+	}
+
+	/**
+	 * Returns a list property.
+	 * 
+	 * @param key
+	 *            the property key.
+	 * 
+	 * @return the {@link List} from the property or an empty list if no
+	 *         property with the key was found.
+	 */
+	public List<String> listProperty(String key) {
+		String property = getProperty(key);
+		return property == null ? new ArrayList<String>() : asList(split(
+				property, " ,;"));
+	}
+
+	/**
+	 * Returns a list property.
+	 * 
+	 * @param key
+	 *            the property key.
+	 * 
+	 * @param defaultValue
+	 *            the default {@link List}.
+	 * 
 	 * @return the {@link List} from the property or the default list if no
 	 *         property with the key was found.
 	 */
 	public List<String> listProperty(String key, List<String> defaultValue) {
 		String property = getProperty(key, join(defaultValue, ","));
-		return Arrays.asList(split(" ,;", property));
+		return Arrays.asList(split(property, " ,;"));
 	}
 
 	@Override
