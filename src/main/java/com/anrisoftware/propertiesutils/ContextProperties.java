@@ -1,11 +1,15 @@
 package com.anrisoftware.propertiesutils;
 
+import static java.lang.Boolean.parseBoolean;
+import static java.lang.Double.parseDouble;
+import static java.util.Arrays.asList;
 import static org.apache.commons.lang3.StringUtils.join;
 import static org.apache.commons.lang3.StringUtils.split;
 import static org.apache.commons.lang3.StringUtils.startsWith;
 
 import java.nio.charset.Charset;
 import java.nio.charset.UnsupportedCharsetException;
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Properties;
@@ -78,6 +82,20 @@ public class ContextProperties extends Properties {
 	 * @param key
 	 *            the property key.
 	 * 
+	 * @return the {@link Boolean} from the property or {@code null} if no
+	 *         property with the key was found.
+	 */
+	public Boolean booleanProperty(String key) {
+		String property = getProperty(key);
+		return property == null ? null : parseBoolean(property);
+	}
+
+	/**
+	 * Returns a boolean property.
+	 * 
+	 * @param key
+	 *            the property key.
+	 * 
 	 * @param defaultValue
 	 *            the default {@link Boolean}.
 	 * 
@@ -86,7 +104,21 @@ public class ContextProperties extends Properties {
 	 */
 	public Boolean booleanProperty(String key, Boolean defaultValue) {
 		String property = getProperty(key, String.valueOf(defaultValue));
-		return Boolean.parseBoolean(property);
+		return parseBoolean(property);
+	}
+
+	/**
+	 * Returns a number property.
+	 * 
+	 * @param key
+	 *            the property key.
+	 * 
+	 * @return the {@link Number} from the property or {@code null} if no
+	 *         property with the key was found.
+	 */
+	public Number numberProperty(String key) {
+		String property = getProperty(key);
+		return property == null ? null : parseDouble(property);
 	}
 
 	/**
@@ -106,7 +138,25 @@ public class ContextProperties extends Properties {
 	 */
 	public Number numberProperty(String key, Number defaultValue) {
 		String property = getProperty(key, String.valueOf(defaultValue));
-		return Double.parseDouble(property);
+		return parseDouble(property);
+	}
+
+	/**
+	 * Returns a character set property.
+	 * 
+	 * @param key
+	 *            the property key.
+	 * 
+	 * @return the {@link Charset} from the property or {@code null} if no
+	 *         property with the key was found.
+	 * 
+	 * @throws UnsupportedCharsetException
+	 *             If no support for the named character set is available in
+	 *             this instance of the Java virtual machine.
+	 */
+	public Charset charsetProperty(String key) {
+		String property = getProperty(key);
+		return property == null ? null : Charset.forName(property);
 	}
 
 	/**
@@ -131,13 +181,25 @@ public class ContextProperties extends Properties {
 	}
 
 	/**
-	 * Returns a character set property.
+	 * Returns a list property.
 	 * 
 	 * @param key
 	 *            the property key.
 	 * 
-	 * @param defaultValue
-	 *            the default {@link List}.
+	 * @return the {@link List} from the property or an empty list if no
+	 *         property with the key was found.
+	 */
+	public List<String> listProperty(String key) {
+		String property = getProperty(key);
+		return property == null ? new ArrayList<String>() : asList(split(" ,;",
+				property));
+	}
+
+	/**
+	 * Returns a list property.
+	 * 
+	 * @param key
+	 *            the property key.
 	 * 
 	 * @return the {@link List} from the property or the default list if no
 	 *         property with the key was found.
