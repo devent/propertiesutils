@@ -325,7 +325,7 @@ public class ContextProperties extends Properties {
 	}
 
 	private String keyWithContext(String key) {
-		if (!startsWith(context, key)) {
+		if (!startsWith(key, context)) {
 			key = String.format("%s.%s", context, key);
 		}
 		return key;
