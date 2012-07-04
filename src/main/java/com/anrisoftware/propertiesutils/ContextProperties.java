@@ -144,6 +144,43 @@ public class ContextProperties extends Properties {
 	}
 
 	/**
+	 * Returns a character property.
+	 * 
+	 * @param key
+	 *            the property key.
+	 * 
+	 * @return the {@link Character} from the property or {@code null} if no
+	 *         property with the key was found.
+	 * 
+	 * @throws IndexOutOfBoundsException
+	 *             if the property is empty.
+	 */
+	public Character charProperty(String key) {
+		String property = getProperty(key);
+		return property == null ? null : property.charAt(0);
+	}
+
+	/**
+	 * Returns a character property.
+	 * 
+	 * @param key
+	 *            the property key.
+	 * 
+	 * @param defaultValue
+	 *            the default {@link Character}.
+	 * 
+	 * @return the {@link Character} from the property or the default value if
+	 *         no property with the key was found.
+	 * 
+	 * @throws IndexOutOfBoundsException
+	 *             if the property is empty.
+	 */
+	public Character charProperty(String key, Character defaultValue) {
+		String property = getProperty(key);
+		return property == null ? defaultValue : property.charAt(0);
+	}
+
+	/**
 	 * Returns a character set property.
 	 * 
 	 * @param key
@@ -293,4 +330,5 @@ public class ContextProperties extends Properties {
 		}
 		return key;
 	}
+
 }
