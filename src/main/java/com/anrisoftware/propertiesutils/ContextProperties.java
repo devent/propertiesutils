@@ -48,8 +48,21 @@ public class ContextProperties extends Properties {
 	 *            the {@link Properties} that are returned.
 	 */
 	public ContextProperties(Object context, Properties parentProperties) {
+		this(context.getClass(), parentProperties);
+	}
+
+	/**
+	 * Sets the context and the properties.
+	 * 
+	 * @param context
+	 *            an {@link Object} that is used as the context.
+	 * 
+	 * @param parentProperties
+	 *            the {@link Properties} that are returned.
+	 */
+	public ContextProperties(Class<?> context, Properties parentProperties) {
 		super(parentProperties);
-		this.context = context.getClass().getPackage().getName();
+		this.context = context.getPackage().getName();
 	}
 
 	@Override
