@@ -233,6 +233,50 @@ public class ContextProperties extends Properties {
 	}
 
 	/**
+	 * Returns a property of the specified type.
+	 * 
+	 * @param key
+	 *            the property key.
+	 * 
+	 * @param format
+	 *            the {@link Format} to parse the type.
+	 * 
+	 * @return the the property or {@code null} if no property with the key was
+	 *         found.
+	 * 
+	 * @throws ParseException
+	 *             if the property cannot be parsed to the type.
+	 */
+	public <T> T typedProperty(String key, Format format) throws ParseException {
+		return typedProperty(key, format, null);
+	}
+
+	/**
+	 * Returns a property of the specified type.
+	 * 
+	 * @param key
+	 *            the property key.
+	 * 
+	 * @param defaultValue
+	 *            the default value.
+	 * 
+	 * @param format
+	 *            the {@link Format} to parse the type.
+	 * 
+	 * @return the the property or {@code null} if no property with the key was
+	 *         found.
+	 * 
+	 * @throws ParseException
+	 *             if the property cannot be parsed to the type.
+	 */
+	@SuppressWarnings("unchecked")
+	public <T> T typedProperty(String key, Format format, T defaultValue)
+			throws ParseException {
+		String property = getProperty(key, String.valueOf(defaultValue));
+		return property == null ? null : (T) format.parseObject(property);
+	}
+
+	/**
 	 * Returns a list property.
 	 * 
 	 * @param key
