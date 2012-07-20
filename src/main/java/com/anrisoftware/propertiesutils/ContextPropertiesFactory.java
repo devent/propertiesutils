@@ -17,7 +17,9 @@ import java.util.Properties;
  */
 public class ContextPropertiesFactory {
 
-	private final Class<?> context;
+	private static final Charset DEFAULT_CHARSET = Charset.defaultCharset();
+
+	private final String context;
 
 	/**
 	 * Sets the specified context object.
@@ -36,6 +38,16 @@ public class ContextPropertiesFactory {
 	 *            the context {@link Class}.
 	 */
 	public ContextPropertiesFactory(Class<?> context) {
+		this(context.getPackage().getName());
+	}
+
+	/**
+	 * Sets the specified context.
+	 * 
+	 * @param context
+	 *            the context.
+	 */
+	public ContextPropertiesFactory(String context) {
 		this.context = context;
 	}
 
@@ -52,11 +64,14 @@ public class ContextPropertiesFactory {
 	 */
 	public ContextProperties fromResource(String resourceName)
 			throws IOException {
-		return fromResource(resourceName, Charset.defaultCharset());
+		return fromResource(null, resourceName, DEFAULT_CHARSET);
 	}
 
 	/**
 	 * Loads the properties from a resource with a specified character set.
+	 * 
+	 * @param resourceContext
+	 *            the context {@link Class} for the resource.
 	 * 
 	 * @param resourceName
 	 *            the resource name.
@@ -69,9 +84,37 @@ public class ContextPropertiesFactory {
 	 * @throws IOException
 	 *             if there was an error loading the resource.
 	 */
-	public ContextProperties fromResource(String resourceName, Charset charset)
-			throws IOException {
-		return fromResource(getResource(context, resourceName), charset);
+	public ContextProperties fromResource(Class<?> resourceContext,
+			String resourceName) throws IOException {
+		return fromResource(resourceContext, resourceName, DEFAULT_CHARSET);
+	}
+
+	/**
+	 * Loads the properties from a resource with a specified character set.
+	 * 
+	 * @param resourceContext
+	 *            the context {@link Class} for the resource.
+	 * 
+	 * @param resourceName
+	 *            the resource name.
+	 * 
+	 * @param charset
+	 *            the {@link Charset} of the resource.
+	 * 
+	 * @return the {@link ContextProperties}.
+	 * 
+	 * @throws IOException
+	 *             if there was an error loading the resource.
+	 */
+	public ContextProperties fromResource(Class<?> resourceContext,
+			String resourceName, Charset charset) throws IOException {
+		URL url;
+		if (resourceContext != null) {
+			url = getResource(resourceContext, resourceName);
+		} else {
+			url = getResource(resourceName);
+		}
+		return fromResource(url, charset);
 	}
 
 	/**
@@ -86,7 +129,7 @@ public class ContextPropertiesFactory {
 	 *             if there was an error loading the resource.
 	 */
 	public ContextProperties fromResource(URL resource) throws IOException {
-		return fromResource(resource, Charset.defaultCharset());
+		return fromResource(resource, DEFAULT_CHARSET);
 	}
 
 	/**
