@@ -22,8 +22,15 @@ import java.util.Properties;
  * </p>
  * <p>
  * The properties keys are prefixed with the context, if not already present.
- * The context is an object package name. Defines additional methods to return
- * different types of properties.
+ * The context is an object package name. For example, if the context object is
+ * {@link ContextProperties} then the context is
+ * {@code "com.anrisoftware.propertiesutils"}. If then a property with the name
+ * {@code foo} is requested, then the property
+ * {@code "com.anrisoftware.propertiesutils.foo"} is looked up.
+ * </p>
+ * <p>
+ * Defines additional methods to return different types of properties, like
+ * boolean, number, list.
  * </p>
  * 
  * @author Erwin Mueller, erwin.mueller@deventm.org
@@ -31,9 +38,8 @@ import java.util.Properties;
  */
 public class ContextProperties extends Properties {
 
-	/**
-	 * 
-	 */
+	private static final String LIST_SEPARATOR_CHARS = " ,;";
+
 	private static final long serialVersionUID = 3495658613155578555L;
 
 	private final String context;
@@ -87,7 +93,7 @@ public class ContextProperties extends Properties {
 	 * @return the {@link String} from the property or the default string if no
 	 *         property with the key was found.
 	 */
-	public String stringProperty(String key, String defaultValue) {
+	public String getStringProperty(String key, String defaultValue) {
 		return getProperty(key, defaultValue);
 	}
 
@@ -100,7 +106,7 @@ public class ContextProperties extends Properties {
 	 * @return the {@link Boolean} from the property or {@code null} if no
 	 *         property with the key was found.
 	 */
-	public Boolean booleanProperty(String key) {
+	public Boolean getBooleanProperty(String key) {
 		String property = getProperty(key);
 		return property == null ? null : parseBoolean(property);
 	}
@@ -117,7 +123,7 @@ public class ContextProperties extends Properties {
 	 * @return the {@link Boolean} from the property or the default boolean if
 	 *         no property with the key was found.
 	 */
-	public Boolean booleanProperty(String key, Boolean defaultValue) {
+	public Boolean getBooleanProperty(String key, Boolean defaultValue) {
 		String property = getProperty(key, String.valueOf(defaultValue));
 		return parseBoolean(property);
 	}
@@ -131,7 +137,7 @@ public class ContextProperties extends Properties {
 	 * @return the {@link Number} from the property or {@code null} if no
 	 *         property with the key was found.
 	 */
-	public Number numberProperty(String key) {
+	public Number getNumberProperty(String key) {
 		String property = getProperty(key);
 		return property == null ? null : parseDouble(property);
 	}
@@ -149,9 +155,9 @@ public class ContextProperties extends Properties {
 	 *         property with the key was found.
 	 * 
 	 * @throws NumberFormatException
-	 *             if the string does not contain a parsable {@code double}.
+	 *             if the string does not contain a parseble {@code double}.
 	 */
-	public Number numberProperty(String key, Number defaultValue) {
+	public Number getNumberProperty(String key, Number defaultValue) {
 		String property = getProperty(key, String.valueOf(defaultValue));
 		return parseDouble(property);
 	}
@@ -166,9 +172,9 @@ public class ContextProperties extends Properties {
 	 *         property with the key was found.
 	 * 
 	 * @throws IndexOutOfBoundsException
-	 *             if the property is empty.
+	 *             if the property is an empty string.
 	 */
-	public Character charProperty(String key) {
+	public Character getCharProperty(String key) {
 		String property = getProperty(key);
 		return property == null ? null : property.charAt(0);
 	}
@@ -186,9 +192,9 @@ public class ContextProperties extends Properties {
 	 *         no property with the key was found.
 	 * 
 	 * @throws IndexOutOfBoundsException
-	 *             if the property is empty.
+	 *             if the property is an empty string.
 	 */
-	public Character charProperty(String key, Character defaultValue) {
+	public Character getCharProperty(String key, Character defaultValue) {
 		String property = getProperty(key);
 		return property == null ? defaultValue : property.charAt(0);
 	}
@@ -206,7 +212,7 @@ public class ContextProperties extends Properties {
 	 *             If no support for the named character set is available in
 	 *             this instance of the Java virtual machine.
 	 */
-	public Charset charsetProperty(String key) {
+	public Charset getCharsetProperty(String key) {
 		String property = getProperty(key);
 		return property == null ? null : Charset.forName(property);
 	}
@@ -227,7 +233,7 @@ public class ContextProperties extends Properties {
 	 *             If no support for the named character set is available in
 	 *             this instance of the Java virtual machine.
 	 */
-	public Charset charsetProperty(String key, Charset defaultValue) {
+	public Charset getCharsetProperty(String key, Charset defaultValue) {
 		String property = getProperty(key, String.valueOf(defaultValue));
 		return Charset.forName(property);
 	}
@@ -247,8 +253,9 @@ public class ContextProperties extends Properties {
 	 * @throws ParseException
 	 *             if the property cannot be parsed to the type.
 	 */
-	public <T> T typedProperty(String key, Format format) throws ParseException {
-		return typedProperty(key, format, null);
+	public <T> T getTypedProperty(String key, Format format)
+			throws ParseException {
+		return getTypedProperty(key, format, null);
 	}
 
 	/**
@@ -270,7 +277,7 @@ public class ContextProperties extends Properties {
 	 *             if the property cannot be parsed to the type.
 	 */
 	@SuppressWarnings("unchecked")
-	public <T> T typedProperty(String key, Format format, T defaultValue)
+	public <T> T getTypedProperty(String key, Format format, T defaultValue)
 			throws ParseException {
 		String property = getProperty(key, String.valueOf(defaultValue));
 		return property == null ? null : (T) format.parseObject(property);
@@ -291,14 +298,14 @@ public class ContextProperties extends Properties {
 	 * @throws ParseException
 	 *             if there was an error to parse a key value.
 	 */
-	public <T> List<T> typedListProperty(String key, Format format)
+	public <T> List<T> getTypedListProperty(String key, Format format)
 			throws ParseException {
 		List<T> list = new ArrayList<T>();
 		String property = getProperty(key);
 		if (property == null) {
 			return list;
 		}
-		for (String value : split(property, " ,;")) {
+		for (String value : split(property, LIST_SEPARATOR_CHARS)) {
 			addParsedObject(list, format, value);
 		}
 		return list;
@@ -322,11 +329,11 @@ public class ContextProperties extends Properties {
 	 * @throws ParseException
 	 *             if there was an error to parse a key value.
 	 */
-	public <T> List<T> typedListProperty(String key, Format format,
+	public <T> List<T> getTypedListProperty(String key, Format format,
 			List<T> defaultValue) throws ParseException {
 		List<T> list = new ArrayList<T>();
 		String property = getProperty(key, join(defaultValue, ","));
-		for (String value : split(property, " ,;")) {
+		for (String value : split(property, LIST_SEPARATOR_CHARS)) {
 			addParsedObject(list, format, value);
 		}
 		return list;
@@ -347,10 +354,10 @@ public class ContextProperties extends Properties {
 	 * @return the {@link List} from the property or an empty list if no
 	 *         property with the key was found.
 	 */
-	public List<String> listProperty(String key) {
+	public List<String> getListProperty(String key) {
 		String property = getProperty(key);
 		return property == null ? new ArrayList<String>() : asList(split(
-				property, " ,;"));
+				property, LIST_SEPARATOR_CHARS));
 	}
 
 	/**
@@ -365,9 +372,9 @@ public class ContextProperties extends Properties {
 	 * @return the {@link List} from the property or the default list if no
 	 *         property with the key was found.
 	 */
-	public List<String> listProperty(String key, List<String> defaultValue) {
+	public List<String> getListProperty(String key, List<String> defaultValue) {
 		String property = getProperty(key, join(defaultValue, ","));
-		return Arrays.asList(split(property, " ,;"));
+		return Arrays.asList(split(property, LIST_SEPARATOR_CHARS));
 	}
 
 	@Override
