@@ -7,6 +7,11 @@ import static org.apache.commons.lang3.StringUtils.join;
 import static org.apache.commons.lang3.StringUtils.split;
 import static org.apache.commons.lang3.StringUtils.startsWith;
 
+import java.io.File;
+import java.net.MalformedURLException;
+import java.net.URI;
+import java.net.URISyntaxException;
+import java.net.URL;
 import java.nio.charset.Charset;
 import java.nio.charset.UnsupportedCharsetException;
 import java.text.Format;
@@ -249,6 +254,125 @@ public class ContextProperties extends Properties {
 	public Charset getCharsetProperty(String key, Charset defaultValue) {
 		String property = getProperty(key, String.valueOf(defaultValue));
 		return Charset.forName(property);
+	}
+
+	/**
+	 * Returns a URL property.
+	 * 
+	 * @param key
+	 *            the property key.
+	 * 
+	 * @return the {@link URL} from the property or {@code null} if no property
+	 *         with the key was found.
+	 * 
+	 * @throws MalformedURLException
+	 *             if the property value is not a valid URL.
+	 * 
+	 * @since 1.1
+	 */
+	public URL getURLProperty(String key) throws MalformedURLException {
+		String property = getProperty(key);
+		return property == null ? null : new URL(property);
+	}
+
+	/**
+	 * Returns a URL property.
+	 * 
+	 * @param key
+	 *            the property key.
+	 * 
+	 * @param defaultValue
+	 *            the default {@link URL}.
+	 * 
+	 * @return the {@link URL} from the property or the default URL if no
+	 *         property with the key was found.
+	 * 
+	 * @throws MalformedURLException
+	 *             if the property value is not a valid URL.
+	 * 
+	 * @since 1.1
+	 */
+	public URL getURLProperty(String key, URL defaultValue)
+			throws MalformedURLException {
+		String property = getProperty(key, String.valueOf(defaultValue));
+		return new URL(property);
+	}
+
+	/**
+	 * Returns a URI property.
+	 * 
+	 * @param key
+	 *            the property key.
+	 * 
+	 * @return the {@link URI} from the property or {@code null} if no property
+	 *         with the key was found.
+	 * 
+	 * @throws URISyntaxException
+	 *             if the property value is not a valid URI.
+	 * 
+	 * @since 1.1
+	 */
+	public URI getURIProperty(String key) throws URISyntaxException {
+		String property = getProperty(key);
+		return property == null ? null : new URI(property);
+	}
+
+	/**
+	 * Returns a URI property.
+	 * 
+	 * @param key
+	 *            the property key.
+	 * 
+	 * @param defaultValue
+	 *            the default {@link URI}.
+	 * 
+	 * @return the {@link URI} from the property or the default URI if no
+	 *         property with the key was found.
+	 * 
+	 * @throws URISyntaxException
+	 *             if the property value is not a valid URI.
+	 * 
+	 * @since 1.1
+	 */
+	public URI getURIProperty(String key, URI defaultValue)
+			throws URISyntaxException {
+		String property = getProperty(key, String.valueOf(defaultValue));
+		return new URI(property);
+	}
+
+	/**
+	 * Returns a File property.
+	 * 
+	 * @param key
+	 *            the property key.
+	 * 
+	 * @return the {@link File} from the property or {@code null} if no property
+	 *         with the key was found.
+	 * 
+	 * @since 1.1
+	 */
+	public File getFileProperty(String key) {
+		String property = getProperty(key);
+		return property == null ? null : new File(property);
+	}
+
+	/**
+	 * Returns a File property.
+	 * 
+	 * @param key
+	 *            the property key.
+	 * 
+	 * @param defaultValue
+	 *            the default {@link File}.
+	 * 
+	 * @return the {@link File} from the property or the default File if no
+	 *         property with the key was found.
+	 * 
+	 * @since 1.1
+	 */
+	public File getFileProperty(String key, File defaultValue) {
+		String property = getProperty(key, String.valueOf(defaultValue));
+		return new File(property);
 	}
 
 	/**
