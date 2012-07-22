@@ -114,7 +114,7 @@ public class ContextProperties extends Properties {
 
 	@Override
 	public String getProperty(String key, String defaultValue) {
-		return super.getProperty(keyWithContext(key));
+		return super.getProperty(keyWithContext(key), defaultValue);
 	}
 
 	/**
