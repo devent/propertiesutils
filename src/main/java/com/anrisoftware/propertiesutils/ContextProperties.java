@@ -389,8 +389,8 @@ public class ContextProperties extends Properties {
 	 * @since 1.1
 	 */
 	public File getFileProperty(String key, File defaultValue) {
-		String property = getProperty(key, String.valueOf(defaultValue));
-		return new File(property);
+		String property = getProperty(key);
+		return property == null ? defaultValue : new File(property);
 	}
 
 	/**
