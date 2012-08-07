@@ -5,7 +5,7 @@
 
 	<groupId>com.anrisoftware.propertiesutils</groupId>
 	<artifactId>propertiesutils</artifactId>
-	<version>1.1.2-SNAPSHOT</version>
+	<version>1.1.2</version>
 
 	<parent>
 		<groupId>com.anrisoftware.globalpom</groupId>
