@@ -18,9 +18,14 @@
  */
 package com.anrisoftware.propertiesutils;
 
+import static org.apache.commons.lang3.Validate.notNull;
+
+import java.io.BufferedInputStream;
 import java.io.File;
 import java.io.FileInputStream;
+import java.io.FileNotFoundException;
 import java.io.IOException;
+import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.io.Reader;
 import java.net.URI;
@@ -40,7 +45,9 @@ public class ContextPropertiesFactory {
 
 	private final String context;
 
-	private final Properties defaultProperties;
+	private Properties defaultProperties;
+
+	private Properties parentProperties;
 
 	/**
 	 * Sets the specified context object.
@@ -49,22 +56,7 @@ public class ContextPropertiesFactory {
 	 *            the context {@link Object}.
 	 */
 	public ContextPropertiesFactory(Object context) {
-		this(context.getClass(), null);
-	}
-
-	/**
-	 * Sets the specified context object.
-	 * 
-	 * @param context
-	 *            the context {@link Object}.
-	 * 
-	 * @param defaultProperties
-	 *            the default {@link Properties}.
-	 * 
-	 * @since 1.1
-	 */
-	public ContextPropertiesFactory(Object context, Properties defaultProperties) {
-		this(context.getClass(), defaultProperties);
+		this(context.getClass());
 	}
 
 	/**
@@ -74,23 +66,7 @@ public class ContextPropertiesFactory {
 	 *            the context {@link Class}.
 	 */
 	public ContextPropertiesFactory(Class<?> context) {
-		this(context.getPackage().getName(), null);
-	}
-
-	/**
-	 * Sets the specified context class.
-	 * 
-	 * @param context
-	 *            the context {@link Class}.
-	 * 
-	 * @param defaultProperties
-	 *            the default {@link Properties}.
-	 * 
-	 * @since 1.1
-	 */
-	public ContextPropertiesFactory(Class<?> context,
-			Properties defaultProperties) {
-		this(context.getPackage().getName(), defaultProperties);
+		this(context.getPackage().getName());
 	}
 
 	/**
@@ -100,34 +76,57 @@ public class ContextPropertiesFactory {
 	 *            the context.
 	 */
 	public ContextPropertiesFactory(String context) {
-		this(context, null);
+		this.context = context;
+		this.defaultProperties = new Properties();
+		this.parentProperties = new Properties();
 	}
 
 	/**
-	 * Sets the specified context.
+	 * Sets the default properties for the context. The default properties are
+	 * used if the context does not contain a specified key.
+	 * <p>
+	 * The method is to use in a fluent API style:
 	 * 
-	 * @param context
-	 *            the context.
+	 * <pre>
+	 * ContextProperties p = new ContextPropertiesFactory(context)
+	 * 		.withDefaultProperties(properties).fromResource(resource);
+	 * </pre>
 	 * 
-	 * @param defaultProperties
+	 * @param properties
 	 *            the default {@link Properties}.
 	 * 
-	 * @since 1.1
+	 * @return this {@link ContextPropertiesFactory}.
+	 * 
+	 * @since 1.2
 	 */
-	public ContextPropertiesFactory(String context, Properties defaultProperties) {
-		this.context = context;
-		this.defaultProperties = defaultProperties;
+	public ContextPropertiesFactory withDefaultProperties(Properties properties) {
+		notNull(properties, "The default properties cannot be null.");
+		defaultProperties = properties;
+		return this;
 	}
 
 	/**
-	 * Returns the system properties.
+	 * Sets the properties for the context. The properties can override loaded
+	 * properties keys.
+	 * <p>
+	 * The method is to use in a fluent API style:
 	 * 
-	 * @return the {@link ContextProperties} containing the system properties.
+	 * <pre>
+	 * ContextProperties p = new ContextPropertiesFactory(context).withProperties(
+	 * 		properties).fromResource(resource);
+	 * </pre>
 	 * 
-	 * @since 1.1
+	 * @param properties
+	 *            the default {@link Properties}.
+	 * 
+	 * @return this {@link ContextPropertiesFactory}.
+	 * 
+	 * @since 1.2
 	 */
-	public ContextProperties getSystemProperties() {
-		return new ContextProperties(context, System.getProperties());
+	public ContextPropertiesFactory withProperties(Properties properties) {
+		notNull(properties, "The parent properties cannot be null.");
+		parentProperties = properties;
+		return this;
 	}
 
 	/**
@@ -148,7 +147,7 @@ public class ContextPropertiesFactory {
 	/**
 	 * Loads the properties from a resource with a specified character set.
 	 * 
-	 * @param resource
+	 * @param url
 	 *            the resource {@link URL}.
 	 * 
 	 * @param charset
@@ -159,11 +158,10 @@ public class ContextPropertiesFactory {
 	 * @throws IOException
 	 *             if there was an error loading the resource.
 	 */
-	public ContextProperties fromResource(URL resource, Charset charset)
+	public ContextProperties fromResource(URL url, Charset charset)
 			throws IOException {
-		Properties properties = new Properties(defaultProperties);
-		Reader reader = new InputStreamReader(resource.openStream(), charset);
-		properties.load(reader);
+		InputStream resource = new BufferedInputStream(url.openStream());
+		Properties properties = loadProperties(resource, charset);
 		return new ContextProperties(context, properties);
 	}
 
@@ -221,7 +219,7 @@ public class ContextPropertiesFactory {
 	/**
 	 * Loads the properties from a resource with a specified character set.
 	 * 
-	 * @param resource
+	 * @param file
 	 *            the resource {@link File}.
 	 * 
 	 * @param charset
@@ -234,12 +232,20 @@ public class ContextPropertiesFactory {
 	 * 
 	 * @since 1.1
 	 */
-	public ContextProperties fromResource(File resource, Charset charset)
+	public ContextProperties fromResource(File file, Charset charset)
 			throws IOException {
-		Properties properties = new Properties(defaultProperties);
-		FileInputStream in = new FileInputStream(resource);
-		Reader reader = new InputStreamReader(in, charset);
-		properties.load(reader);
+		FileInputStream resource = new FileInputStream(file);
+		Properties properties = loadProperties(resource, charset);
 		return new ContextProperties(context, properties);
+	}
+
+	private Properties loadProperties(InputStream resource, Charset charset)
+			throws FileNotFoundException, IOException {
+		Properties resourceP = new Properties(defaultProperties);
+		Reader reader = new InputStreamReader(resource, charset);
+		resourceP.load(reader);
+		Properties parentP = new Properties(resourceP);
+		parentP.putAll(parentProperties);
+		return parentP;
 	}
 }
