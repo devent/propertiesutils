@@ -1,24 +1,22 @@
 /*
  * Copyright 2012 Erwin Müller <erwin.mueller@deventm.org>
- * 
+ *
  * This file is part of propertiesutils.
- * 
+ *
  * propertiesutils is free software: you can redistribute it and/or modify it
  * under the terms of the GNU Lesser General Public License as published by the
  * Free Software Foundation, either version 3 of the License, or (at your
  * option) any later version.
- * 
+ *
  * propertiesutils is distributed in the hope that it will be useful, but
  * WITHOUT ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or
  * FITNESS FOR A PARTICULAR PURPOSE. See the GNU General Public License for more
  * details.
- * 
+ *
  * You should have received a copy of the GNU Lesser General Public License
  * along with propertiesutils. If not, see <http://www.gnu.org/licenses/>.
  */
 package com.anrisoftware.propertiesutils;
-
-import static com.google.common.io.Resources.getResource;
 
 import java.io.File;
 import java.io.FileInputStream;
@@ -124,78 +122,12 @@ public class ContextPropertiesFactory {
 	/**
 	 * Returns the system properties.
 	 * 
-	 * @return the {@link ContextProperties}.
+	 * @return the {@link ContextProperties} containing the system properties.
 	 * 
 	 * @since 1.1
 	 */
 	public ContextProperties getSystemProperties() {
 		return new ContextProperties(context, System.getProperties());
-	}
-
-	/**
-	 * Loads the properties from a resource with a default character set.
-	 * 
-	 * @param resourceName
-	 *            the resource name.
-	 * 
-	 * @return the {@link ContextProperties}.
-	 * 
-	 * @throws IOException
-	 *             if there was an error loading the resource.
-	 */
-	public ContextProperties fromResource(String resourceName)
-			throws IOException {
-		return fromResource(null, resourceName, DEFAULT_CHARSET);
-	}
-
-	/**
-	 * Loads the properties from a resource with a specified character set.
-	 * 
-	 * @param resourceContext
-	 *            the context {@link Class} for the resource.
-	 * 
-	 * @param resourceName
-	 *            the resource name.
-	 * 
-	 * @param charset
-	 *            the {@link Charset} of the resource.
-	 * 
-	 * @return the {@link ContextProperties}.
-	 * 
-	 * @throws IOException
-	 *             if there was an error loading the resource.
-	 */
-	public ContextProperties fromResource(Class<?> resourceContext,
-			String resourceName) throws IOException {
-		return fromResource(resourceContext, resourceName, DEFAULT_CHARSET);
-	}
-
-	/**
-	 * Loads the properties from a resource with a specified character set.
-	 * 
-	 * @param resourceContext
-	 *            the context {@link Class} for the resource.
-	 * 
-	 * @param resourceName
-	 *            the resource name.
-	 * 
-	 * @param charset
-	 *            the {@link Charset} of the resource.
-	 * 
-	 * @return the {@link ContextProperties}.
-	 * 
-	 * @throws IOException
-	 *             if there was an error loading the resource.
-	 */
-	public ContextProperties fromResource(Class<?> resourceContext,
-			String resourceName, Charset charset) throws IOException {
-		URL url;
-		if (resourceContext != null) {
-			url = getResource(resourceContext, resourceName);
-		} else {
-			url = getResource(resourceName);
-		}
-		return fromResource(url, charset);
 	}
 
 	/**
@@ -305,8 +237,8 @@ public class ContextPropertiesFactory {
 	public ContextProperties fromResource(File resource, Charset charset)
 			throws IOException {
 		Properties properties = new Properties(defaultProperties);
-		Reader reader = new InputStreamReader(new FileInputStream(resource),
-				charset);
+		FileInputStream in = new FileInputStream(resource);
+		Reader reader = new InputStreamReader(in, charset);
 		properties.load(reader);
 		return new ContextProperties(context, properties);
 	}
