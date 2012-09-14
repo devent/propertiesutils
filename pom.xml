@@ -73,6 +73,14 @@
 			<artifactId>globalpom-groovytestutils</artifactId>
 			<scope>test</scope>
 		</dependency>
+		<dependency>
+			<groupId>org.codehaus.groovy</groupId>
+			<artifactId>groovy-all</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>tablelayout</groupId>
+			<artifactId>TableLayout</artifactId>
+		</dependency>
 	</dependencies>
 
 </project>
