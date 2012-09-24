@@ -23,8 +23,11 @@ import groovy.lang.Binding;
 import groovy.lang.GroovyShell;
 
 import java.awt.Color;
+import java.awt.Component;
 import java.awt.Font;
 import java.awt.LayoutManager;
+import java.util.HashMap;
+import java.util.Map;
 import java.util.Properties;
 
 import javax.swing.border.Border;
@@ -92,9 +95,9 @@ public class SwingProperties extends ContextProperties {
 	private GroovyShell createShell() {
 		String[] staticStarImports = new String[] { "javax.swing.BorderFactory" };
 		String[] staticImports = new String[] {};
-		String[] starImports = new String[] {};
+		String[] starImports = new String[] { "javax.swing", "java.awt" };
 		String[] imports = new String[] { "java.awt.Color", "java.awt.Font",
-				"javax.swing.border.BevelBorder",
+				"java.awt.Frame", "javax.swing.border.BevelBorder",
 				"javax.swing.border.CompoundBorder",
 				"javax.swing.border.EmptyBorder",
 				"javax.swing.border.EtchedBorder",
@@ -184,6 +187,45 @@ public class SwingProperties extends ContextProperties {
 		} else {
 			return evaluate(script);
 		}
+	}
+
+	public int getFrameStateProperty(String key) {
+		String script = getProperty(key);
+		int state = evaluate(script);
+		return state;
+	}
+
+	public int getFrameStateProperty(String key, int defaultValue) {
+		String script = getProperty(key);
+		if (StringUtils.isEmpty(script)) {
+			return defaultValue;
+		} else {
+			return evaluate(script);
+		}
+	}
+
+	public Component getStyledComponent(Component component, String key) {
+		String script = getProperty(key);
+		evaluate(script, component, new HashMap<String, Object>());
+		return component;
+	}
+
+	public Component getStyledComponent(Component component, String key,
+			Map<String, Object> variables) {
+		String script = getProperty(key);
+		evaluate(script, component, variables);
+		return component;
+	}
+
+	private <T> T evaluate(String script, Component component,
+			Map<String, Object> variables) {
+		shell.setVariable("it", component);
+		for (Map.Entry<String, Object> entry : variables.entrySet()) {
+			shell.setVariable(entry.getKey(), entry.getValue());
+		}
+		@SuppressWarnings("unchecked")
+		T result = (T) shell.evaluate(script);
+		return result;
 	}
 
 	private <T> T evaluate(String script) {
