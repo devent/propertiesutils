@@ -10,7 +10,7 @@
 	<parent>
 		<groupId>com.anrisoftware.globalpom</groupId>
 		<artifactId>globalpom-groovy</artifactId>
-		<version>1.11</version>
+		<version>1.12</version>
 	</parent>
 
 	<developers>
@@ -56,7 +56,7 @@
 			<dependency>
 				<groupId>com.anrisoftware.globalpom</groupId>
 				<artifactId>globalpom-groovytestutils</artifactId>
-				<version>1.8</version>
+				<version>${project.custom.globalpom.groovytestutils.version}</version>
 			</dependency>
 		</dependencies>
 	</dependencyManagement>
@@ -74,12 +74,12 @@
 			<scope>test</scope>
 		</dependency>
 		<dependency>
-			<groupId>org.codehaus.groovy</groupId>
-			<artifactId>groovy-all</artifactId>
-		</dependency>
-		<dependency>
 			<groupId>tablelayout</groupId>
 			<artifactId>TableLayout</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>org.codehaus.groovy</groupId>
+			<artifactId>groovy-jsr223</artifactId>
 		</dependency>
 	</dependencies>
 
