@@ -6,11 +6,11 @@
 	<parent>
 		<groupId>com.anrisoftware.propertiesutils</groupId>
 		<artifactId>propertiesutils-parent</artifactId>
-		<version>1.0-SNAPSHOT</version>
+		<version>1.0</version>
 	</parent>
 
 	<artifactId>propertiesutils-swingproperties-groovy</artifactId>
-	<version>0.0.1-SNAPSHOT</version>
+	<version>1.0</version>
 	<name>Swing Groovy Script Properties</name>
 	<description>Loads Groovy script from the properties to layout and customize swing components.</description>
 	<inceptionYear>2012</inceptionYear>
@@ -29,12 +29,16 @@
 			<groupId>tablelayout</groupId>
 			<artifactId>TableLayout</artifactId>
 		</dependency>
+        <dependency>
+            <groupId>org.codehaus.groovy</groupId>
+            <artifactId>groovy</artifactId>
+        </dependency>
 
 		<!-- own modules dependencies -->
 		<dependency>
 			<groupId>com.anrisoftware.propertiesutils</groupId>
 			<artifactId>propertiesutils-swingproperties</artifactId>
-			<version>0.0.1-SNAPSHOT</version>
+			<version>1.0</version>
 		</dependency>
 
 	</dependencies>
