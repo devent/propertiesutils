@@ -23,6 +23,11 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.Properties;
 
+import javax.inject.Inject;
+import javax.script.ScriptException;
+
+import org.apache.commons.lang3.builder.ToStringBuilder;
+
 import com.google.inject.assistedinject.Assisted;
 import com.google.inject.assistedinject.AssistedInject;
 
@@ -40,6 +45,7 @@ import com.google.inject.assistedinject.AssistedInject;
 public class SwingProperties extends ContextProperties {
 
 	private final Evaluating evaluating;
+
 	private SwingPropertiesLogger log;
 
 	/**
@@ -75,7 +81,7 @@ public class SwingProperties extends ContextProperties {
 	 *            the {@link Evaluating} to evaluate the script.
 	 */
 	@AssistedInject
-	public SwingProperties(@Assisted Object context,
+	SwingProperties(@Assisted Object context,
 			@Assisted Properties parentProperties,
 			@Assisted Evaluating evaluating) {
 		this(context.getClass(), parentProperties, evaluating);
@@ -94,11 +100,22 @@ public class SwingProperties extends ContextProperties {
 	 *            the {@link Evaluating} to evaluate the script.
 	 */
 	@AssistedInject
-	public SwingProperties(@Assisted String context,
+	SwingProperties(@Assisted String context,
 			@Assisted Properties parentProperties,
 			@Assisted Evaluating evaluating) {
 		super(context, parentProperties);
 		this.evaluating = evaluating;
+	}
+
+	/**
+	 * Injects the logger.
+	 * 
+	 * @param logger
+	 *            the {@link SwingPropertiesLogger}.
+	 */
+	@Inject
+	void setSwingPropertiesLogger(SwingPropertiesLogger logger) {
+		log = logger;
 	}
 
 	/**
@@ -134,6 +151,9 @@ public class SwingProperties extends ContextProperties {
 	 * @throws NullPointerException
 	 *             if the specified component is {@code null}; if the evaluated
 	 *             script returns a null value.
+	 * 
+	 * @throws IllegalStateException
+	 *             if there was an error evaluating the script.
 	 */
 	public Component getStyledComponent(Component component, String key) {
 		log.checkComponent(this, component);
@@ -193,6 +213,9 @@ public class SwingProperties extends ContextProperties {
 	 * @throws NullPointerException
 	 *             if the specified component is {@code null}; if the evaluated
 	 *             script returns a null value.
+	 * 
+	 * @throws IllegalStateException
+	 *             if there was an error evaluating the script.
 	 */
 	public Component getStyledComponent(Component component, String key,
 			Map<String, Object> variables) {
@@ -207,8 +230,17 @@ public class SwingProperties extends ContextProperties {
 		variables = new HashMap<String, Object>(variables);
 		variables.put("it", component);
 		log.evaluatingScript(script, variables);
-		T result = evaluating.<T> evaluate(script, variables);
-		return result;
+		try {
+			T result = evaluating.<T> evaluate(script, variables);
+			return result;
+		} catch (ScriptException e) {
+			throw log.errorEvaluatingScript(this, e);
+		}
 	}
 
+	@Override
+	public synchronized String toString() {
+		return new ToStringBuilder(this).appendSuper(super.toString())
+				.toString();
+	}
 }

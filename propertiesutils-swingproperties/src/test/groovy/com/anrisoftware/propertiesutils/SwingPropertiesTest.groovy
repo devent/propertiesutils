@@ -18,65 +18,67 @@
  */
 package com.anrisoftware.propertiesutils
 
-import groovy.util.logging.Slf4j
+import java.awt.BorderLayout
 
-import java.awt.Color
-import java.awt.Font
+import javax.swing.JLabel
+import javax.swing.JPanel
+import javax.swing.JTextField
 
-import javax.swing.BorderFactory
-
+import org.junit.BeforeClass
 import org.junit.Test
 
-import com.anrisoftware.globalpom.utils.TestUtils
-import com.google.common.io.Resources
+import com.anrisoftware.globalpom.utils.TestFrameUtil
+import com.google.inject.Guice
+import com.google.inject.Injector
 
 /**
- * Test the swing context properties.
+ * Test the swing context properties with Groovy script.
  *
  * @author Erwin Mueller, erwin.mueller@deventm.org
- * @since 1.2
+ * @since 1.0
  */
-@Slf4j
-class SwingPropertiesTest extends TestUtils {
+class SwingPropertiesTest extends TestFrameUtil {
 
-	static URL RESOURCE_URL = Resources.getResource("swing_test.properties")
+	static URL RESOURCE_URL = resourceURL("swingtest.properties", SwingPropertiesTest)
 
-	@Test
-	void "border property"() {
-		def properties = new SwingProperties(this,
-						new ContextPropertiesFactory(this).
-						fromResource(RESOURCE_URL))
-		def border = properties.getBorderProperty "border"
-		log.info "Loaded border {}.", border
-		assert border == BorderFactory.createEtchedBorder()
+	static title = "Swing Properties"
+
+	static Injector injector
+
+	static SwingPropertiesFactory factory
+
+	@BeforeClass
+	static void createFactory() {
+		injector = Guice.createInjector new SwingPropertiesModule()
+		factory = injector.getInstance SwingPropertiesFactory
 	}
 
 	@Test
-	void "color property"() {
-		def properties = new SwingProperties(this,
-						new ContextPropertiesFactory(this).
-						fromResource(RESOURCE_URL))
-		def color = properties.getColorProperty "color"
-		log.info "Loaded color {}.", color
-		assert color == new Color(10, 5, 20)
+	void "style label"() {
+		def p = new ContextPropertiesFactory(this).fromResource(RESOURCE_URL)
+		p = factory.create(this, p, new ScriptEvaluating("groovy"))
+
+		def panel = new JPanel()
+		def label = new JLabel()
+		panel.add label, BorderLayout.NORTH
+		label = p.getStyledComponent(label, "label")
+		beginPanelFrame title, panel, {
+			fixture.label().requireText "Test"
+		}
 	}
 
 	@Test
-	void "font property"() {
-		def properties = new SwingProperties(this,
-						new ContextPropertiesFactory(this).
-						fromResource(RESOURCE_URL))
-		def font = properties.getFontProperty "font"
-		log.info "Loaded font {}.", font
-		assert font == new Font(Font.SERIF, Font.BOLD, 20)
-	}
+	void "style panel with label and text field"() {
+		def p = new ContextPropertiesFactory(this).fromResource(RESOURCE_URL)
+		p = factory.create(this, p, new ScriptEvaluating("groovy"))
 
-	@Test
-	void "table layout property"() {
-		def properties = new SwingProperties(this,
-						new ContextPropertiesFactory(this).
-						fromResource(RESOURCE_URL))
-		def layout = properties.getLayoutProperty "table_layout"
-		log.info "Loaded font {}.", layout
+		def panel = new JPanel()
+		def label = new JLabel()
+		def textField = new JTextField()
+		panel = p.getStyledComponent(panel, "panel", ["textLabel": label, "textField": textField])
+		beginPanelFrame title, panel, {
+			fixture.label().requireText "Test"
+			fixture.textBox().requireText ""
+		}
 	}
 }

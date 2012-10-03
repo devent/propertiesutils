@@ -1,10 +1,13 @@
 package com.anrisoftware.propertiesutils;
 
+import static java.lang.String.format;
 import static org.apache.commons.lang3.Validate.notEmpty;
 import static org.apache.commons.lang3.Validate.notNull;
 
 import java.awt.Component;
 import java.util.Map;
+
+import javax.script.ScriptException;
 
 import com.anrisoftware.globalpom.log.AbstractLogger;
 
@@ -42,5 +45,13 @@ class SwingPropertiesLogger extends AbstractLogger {
 	void checkComponent(SwingProperties p, Component component) {
 		notNull(component,
 				"The component for the swing property cannot be null in %s.", p);
+	}
+
+	IllegalStateException errorEvaluatingScript(SwingProperties p,
+			ScriptException e) {
+		IllegalStateException ex = new IllegalStateException(format(
+				"Error evaluating the script in %s", p), e);
+		log.error(ex.getLocalizedMessage());
+		return ex;
 	}
 }
