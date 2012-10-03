@@ -30,6 +30,21 @@ import javax.script.ScriptException;
  */
 public interface Evaluating {
 
+	/**
+	 * Evaluate the specified script with the variables.
+	 * 
+	 * @param script
+	 *            the script to evaluate.
+	 * 
+	 * @param variables
+	 *            the {@link Map} of variables that are made available in the
+	 *            script.
+	 * 
+	 * @return the result of the script.
+	 * 
+	 * @throws ScriptException
+	 *             if there was an error evaluating the script.
+	 */
 	<T> T evaluate(String script, Map<String, Object> variables)
 			throws ScriptException;
 }
