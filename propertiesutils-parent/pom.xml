@@ -64,6 +64,11 @@
 				<artifactId>globalpom-groovytestutils</artifactId>
 				<version>${project.custom.globalpom.groovytestutils.version}</version>
 			</dependency>
+            <dependency>
+                <groupId>com.anrisoftware.globalpom</groupId>
+                <artifactId>globalpom-log</artifactId>
+                <version>1.5</version>
+            </dependency>
 		</dependencies>
 	</dependencyManagement>
 

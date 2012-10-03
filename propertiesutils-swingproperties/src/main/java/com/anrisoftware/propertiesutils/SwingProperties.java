@@ -18,24 +18,13 @@
  */
 package com.anrisoftware.propertiesutils;
 
-import static java.util.Arrays.asList;
-import groovy.lang.Binding;
-import groovy.lang.GroovyShell;
-
-import java.awt.Color;
 import java.awt.Component;
-import java.awt.Font;
-import java.awt.LayoutManager;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Properties;
 
-import javax.swing.border.Border;
-
-import org.apache.commons.lang3.StringUtils;
-import org.codehaus.groovy.control.CompilerConfiguration;
-import org.codehaus.groovy.control.customizers.ImportCustomizer;
-import org.codehaus.groovy.control.customizers.SecureASTCustomizer;
+import com.google.inject.assistedinject.Assisted;
+import com.google.inject.assistedinject.AssistedInject;
 
 /**
  * Swing properties.
@@ -50,166 +39,161 @@ import org.codehaus.groovy.control.customizers.SecureASTCustomizer;
 @SuppressWarnings("serial")
 public class SwingProperties extends ContextProperties {
 
-	private final GroovyShell shell;
+	private final Evaluating evaluating;
+	private SwingPropertiesLogger log;
 
 	/**
 	 * Sets the context and the properties.
 	 * 
 	 * @param context
-	 *            an {@link Object} that is used as the context.
+	 *            the context {@link Class}.
 	 * 
 	 * @param parentProperties
-	 *            the {@link Properties} that are returned.
+	 *            the parent {@link Properties}.
+	 * 
+	 * @param evaluating
+	 *            the {@link Evaluating} to evaluate the script.
+	 * 
 	 */
-	public SwingProperties(Class<?> context, Properties parentProperties) {
-		this(context.getPackage().getName(), parentProperties);
+	@AssistedInject
+	SwingProperties(@Assisted Class<?> context,
+			@Assisted Properties parentProperties,
+			@Assisted Evaluating evaluating) {
+		this(context.getPackage().getName(), parentProperties, evaluating);
 	}
 
 	/**
 	 * Sets the context and the properties.
 	 * 
 	 * @param context
-	 *            an {@link Object} that is used as the context.
+	 *            the context {@link Object}.
 	 * 
 	 * @param parentProperties
-	 *            the {@link Properties} that are returned.
+	 *            the parent {@link Properties}.
+	 * 
+	 * @param evaluating
+	 *            the {@link Evaluating} to evaluate the script.
 	 */
-	public SwingProperties(Object context, Properties parentProperties) {
-		this(context.getClass(), parentProperties);
+	@AssistedInject
+	public SwingProperties(@Assisted Object context,
+			@Assisted Properties parentProperties,
+			@Assisted Evaluating evaluating) {
+		this(context.getClass(), parentProperties, evaluating);
 	}
 
 	/**
 	 * Sets the context and the properties.
 	 * 
 	 * @param context
-	 *            the context.
+	 *            the custom context.
 	 * 
 	 * @param parentProperties
-	 *            the {@link Properties} that are returned.
+	 *            the parent {@link Properties}.
+	 * 
+	 * @param evaluating
+	 *            the {@link Evaluating} to evaluate the script.
 	 */
-	public SwingProperties(String context, Properties parentProperties) {
+	@AssistedInject
+	public SwingProperties(@Assisted String context,
+			@Assisted Properties parentProperties,
+			@Assisted Evaluating evaluating) {
 		super(context, parentProperties);
-		this.shell = createShell();
+		this.evaluating = evaluating;
 	}
 
-	private GroovyShell createShell() {
-		String[] staticStarImports = new String[] { "javax.swing.BorderFactory" };
-		String[] staticImports = new String[] {};
-		String[] starImports = new String[] { "javax.swing", "java.awt" };
-		String[] imports = new String[] { "java.awt.Color", "java.awt.Font",
-				"java.awt.Frame", "javax.swing.border.BevelBorder",
-				"javax.swing.border.CompoundBorder",
-				"javax.swing.border.EmptyBorder",
-				"javax.swing.border.EtchedBorder",
-				"javax.swing.border.LineBorder",
-				"javax.swing.border.SoftBevelBorder",
-				"javax.swing.border.StrokeBorder", "java.awt.BorderLayout",
-				"javax.swing.BoxLayout", "java.awt.CardLayout",
-				"java.awt.FlowLayout", "java.awt.GridBagLayout",
-				"java.awt.GridLayout", "javax.swing.GroupLayout",
-				"javax.swing.OverlayLayout", "javax.swing.SpringLayout",
-				"javax.swing.ViewportLayout",
-				"info.clearthought.layout.TableLayout",
-				"info.clearthought.layout.TableLayoutConstants" };
-
-		CompilerConfiguration compiler = new CompilerConfiguration();
-		ImportCustomizer importCustomizer = new ImportCustomizer();
-		importCustomizer.addImports(imports);
-		importCustomizer.addStarImports(starImports);
-		importCustomizer.addStaticStars(staticStarImports);
-		compiler.addCompilationCustomizers(importCustomizer);
-
-		SecureASTCustomizer secure = new SecureASTCustomizer();
-		secure.setClosuresAllowed(false);
-		secure.setMethodDefinitionAllowed(false);
-		secure.setImportsWhitelist(asList(imports));
-		secure.setStarImportsWhitelist(asList(starImports));
-		secure.setStaticImportsWhitelist(asList(staticImports));
-		secure.setStaticStarImportsWhitelist(asList(staticStarImports));
-		compiler.addCompilationCustomizers(secure);
-
-		ClassLoader classLoader = getClass().getClassLoader();
-		return new GroovyShell(classLoader, new Binding(), compiler);
-	}
-
-	public Border getBorderProperty(String key) {
-		String script = getProperty(key);
-		return evaluate(script);
-	}
-
-	public Border getBorderProperty(String key, Border defaultValue) {
-		String script = getProperty(key);
-		if (StringUtils.isEmpty(script)) {
-			return defaultValue;
-		} else {
-			return evaluate(script);
-		}
-	}
-
-	public Color getColorProperty(String key) {
-		String script = getProperty(key);
-		return evaluate(script);
-	}
-
-	public Color getColorProperty(String key, Color defaultValue) {
-		String script = getProperty(key);
-		if (StringUtils.isEmpty(script)) {
-			return defaultValue;
-		} else {
-			return evaluate(script);
-		}
-	}
-
-	public Font getFontProperty(String key) {
-		String script = getProperty(key);
-		return evaluate(script);
-	}
-
-	public Font getFontProperty(String key, Font defaultValue) {
-		String script = getProperty(key);
-		if (StringUtils.isEmpty(script)) {
-			return defaultValue;
-		} else {
-			return evaluate(script);
-		}
-	}
-
-	public LayoutManager getLayoutProperty(String key) {
-		String script = getProperty(key);
-		return evaluate(script);
-	}
-
-	public LayoutManager getLayoutProperty(String key,
-			LayoutManager defaultValue) {
-		String script = getProperty(key);
-		if (StringUtils.isEmpty(script)) {
-			return defaultValue;
-		} else {
-			return evaluate(script);
-		}
-	}
-
-	public int getFrameStateProperty(String key) {
-		String script = getProperty(key);
-		int state = evaluate(script);
-		return state;
-	}
-
-	public int getFrameStateProperty(String key, int defaultValue) {
-		String script = getProperty(key);
-		if (StringUtils.isEmpty(script)) {
-			return defaultValue;
-		} else {
-			return evaluate(script);
-		}
-	}
-
+	/**
+	 * Returns the styled component with the specified property key.
+	 * <p>
+	 * The evaluated script will receive the variable {@code it} that is the
+	 * instance of the specified component. The script can then style the
+	 * component and return the same component after it is finished.
+	 * <p>
+	 * Example {@code JLabel} component with a properties file:
+	 * 
+	 * <pre>
+	 * JLabel label = new JLabel();
+	 * label = getStyledComponent(label, &quot;label&quot;);
+	 * </pre>
+	 * 
+	 * <pre>
+	 * # properties file
+	 * context.package.label = \n\
+	 * 		it.setFont(new Font("Dialog", Font.BOLD, 12)); \n\
+	 * 		it.setForderground(Color.RED);  \n\
+	 * 		return it
+	 * </pre>
+	 * 
+	 * @param component
+	 *            the {@link Component} to be styled.
+	 * 
+	 * @param key
+	 *            the property key.
+	 * 
+	 * @return the styled {@link Component}.
+	 * 
+	 * @throws NullPointerException
+	 *             if the specified component is {@code null}; if the evaluated
+	 *             script returns a null value.
+	 */
 	public Component getStyledComponent(Component component, String key) {
+		log.checkComponent(this, component);
 		String script = getProperty(key);
-		evaluate(script, component, new HashMap<String, Object>());
+		component = evaluate(script, component, new HashMap<String, Object>());
+		log.checkResult(this, component, key);
 		return component;
 	}
 
+	/**
+	 * Returns the styled component with the specified property key.
+	 * <p>
+	 * The evaluated script will receive the variable {@code it} that is the
+	 * instance of the specified component. The script can then style the
+	 * component and return the same component after it is finished.
+	 * <p>
+	 * In addition the specified variables are passed on to the script and can
+	 * be used.
+	 * <p>
+	 * Example {@code JPanel} component with a properties file:
+	 * 
+	 * <pre>
+	 * JPanel panel = new JPanel();
+	 * JLabel label = new JLabel();
+	 * JTextField textField = new JTextField();
+	 * 
+	 * variables = new HashMap();
+	 * variables.put(&quot;layout&quot;, layout);
+	 * variables.put(&quot;textLabel&quot;, label);
+	 * variables.put(&quot;textField&quot;, textField);
+	 * panel = getStyledComponent(panel, &quot;panel&quot;, variables);
+	 * </pre>
+	 * 
+	 * <pre>
+	 * # properties file
+	 * context.package.panel = \n\
+	 * 		double[] col = ... \n\
+	 * 		double[] row = ... \n\
+	 * 		TableLayout layout = new TableLayout(col, row); \n\
+	 * 		it.setLayout(layout); \n\
+	 * 		it.add(textLabel, "0, 0");  \n\
+	 * 		it.add(textField, "1, 0");  \n\
+	 * 		return it
+	 * </pre>
+	 * 
+	 * @param component
+	 *            the {@link Component} to be styled.
+	 * 
+	 * @param key
+	 *            the property key.
+	 * 
+	 * @param variables
+	 *            the {@link Map} with additional variables.
+	 * 
+	 * @return the styled {@link Component}.
+	 * 
+	 * @throws NullPointerException
+	 *             if the specified component is {@code null}; if the evaluated
+	 *             script returns a null value.
+	 */
 	public Component getStyledComponent(Component component, String key,
 			Map<String, Object> variables) {
 		String script = getProperty(key);
@@ -219,18 +203,11 @@ public class SwingProperties extends ContextProperties {
 
 	private <T> T evaluate(String script, Component component,
 			Map<String, Object> variables) {
-		shell.setVariable("it", component);
-		for (Map.Entry<String, Object> entry : variables.entrySet()) {
-			shell.setVariable(entry.getKey(), entry.getValue());
-		}
-		@SuppressWarnings("unchecked")
-		T result = (T) shell.evaluate(script);
-		return result;
-	}
-
-	private <T> T evaluate(String script) {
-		@SuppressWarnings("unchecked")
-		T result = (T) shell.evaluate(script);
+		log.checkScript(this, script);
+		variables = new HashMap<String, Object>(variables);
+		variables.put("it", component);
+		log.evaluatingScript(script, variables);
+		T result = evaluating.<T> evaluate(script, variables);
 		return result;
 	}
 
