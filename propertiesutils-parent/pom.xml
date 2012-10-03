@@ -62,7 +62,7 @@
 			<dependency>
 				<groupId>com.anrisoftware.globalpom</groupId>
 				<artifactId>globalpom-groovytestutils</artifactId>
-				<version>${project.custom.globalpom.groovytestutils.version}</version>
+				<version>1.9</version>
 			</dependency>
             <dependency>
                 <groupId>com.anrisoftware.globalpom</groupId>

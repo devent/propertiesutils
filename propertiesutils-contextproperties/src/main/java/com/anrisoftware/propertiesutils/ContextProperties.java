@@ -1,20 +1,20 @@
 /*
  * Copyright 2012 Erwin Müller <erwin.mueller@deventm.org>
  *
- * This file is part of propertiesutils.
+ * This file is part of propertiesutils-contextproperties.
  *
- * propertiesutils is free software: you can redistribute it and/or modify it
+ * propertiesutils-contextproperties is free software: you can redistribute it and/or modify it
  * under the terms of the GNU Lesser General Public License as published by the
  * Free Software Foundation, either version 3 of the License, or (at your
  * option) any later version.
  *
- * propertiesutils is distributed in the hope that it will be useful, but
+ * propertiesutils-contextproperties is distributed in the hope that it will be useful, but
  * WITHOUT ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or
  * FITNESS FOR A PARTICULAR PURPOSE. See the GNU General Public License for more
  * details.
  *
  * You should have received a copy of the GNU Lesser General Public License
- * along with propertiesutils. If not, see <http://www.gnu.org/licenses/>.
+ * along with propertiesutils-contextproperties. If not, see <http://www.gnu.org/licenses/>.
  */
 package com.anrisoftware.propertiesutils;
 
