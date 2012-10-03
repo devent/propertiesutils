@@ -7,13 +7,12 @@
 		<groupId>com.anrisoftware.propertiesutils</groupId>
 		<artifactId>propertiesutils-parent</artifactId>
 		<version>1.0-SNAPSHOT</version>
-		<relativePath>../propertiesutils-parent</relativePath>
 	</parent>
 
-	<artifactId>propertiesutils-contextproperties</artifactId>
-	<version>1.2-SNAPSHOT</version>
-	<name>Context Properties</name>
-	<description>Loads properties in a context of a class.</description>
+	<artifactId>propertiesutils-swingproperties</artifactId>
+	<version>0.0.1-SNAPSHOT</version>
+	<name>Swing Script Properties</name>
+	<description>Loads script from the properties to layout and customize swing components.</description>
 	<inceptionYear>2012</inceptionYear>
 
 	<dependencies>
@@ -32,9 +31,17 @@
 
 		<!-- compile dependencies -->
 		<dependency>
-			<groupId>org.apache.commons</groupId>
-			<artifactId>commons-lang3</artifactId>
+			<groupId>tablelayout</groupId>
+			<artifactId>TableLayout</artifactId>
+			<optional>true</optional>
 		</dependency>
-	</dependencies>
 
+		<!-- own modules dependencies -->
+		<dependency>
+			<groupId>com.anrisoftware.propertiesutils</groupId>
+			<artifactId>propertiesutils-contextproperties</artifactId>
+			<version>1.2-SNAPSHOT</version>
+		</dependency>
+
+	</dependencies>
 </project>

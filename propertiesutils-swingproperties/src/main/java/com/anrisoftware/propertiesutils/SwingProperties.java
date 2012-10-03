@@ -45,7 +45,7 @@ import org.codehaus.groovy.control.customizers.SecureASTCustomizer;
  * </p>
  * 
  * @author Erwin Mueller, erwin.mueller@deventm.org
- * @since 1.2
+ * @since 1.0
  */
 @SuppressWarnings("serial")
 public class SwingProperties extends ContextProperties {
