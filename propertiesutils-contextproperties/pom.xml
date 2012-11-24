@@ -11,7 +11,7 @@
 	</parent>
 
 	<artifactId>propertiesutils-contextproperties</artifactId>
-	<version>1.3-SNAPSHOT</version>
+	<version>1.3</version>
 	<name>Context Properties</name>
 	<description>Loads properties in a context of a class.</description>
 	<inceptionYear>2012</inceptionYear>
