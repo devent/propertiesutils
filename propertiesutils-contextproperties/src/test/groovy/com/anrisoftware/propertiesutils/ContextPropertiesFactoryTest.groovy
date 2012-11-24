@@ -62,4 +62,22 @@ class ContextPropertiesFactoryTest extends TestUtils {
 						fromResource(RESOURCE_URL)
 		assertStringContent properties.getProperty("testString"), "Bar"
 	}
+
+	@Test
+	void "object context from URL resource with replacements"() {
+		def properties = new ContextPropertiesFactory(this).
+						fromResource(RESOURCE_URL).
+						withReplacement("foo", "aaa")
+		assertStringContent properties.getProperty("testWithReplacements"), "Foo aaa"
+	}
+
+	@Test
+	void "object context from URL resource with replacements system properties"() {
+		def os = System.getProperty("os.name")
+		def properties = new ContextPropertiesFactory(this).
+						fromResource(RESOURCE_URL).
+						withReplacements(System.getProperties())
+		assertStringContent properties.getProperty("testWithReplacementsSystem"),
+						"Foo $os"
+	}
 }

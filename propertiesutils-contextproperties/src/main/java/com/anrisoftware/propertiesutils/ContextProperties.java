@@ -20,12 +20,15 @@ package com.anrisoftware.propertiesutils;
 
 import static java.lang.Boolean.parseBoolean;
 import static java.lang.Double.parseDouble;
+import static java.lang.String.format;
 import static java.util.Arrays.asList;
 import static org.apache.commons.lang3.StringUtils.join;
 import static org.apache.commons.lang3.StringUtils.split;
 import static org.apache.commons.lang3.StringUtils.startsWith;
+import static org.apache.commons.lang3.Validate.notNull;
 
 import java.io.File;
+import java.io.Serializable;
 import java.net.MalformedURLException;
 import java.net.URI;
 import java.net.URISyntaxException;
@@ -36,7 +39,9 @@ import java.text.Format;
 import java.text.ParseException;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.Properties;
 
 /**
@@ -61,11 +66,15 @@ import java.util.Properties;
  */
 public class ContextProperties extends Properties {
 
+	private static final String REPLACEMENT_PATTERN = "\\$\\{%s\\}";
+
 	private static final String LIST_SEPARATOR_CHARS = " ,;";
 
 	private static final long serialVersionUID = 3495658613155578555L;
 
 	private final String context;
+
+	private final HashMap<String, Serializable> replacements;
 
 	/**
 	 * Sets the context and the properties.
@@ -105,16 +114,87 @@ public class ContextProperties extends Properties {
 	public ContextProperties(String context, Properties parentProperties) {
 		super(parentProperties);
 		this.context = context;
+		this.replacements = new HashMap<String, Serializable>();
+	}
+
+	/**
+	 * Adds the replacements from the specified map.
+	 * <p>
+	 * Each of the replacement entries is applied to the property. The
+	 * replacement is of format <code>{$key}</code>.
+	 * <p>
+	 * It is possible to add the system properties directly as in
+	 * {@code p.withReplacements(System.getProperties())}.
+	 * 
+	 * @param map
+	 *            the {@link Map} that contains the replacements as
+	 *            {@code <key>: <value>}.
+	 * 
+	 * @return this {@link ContextProperties}.
+	 * 
+	 * @throws NullPointerException
+	 *             if the specified map is {@code null}.
+	 * 
+	 * @since 1.3
+	 */
+	public ContextProperties withReplacements(Map<?, ?> map) {
+		notNull(map);
+		Serializable replace;
+		for (Map.Entry<?, ?> entry : map.entrySet()) {
+			String key = entry.getKey().toString();
+			if (entry.getValue() instanceof Serializable) {
+				replace = (Serializable) entry.getValue();
+			} else {
+				replace = entry.getValue().toString();
+			}
+			this.replacements.put(key, replace);
+		}
+		return this;
+	}
+
+	/**
+	 * Adds the replacement with the specified key.
+	 * <p>
+	 * Each of the replacement entries is applied to the property. The
+	 * replacement is of format <code>{$key}</code>.
+	 * 
+	 * @param key
+	 *            the replacement key.
+	 * 
+	 * @param replace
+	 *            the {@link Serializable} object as the replacement.
+	 * 
+	 * @return this {@link ContextProperties}.
+	 * 
+	 * @since 1.3
+	 */
+	public ContextProperties withReplacement(String key, Serializable replace) {
+		replacements.put(key, replace);
+		return this;
 	}
 
 	@Override
 	public String getProperty(String key) {
-		return super.getProperty(keyWithContext(key));
+		String value = super.getProperty(keyWithContext(key));
+		return applyReplacements(value);
 	}
 
 	@Override
 	public String getProperty(String key, String defaultValue) {
-		return super.getProperty(keyWithContext(key), defaultValue);
+		String value = super.getProperty(keyWithContext(key), defaultValue);
+		return applyReplacements(value);
+	}
+
+	private String applyReplacements(String value) {
+		if (value == null) {
+			return value;
+		}
+		for (Map.Entry<String, Serializable> entry : replacements.entrySet()) {
+			String replace = entry.getValue().toString();
+			String key = entry.getKey();
+			value = value.replaceAll(format(REPLACEMENT_PATTERN, key), replace);
+		}
+		return value;
 	}
 
 	/**
