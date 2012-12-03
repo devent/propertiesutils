@@ -520,7 +520,8 @@ public class ContextProperties extends Properties {
 	}
 
 	/**
-	 * Returns a list property.
+	 * Returns a list property. The separator characters are
+	 * {@value #LIST_SEPARATOR_CHARS}.
 	 * 
 	 * @param key
 	 *            the property key.
@@ -536,19 +537,46 @@ public class ContextProperties extends Properties {
 	 */
 	public <T> List<T> getTypedListProperty(String key, Format format)
 			throws ParseException {
+		return getTypedListProperty(key, format, LIST_SEPARATOR_CHARS);
+	}
+
+	/**
+	 * Returns a list property.
+	 * 
+	 * @param key
+	 *            the property key.
+	 * 
+	 * @param format
+	 *            the {@link Format} to parse the key values.
+	 * 
+	 * @param separatorChars
+	 *            the characters used as the delimiters, {@code null} splits on
+	 *            whitespace.
+	 * 
+	 * @return the {@link List} from the property or an empty list if no
+	 *         property with the key was found.
+	 * 
+	 * @throws ParseException
+	 *             if there was an error to parse a key value.
+	 * 
+	 * @since 1.4
+	 */
+	public <T> List<T> getTypedListProperty(String key, Format format,
+			String separatorChars) throws ParseException {
 		List<T> list = new ArrayList<T>();
 		String property = getProperty(key);
 		if (property == null) {
 			return list;
 		}
-		for (String value : split(property, LIST_SEPARATOR_CHARS)) {
+		for (String value : split(property, separatorChars)) {
 			addParsedObject(list, format, value);
 		}
 		return list;
 	}
 
 	/**
-	 * Returns a list property.
+	 * Returns a list property. The separator characters are
+	 * {@value #LIST_SEPARATOR_CHARS}.
 	 * 
 	 * @param key
 	 *            the property key.
@@ -567,6 +595,36 @@ public class ContextProperties extends Properties {
 	 */
 	public <T> List<T> getTypedListProperty(String key, Format format,
 			List<T> defaultValue) throws ParseException {
+		return getTypedListProperty(key, format, defaultValue,
+				LIST_SEPARATOR_CHARS);
+	}
+
+	/**
+	 * Returns a list property.
+	 * 
+	 * @param key
+	 *            the property key.
+	 * 
+	 * @param format
+	 *            the {@link Format} to parse the key values.
+	 * 
+	 * @param defaultValue
+	 *            the default {@link List}.
+	 * 
+	 * @param separatorChars
+	 *            the characters used as the delimiters, {@code null} splits on
+	 *            whitespace.
+	 * 
+	 * @return the {@link List} from the property or the default list if no
+	 *         property with the key was found.
+	 * 
+	 * @throws ParseException
+	 *             if there was an error to parse a key value.
+	 * 
+	 * @since 1.4
+	 */
+	public <T> List<T> getTypedListProperty(String key, Format format,
+			List<T> defaultValue, String separatorChars) throws ParseException {
 		List<T> list = new ArrayList<T>();
 		String property = getProperty(key, join(defaultValue, ","));
 		for (String value : split(property, LIST_SEPARATOR_CHARS)) {
@@ -582,7 +640,8 @@ public class ContextProperties extends Properties {
 	}
 
 	/**
-	 * Returns a list property.
+	 * Returns a list property. The separator characters are
+	 * {@value #LIST_SEPARATOR_CHARS}.
 	 * 
 	 * @param key
 	 *            the property key.
@@ -591,13 +650,34 @@ public class ContextProperties extends Properties {
 	 *         property with the key was found.
 	 */
 	public List<String> getListProperty(String key) {
-		String property = getProperty(key);
-		return property == null ? new ArrayList<String>() : asList(split(
-				property, LIST_SEPARATOR_CHARS));
+		return getListProperty(key, LIST_SEPARATOR_CHARS);
 	}
 
 	/**
-	 * Returns a list property.
+	 * Returns a list property. The separator characters are
+	 * {@value #LIST_SEPARATOR_CHARS}.
+	 * 
+	 * @param key
+	 *            the property key.
+	 * 
+	 * @param separatorChars
+	 *            the characters used as the delimiters, {@code null} splits on
+	 *            whitespace.
+	 * 
+	 * @return the {@link List} from the property or an empty list if no
+	 *         property with the key was found.
+	 * 
+	 * @since 1.4
+	 */
+	public List<String> getListProperty(String key, String separatorChars) {
+		String property = getProperty(key);
+		return property == null ? new ArrayList<String>() : asList(split(
+				property, separatorChars));
+	}
+
+	/**
+	 * Returns a list property. The separator characters are
+	 * {@value #LIST_SEPARATOR_CHARS}.
 	 * 
 	 * @param key
 	 *            the property key.
@@ -609,8 +689,32 @@ public class ContextProperties extends Properties {
 	 *         property with the key was found.
 	 */
 	public List<String> getListProperty(String key, List<String> defaultValue) {
+		return getListProperty(key, defaultValue, LIST_SEPARATOR_CHARS);
+	}
+
+	/**
+	 * Returns a list property. The separator characters are
+	 * {@value #LIST_SEPARATOR_CHARS}.
+	 * 
+	 * @param key
+	 *            the property key.
+	 * 
+	 * @param defaultValue
+	 *            the default {@link List}.
+	 * 
+	 * @param separatorChars
+	 *            the characters used as the delimiters, {@code null} splits on
+	 *            whitespace.
+	 * 
+	 * @return the {@link List} from the property or the default list if no
+	 *         property with the key was found.
+	 * 
+	 * @since 1.4
+	 */
+	public List<String> getListProperty(String key, List<String> defaultValue,
+			String separatorChars) {
 		String property = getProperty(key, join(defaultValue, ","));
-		return Arrays.asList(split(property, LIST_SEPARATOR_CHARS));
+		return Arrays.asList(split(property, separatorChars));
 	}
 
 	@Override
