@@ -23,6 +23,7 @@ import static java.lang.Double.parseDouble;
 import static java.lang.String.format;
 import static java.util.Arrays.asList;
 import static org.apache.commons.lang3.StringUtils.join;
+import static org.apache.commons.lang3.StringUtils.replace;
 import static org.apache.commons.lang3.StringUtils.split;
 import static org.apache.commons.lang3.StringUtils.startsWith;
 import static org.apache.commons.lang3.Validate.notNull;
@@ -66,11 +67,11 @@ import java.util.Properties;
  */
 public class ContextProperties extends Properties {
 
-	private static final String REPLACEMENT_PATTERN = "\\$\\{%s\\}";
-
 	private static final String LIST_SEPARATOR_CHARS = " ,;";
 
 	private static final long serialVersionUID = 3495658613155578555L;
+
+	private static final String REPLACEMENT_PATTERN = "${%s}";
 
 	private final String context;
 
@@ -192,7 +193,7 @@ public class ContextProperties extends Properties {
 		for (Map.Entry<String, Serializable> entry : replacements.entrySet()) {
 			String replace = entry.getValue().toString();
 			String key = entry.getKey();
-			value = value.replaceAll(format(REPLACEMENT_PATTERN, key), replace);
+			value = replace(value, format(REPLACEMENT_PATTERN, key), replace);
 		}
 		return value;
 	}
