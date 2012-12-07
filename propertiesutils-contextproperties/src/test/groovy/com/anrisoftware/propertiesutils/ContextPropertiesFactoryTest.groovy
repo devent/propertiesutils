@@ -72,6 +72,14 @@ class ContextPropertiesFactoryTest extends TestUtils {
 	}
 
 	@Test
+	void "object context from URL resource with replacements with backslash"() {
+		def properties = new ContextPropertiesFactory(this).
+						fromResource(RESOURCE_URL).
+						withReplacement("foo", "C:\\Users\\user\\Documents\\foo")
+		assertStringContent properties.getProperty("testWithReplacements"), "Foo C:\\Users\\user\\Documents\\foo"
+	}
+
+	@Test
 	void "object context from URL resource with replacements system properties"() {
 		def os = System.getProperty("os.name")
 		def properties = new ContextPropertiesFactory(this).
