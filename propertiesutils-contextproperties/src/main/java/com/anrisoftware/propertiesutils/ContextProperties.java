@@ -393,8 +393,8 @@ public class ContextProperties extends Properties {
 	 */
 	public URL getURLProperty(String key, URL defaultValue)
 			throws MalformedURLException {
-		String property = getProperty(key, String.valueOf(defaultValue));
-		return new URL(property);
+		String property = getProperty(key);
+		return property == null ? defaultValue : new URL(property);
 	}
 
 	/**

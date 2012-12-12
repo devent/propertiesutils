@@ -18,6 +18,7 @@
  */
 package com.anrisoftware.propertiesutils;
 
+import static java.lang.System.getProperties;
 import static org.apache.commons.lang3.Validate.notNull;
 
 import java.io.BufferedInputStream;
@@ -28,6 +29,7 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.io.Reader;
+import java.net.MalformedURLException;
 import java.net.URI;
 import java.net.URL;
 import java.nio.charset.Charset;
@@ -102,6 +104,35 @@ public class ContextPropertiesFactory {
 	public ContextPropertiesFactory withDefaultProperties(Properties properties) {
 		notNull(properties, "The default properties cannot be null.");
 		defaultProperties = properties;
+		return this;
+	}
+
+	/**
+	 * Sets the default properties for the context. The default properties are
+	 * used if the context does not contain a specified key.
+	 * <p>
+	 * The method is to use in a fluent API style:
+	 * 
+	 * <pre>
+	 * ContextProperties p = new ContextPropertiesFactory(context)
+	 * 		.withDefaultProperties(propertiesUrl).fromResource(resource);
+	 * </pre>
+	 * 
+	 * @param resource
+	 *            the resource {@link URL} of the default properties.
+	 * 
+	 * @return this {@link ContextPropertiesFactory}.
+	 * 
+	 * @throws IOException
+	 *             if there was an I/O exception while loading the properties
+	 *             from the resource URL.
+	 * 
+	 * @since 1.4
+	 */
+	public ContextPropertiesFactory withDefaultProperties(URL resource)
+			throws IOException {
+		defaultProperties = new Properties();
+		defaultProperties.load(resource.openStream());
 		return this;
 	}
 
@@ -239,6 +270,57 @@ public class ContextPropertiesFactory {
 		return new ContextProperties(context, properties);
 	}
 
+	/**
+	 * Loads the properties from user specified resource with the default
+	 * character set.
+	 * <p>
+	 * The user can specify a location for the user specific properties in the
+	 * system properties:
+	 * <ul>
+	 * <li>{@code <context>.<fileKey>}</li>
+	 * <li>{@code <context>.<urlKey>}</li>
+	 * </ul>
+	 * If the file key property or the URL key property are set then the
+	 * properties are loaded from the specified location. If the user have not
+	 * set any of the properties then the properties are loaded from the
+	 * specified resource URL.
+	 * 
+	 * 
+	 * @param resource
+	 *            the resource {@link URL} if the user is not specifying a
+	 *            custom properties resource.
+	 * 
+	 * @param fileKey
+	 *            the key for the user specific properties file resource.
+	 * 
+	 * @param urlKey
+	 *            the key for the user specific properties URL resource.
+	 * 
+	 * @return the {@link ContextProperties}.
+	 * 
+	 * @throws IOException
+	 *             if there was an error loading the resource.
+	 * 
+	 * @since 1.4
+	 */
+	public ContextProperties fromUserResources(URL resource, String fileKey,
+			String urlKey) throws IOException {
+		URL userResource = getUserResourceURL(fileKey, urlKey);
+		return fromResource(userResource == null ? resource : userResource);
+	}
+
+	private URL getUserResourceURL(String fileKey, String urlKey)
+			throws MalformedURLException {
+		ContextProperties properties;
+		properties = new ContextProperties(context, getProperties());
+		File file = properties.getFileProperty(fileKey, null);
+		URL url = properties.getURLProperty(urlKey, null);
+		if (file != null) {
+			url = file.toURI().toURL();
+		}
+		return url;
+	}
+
 	private Properties loadProperties(InputStream resource, Charset charset)
 			throws FileNotFoundException, IOException {
 		Properties resourceP = new Properties(defaultProperties);
@@ -248,4 +330,5 @@ public class ContextPropertiesFactory {
 		parentP.putAll(parentProperties);
 		return parentP;
 	}
+
 }
