@@ -11,7 +11,7 @@
 	</parent>
 
 	<artifactId>propertiesutils-contextproperties</artifactId>
-	<version>1.4</version>
+	<version>1.5-SNAPSHOT</version>
 	<name>Context Properties</name>
 	<description>Loads properties in a context of a class.</description>
 	<inceptionYear>2012</inceptionYear>
@@ -29,6 +29,11 @@
 		<dependency>
 			<groupId>org.apache.commons</groupId>
 			<artifactId>commons-lang3</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>joda-time</groupId>
+			<artifactId>joda-time</artifactId>
+			<optional>true</optional>
 		</dependency>
 	</dependencies>
 
