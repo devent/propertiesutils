@@ -25,6 +25,7 @@
 				<role>Owner</role>
 				<role>Developer</role>
 			</roles>
+			<timezone>Europe/Berlin</timezone>
 		</developer>
 	</developers>
 
