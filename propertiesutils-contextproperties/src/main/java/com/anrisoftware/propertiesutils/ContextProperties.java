@@ -174,6 +174,17 @@ public class ContextProperties extends Properties {
 		return this;
 	}
 
+	/**
+	 * Returns the context of this properties.
+	 * 
+	 * @return the context.
+	 * 
+	 * @since 1.5
+	 */
+	public String getContext() {
+		return context;
+	}
+
 	@Override
 	public String getProperty(String key) {
 		String value = super.getProperty(keyWithContext(key));
