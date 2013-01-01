@@ -6,7 +6,7 @@
 	<parent>
 		<groupId>com.anrisoftware.propertiesutils</groupId>
 		<artifactId>propertiesutils-parent</artifactId>
-		<version>1.2-SNAPSHOT</version>
+		<version>1.2</version>
 		<relativePath>../propertiesutils-parent</relativePath>
 	</parent>
 
@@ -31,7 +31,7 @@
 			<artifactId>commons-lang3</artifactId>
 		</dependency>
 
-        <!-- for data context properties -->
+        <!-- for date context properties -->
 		<dependency>
 			<groupId>joda-time</groupId>
 			<artifactId>joda-time</artifactId>
