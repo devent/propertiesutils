@@ -331,4 +331,20 @@ public class ContextPropertiesFactory {
 		return parentP;
 	}
 
+	/**
+	 * Returning the context properties without loading any other resources.
+	 * <p>
+	 * Useful if we already loaded default properties from shared resource.
+	 * 
+	 * @return the {@link ContextProperties}.
+	 * 
+	 * @since 1.5
+	 */
+	public ContextProperties fromDefaults() {
+		Properties resourceP = new Properties(defaultProperties);
+		Properties parentP = new Properties(resourceP);
+		parentP.putAll(parentProperties);
+		return new ContextProperties(context, parentP);
+	}
+
 }
