@@ -16,10 +16,6 @@
 	<url>https://www.anr-institute.com/projects/projects/propertiesutils-parent</url>
 	<inceptionYear>2012</inceptionYear>
 
-	<properties>
-		<project.custom.year>2013</project.custom.year>
-	</properties>
-
 	<developers>
 		<developer>
 			<id>EM</id>
@@ -45,7 +41,7 @@
 	<scm>
 		<connection>scm:git:${custom.gitpublic.url}propertiesutils.git</connection>
 		<developerConnection>scm:git:${custom.gitpublic.url}propertiesutils.git</developerConnection>
-		<url>scm:git:${custom.gitpublic.url}propertiesutils.git</url>
+		<url>https://www.anr-institute.com/gitpublic/propertiesutils.git/</url>
 	</scm>
 
 	<issueManagement>
@@ -69,7 +65,7 @@
 			<dependency>
 				<groupId>com.anrisoftware.globalpom</groupId>
 				<artifactId>globalpom-groovytestutils</artifactId>
-				<version>1.15.1</version>
+				<version>1.16</version>
 			</dependency>
 			<dependency>
 				<groupId>com.anrisoftware.globalpom</groupId>
