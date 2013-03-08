@@ -1,5 +1,5 @@
 /*
- * Copyright 2012 Erwin Müller <erwin.mueller@deventm.org>
+ * Copyright 2012-2013 Erwin Müller <erwin.mueller@deventm.org>
  *
  * This file is part of propertiesutils-contextproperties.
  *
@@ -18,10 +18,9 @@
  */
 package com.anrisoftware.propertiesutils
 
-import org.junit.Test
+import static com.anrisoftware.globalpom.utils.TestUtils.*
 
-import com.anrisoftware.globalpom.utils.TestUtils
-import com.google.common.io.Resources
+import org.junit.Test
 
 /**
  * Test the context properties factory.
@@ -29,14 +28,14 @@ import com.google.common.io.Resources
  * @author Erwin Mueller, erwin.mueller@deventm.org
  * @since 1.2
  */
-class ContextPropertiesFactoryTest extends TestUtils {
+class ContextPropertiesFactoryTest {
 
-	static URL RESOURCE_URL = Resources.getResource("test.properties")
+	static URL RESOURCE_URL = ContextPropertiesFactoryTest.class.getResource("/test.properties")
 
 	@Test
 	void "object context from URL resource"() {
 		def properties = new ContextPropertiesFactory(this).
-						fromResource(RESOURCE_URL)
+				fromResource(RESOURCE_URL)
 		assertStringContent properties.getProperty("testString"), "Foo"
 	}
 
@@ -46,8 +45,8 @@ class ContextPropertiesFactoryTest extends TestUtils {
 		defaults.put("com.anrisoftware.propertiesutils.default_key", "Bar")
 
 		def properties = new ContextPropertiesFactory(this).
-						withDefaultProperties(defaults).
-						fromResource(RESOURCE_URL)
+				withDefaultProperties(defaults).
+				fromResource(RESOURCE_URL)
 		assertStringContent properties.getProperty("testString"), "Foo"
 		assertStringContent properties.getProperty("default_key"), "Bar"
 	}
@@ -58,24 +57,24 @@ class ContextPropertiesFactoryTest extends TestUtils {
 		defaults.put("com.anrisoftware.propertiesutils.testString", "Bar")
 
 		def properties = new ContextPropertiesFactory(this).
-						withProperties(defaults).
-						fromResource(RESOURCE_URL)
+				withProperties(defaults).
+				fromResource(RESOURCE_URL)
 		assertStringContent properties.getProperty("testString"), "Bar"
 	}
 
 	@Test
 	void "object context from URL resource with replacements"() {
 		def properties = new ContextPropertiesFactory(this).
-						fromResource(RESOURCE_URL).
-						withReplacement("foo", "aaa")
+				fromResource(RESOURCE_URL).
+				withReplacement("foo", "aaa")
 		assertStringContent properties.getProperty("testWithReplacements"), "Foo aaa"
 	}
 
 	@Test
 	void "object context from URL resource with replacements with backslash"() {
 		def properties = new ContextPropertiesFactory(this).
-						fromResource(RESOURCE_URL).
-						withReplacement("foo", "C:\\Users\\user\\Documents\\foo")
+				fromResource(RESOURCE_URL).
+				withReplacement("foo", "C:\\Users\\user\\Documents\\foo")
 		assertStringContent properties.getProperty("testWithReplacements"), "Foo C:\\Users\\user\\Documents\\foo"
 	}
 
@@ -83,9 +82,9 @@ class ContextPropertiesFactoryTest extends TestUtils {
 	void "object context from URL resource with replacements system properties"() {
 		def os = System.getProperty("os.name")
 		def properties = new ContextPropertiesFactory(this).
-						fromResource(RESOURCE_URL).
-						withReplacements(System.getProperties())
+				fromResource(RESOURCE_URL).
+				withReplacements(System.getProperties())
 		assertStringContent properties.getProperty("testWithReplacementsSystem"),
-						"Foo $os"
+				"Foo $os"
 	}
 }
