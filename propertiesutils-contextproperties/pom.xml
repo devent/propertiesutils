@@ -37,13 +37,6 @@
 			<artifactId>joda-time</artifactId>
 			<optional>true</optional>
 		</dependency>
-
-		<!-- for AWT context properties -->
-		<dependency>
-			<groupId>com.anrisoftware.globalpom</groupId>
-			<artifactId>globalpom-utils</artifactId>
-			<optional>true</optional>
-		</dependency>
 	</dependencies>
 
 </project>

@@ -6,14 +6,24 @@
 	<parent>
 		<groupId>com.anrisoftware.propertiesutils</groupId>
 		<artifactId>propertiesutils-parent</artifactId>
-		<version>1.0</version>
+		<version>1.4-SNAPSHOT</version>
 	</parent>
 
 	<artifactId>propertiesutils-swingproperties</artifactId>
-	<version>1.1</version>
-	<name>Swing Script Properties</name>
-	<description>Loads script from the properties to layout and customize swing components.</description>
-	<inceptionYear>2012</inceptionYear>
+	<version>1.2-SNAPSHOT</version>
+	<name>Properties Utilities :: Swing Properties</name>
+	<description>AWT and Swing properties.</description>
+	<url>https://www.anr-institute.com/projects/projects/propertiesutils-swingproperties</url>
+	<inceptionYear>2013</inceptionYear>
+
+	<properties>
+		<project.custom.year>${project.inceptionYear}</project.custom.year>
+	</properties>
+
+	<issueManagement>
+		<system>Redmine</system>
+		<url>https://www.anr-institute.com/projects/projects/propertiesutils-swingproperties</url>
+	</issueManagement>
 
 	<dependencies>
 
@@ -28,26 +38,17 @@
 		<dependency>
 			<groupId>com.anrisoftware.propertiesutils</groupId>
 			<artifactId>propertiesutils-contextproperties</artifactId>
-			<version>1.3</version>
+			<version>1.6-SNAPSHOT</version>
 		</dependency>
 
 		<!-- compile dependencies -->
-		<dependency>
-			<groupId>tablelayout</groupId>
-			<artifactId>TableLayout</artifactId>
-			<optional>true</optional>
-		</dependency>
 		<dependency>
 			<groupId>org.apache.commons</groupId>
 			<artifactId>commons-lang3</artifactId>
 		</dependency>
 		<dependency>
-			<groupId>com.google.inject.extensions</groupId>
-			<artifactId>guice-assistedinject</artifactId>
-		</dependency>
-		<dependency>
 			<groupId>com.anrisoftware.globalpom</groupId>
-			<artifactId>globalpom-log</artifactId>
+			<artifactId>globalpom-utils</artifactId>
 		</dependency>
 	</dependencies>
 </project>
