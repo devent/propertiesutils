@@ -11,7 +11,7 @@
 	</parent>
 
 	<artifactId>propertiesutils-contextproperties</artifactId>
-	<version>1.6-SNAPSHOT</version>
+	<version>1.6</version>
 	<name>Properties Utilities :: Context Properties</name>
 	<description>Loads properties in a context of a class.</description>
 	<url>https://www.anr-institute.com/projects/projects/propertiesutils-contextproperties</url>
