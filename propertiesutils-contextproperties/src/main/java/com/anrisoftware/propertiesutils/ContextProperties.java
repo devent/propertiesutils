@@ -65,11 +65,10 @@ import java.util.Properties;
  * @author Erwin Mueller, erwin.mueller@deventm.org
  * @since 1.0
  */
+@SuppressWarnings("serial")
 public class ContextProperties extends Properties {
 
 	private static final String LIST_SEPARATOR_CHARS = " ,;";
-
-	private static final long serialVersionUID = 3495658613155578555L;
 
 	private static final String REPLACEMENT_PATTERN = "${%s}";
 

@@ -29,6 +29,7 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.io.Reader;
+import java.io.Serializable;
 import java.net.MalformedURLException;
 import java.net.URI;
 import java.net.URL;
@@ -41,7 +42,8 @@ import java.util.Properties;
  * @author Erwin Mueller, erwin.mueller@deventm.org
  * @since 1.0
  */
-public class ContextPropertiesFactory {
+@SuppressWarnings("serial")
+public class ContextPropertiesFactory implements Serializable {
 
 	private static final Charset DEFAULT_CHARSET = Charset.defaultCharset();
 

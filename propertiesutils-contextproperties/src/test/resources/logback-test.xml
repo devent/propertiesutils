@@ -21,33 +21,18 @@
 -->
 <configuration scan="true">
 
-	<property resource="logback.properties"/>
-
-	<appender name="MVN_STYLE" class="ch.qos.logback.core.ConsoleAppender">
+	<appender name="TESTING_STYLE" class="ch.qos.logback.core.ConsoleAppender">
 		<target>System.err</target>
 		<encoder>
-			<pattern>[%-5level] %-4relative [%thread] %logger{15} - %msg %n</pattern>
+			<pattern>[%level] %-4relative [%thread] %logger{0} - %msg%n%rEx{short}</pattern>
 			<immediateFlush>false</immediateFlush>
 		</encoder>
 	</appender>
 
-	<appender name="FILE_DAILY"
-		class="ch.qos.logback.core.rolling.RollingFileAppender">
-		<file>${java.io.tmpdir}/${project.name}.log</file>
-		<rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
-			<fileNamePattern>logFile.%d{yyyy-MM-dd}.log</fileNamePattern>
-			<maxHistory>30</maxHistory>
-		</rollingPolicy>
-		<encoder>
-			<pattern>[%-5level] %-4relative [%thread] %logger{15} - %msg %n</pattern>
-			<immediateFlush>true</immediateFlush>
-		</encoder>
-	</appender>
-
 	<root level="ERROR">
-		<appender-ref ref="MVN_STYLE" />
+		<appender-ref ref="TESTING_STYLE" />
 	</root>
 
-	<logger name="com.anrisoftware" level="TRACE" />
+	<logger name="com.anrisoftware.propertiesutils" level="ALL" />
 
 </configuration>

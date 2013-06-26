@@ -31,12 +31,8 @@ import org.joda.time.format.PeriodFormatter;
  * @author Erwin Mueller, erwin.mueller@deventm.org
  * @since 1.5
  */
+@SuppressWarnings("serial")
 public class DateContextProperties extends ContextProperties {
-
-	/**
-	 * @version 1.5
-	 */
-	private static final long serialVersionUID = -3424187504752836390L;
 
 	/**
 	 * Sets the context and the properties.
