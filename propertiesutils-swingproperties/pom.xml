@@ -6,11 +6,10 @@
 	<parent>
 		<groupId>com.anrisoftware.propertiesutils</groupId>
 		<artifactId>propertiesutils-parent</artifactId>
-		<version>1.4</version>
+		<version>1.7-SNAPSHOT</version>
 	</parent>
 
 	<artifactId>propertiesutils-swingproperties</artifactId>
-	<version>1.2</version>
 	<name>Properties Utilities :: Swing Properties</name>
 	<description>AWT and Swing properties.</description>
 	<url>https://www.anr-institute.com/projects/projects/propertiesutils-swingproperties</url>

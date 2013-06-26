@@ -34,7 +34,7 @@ import com.anrisoftware.globalpom.format.point.PointFormat;
  * </ul>
  * 
  * @author Erwin Mueller, erwin.mueller@deventm.org
- * @since 1.2
+ * @since 1.7
  */
 @SuppressWarnings("serial")
 public class AwtContextProperties extends ContextProperties {
