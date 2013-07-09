@@ -6,7 +6,7 @@
 	<parent>
 		<groupId>com.anrisoftware.propertiesutils</groupId>
 		<artifactId>propertiesutils-parent</artifactId>
-		<version>1.7</version>
+		<version>1.8-SNAPSHOT</version>
 		<relativePath>../propertiesutils-parent</relativePath>
 	</parent>
 
@@ -20,6 +20,12 @@
 		<system>Redmine</system>
 		<url>https://www.anr-institute.com/projects/projects/propertiesutils-contextproperties</url>
 	</issueManagement>
+
+	<scm>
+		<connection>scm:git:${custom.gitpublic.url}propertiesutils.git</connection>
+		<developerConnection>scm:git:${custom.gitpublic.url}propertiesutils.git</developerConnection>
+		<url>https://www.anr-institute.com/gitpublic/propertiesutils.git/</url>
+	</scm>
 
 	<dependencies>
 
