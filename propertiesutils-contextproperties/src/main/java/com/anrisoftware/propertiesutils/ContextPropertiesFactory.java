@@ -1,20 +1,21 @@
 /*
  * Copyright 2012-2013 Erwin Müller <erwin.mueller@deventm.org>
- *
+ * 
  * This file is part of propertiesutils-contextproperties.
- *
- * propertiesutils-contextproperties is free software: you can redistribute it and/or modify it
- * under the terms of the GNU Lesser General Public License as published by the
- * Free Software Foundation, either version 3 of the License, or (at your
- * option) any later version.
- *
- * propertiesutils-contextproperties is distributed in the hope that it will be useful, but
- * WITHOUT ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or
- * FITNESS FOR A PARTICULAR PURPOSE. See the GNU General Public License for more
- * details.
- *
+ * 
+ * propertiesutils-contextproperties is free software: you can redistribute it
+ * and/or modify it under the terms of the GNU Lesser General Public License as
+ * published by the Free Software Foundation, either version 3 of the License,
+ * or (at your option) any later version.
+ * 
+ * propertiesutils-contextproperties is distributed in the hope that it will be
+ * useful, but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the GNU General
+ * Public License for more details.
+ * 
  * You should have received a copy of the GNU Lesser General Public License
- * along with propertiesutils-contextproperties. If not, see <http://www.gnu.org/licenses/>.
+ * along with propertiesutils-contextproperties. If not, see
+ * <http://www.gnu.org/licenses/>.
  */
 package com.anrisoftware.propertiesutils;
 
@@ -145,8 +146,10 @@ public class ContextPropertiesFactory implements Serializable {
 	 * The method is to use in a fluent API style:
 	 * 
 	 * <pre>
+	 * // loads the properties from the resource but lets the user overwrite
+	 * // the properties with the system properties:
 	 * ContextProperties p = new ContextPropertiesFactory(context).withProperties(
-	 * 		properties).fromResource(resource);
+	 * 		System.getProperties()).fromResource(resource);
 	 * </pre>
 	 * 
 	 * @param properties

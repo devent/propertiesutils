@@ -6,7 +6,7 @@
 	<parent>
 		<groupId>com.anrisoftware.propertiesutils</groupId>
 		<artifactId>propertiesutils-parent</artifactId>
-		<version>1.8</version>
+		<version>1.9-SNAPSHOT</version>
 		<relativePath>../propertiesutils-parent</relativePath>
 	</parent>
 
