@@ -48,6 +48,13 @@
 			<artifactId>joda-time</artifactId>
 			<optional>true</optional>
 		</dependency>
+
+		<!-- for AbstractContextPropertiesProvider -->
+		<dependency>
+			<groupId>com.google.inject</groupId>
+			<artifactId>guice</artifactId>
+			<optional>true</optional>
+		</dependency>
 	</dependencies>
 
 </project>
