@@ -6,13 +6,13 @@
 	<parent>
 		<groupId>com.anrisoftware.globalpom</groupId>
 		<artifactId>globalpom-groovy</artifactId>
-		<version>1.21-SNAPSHOT</version>
+		<version>1.21</version>
 	</parent>
 
 	<groupId>com.anrisoftware.propertiesutils</groupId>
 	<artifactId>propertiesutils-parent</artifactId>
 	<name>Properties Utilities :: Parent POM</name>
-	<version>1.10-SNAPSHOT</version>
+	<version>1.10</version>
 	<packaging>pom</packaging>
 	<url>https://www.anr-institute.com/projects/projects/propertiesutils-parent</url>
 	<inceptionYear>2012</inceptionYear>
@@ -66,7 +66,7 @@
 			<dependency>
 				<groupId>com.anrisoftware.globalpom</groupId>
 				<artifactId>globalpom-groovytestutils</artifactId>
-                <version>1.22-SNAPSHOT</version>
+                <version>1.22</version>
 			</dependency>
 		</dependencies>
 	</dependencyManagement>
