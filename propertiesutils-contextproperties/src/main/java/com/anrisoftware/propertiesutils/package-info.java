@@ -17,7 +17,23 @@
  * along with propertiesutils-contextproperties. If not, see <http://www.gnu.org/licenses/>.
  */
 /**
- * <h1>GitHub SCM</h1>
+ * <h1>Properties Utilities :: Context Properties</h1>
+ *
+ * <p>
+ * Loads properties in a context of a class.
+ *
+ * <h2>Maven Module</h2>
+ *
+ * <pre>
+ * &lt;dependency>
+ * &lt;groupId>com.anrisoftware.propertiesutils&lt;/groupId>
+ * &lt;artifactId>globalpomutils-contextproperties&lt;/artifactId>
+ * &lt;version>1.10&lt;/version>
+ * &lt;/dependency>
+ * </pre>
+ *
+ * <h2>GitHub SCM</h2>
+ *
  * <ul>
  * <li><a href="https://github.com/devent/propertiesutils">Propertiesutils Repository</a></li>
  * <li><a href="git://git@github.com:devent/propertiesutils.git">Propertiesutils Repository SSH</a>
