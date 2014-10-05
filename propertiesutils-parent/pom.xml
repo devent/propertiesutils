@@ -6,15 +6,15 @@
 	<parent>
 		<groupId>com.anrisoftware.globalpom</groupId>
 		<artifactId>globalpom-groovy</artifactId>
-		<version>1.22</version>
+		<version>1.24</version>
 	</parent>
 
 	<groupId>com.anrisoftware.propertiesutils</groupId>
 	<artifactId>propertiesutils-parent</artifactId>
 	<name>Properties Utilities :: Parent POM</name>
-	<version>1.11</version>
+	<version>1.12-SNAPSHOT</version>
 	<packaging>pom</packaging>
-	<url>https://anrisoftware.com/projects/propertiesutils-parent</url>
+	<url>https://anrisoftware.com/projects/projects/propertiesutils-parent</url>
 	<inceptionYear>2012</inceptionYear>
 
 	<developers>
@@ -51,14 +51,14 @@
 	</issueManagement>
 
 	<distributionManagement>
-		<repository>
-			<id>${custom.repository.anrispublic.id}</id>
-			<url>${custom.repository.root}${custom.repository.anrispublic.path}</url>
-		</repository>
-		<snapshotRepository>
-			<id>${custom.repository.anrispublicsnapshots.id}</id>
-			<url>${custom.repository.root}${custom.repository.anrispublicsnapshots.path}</url>
-		</snapshotRepository>
+        <repository>
+            <id>osssonatype</id>
+            <url>https://oss.sonatype.org/service/local/staging/deploy/maven2</url>
+        </repository>
+        <snapshotRepository>
+            <id>osssonatype_snapshots</id>
+            <url>https://oss.sonatype.org/content/repositories/snapshots</url>
+        </snapshotRepository>
 	</distributionManagement>
 
 	<dependencyManagement>
@@ -66,7 +66,7 @@
 			<dependency>
 				<groupId>com.anrisoftware.globalpom</groupId>
 				<artifactId>globalpom-groovytestutils</artifactId>
-                <version>1.23</version>
+                <version>1.24</version>
 			</dependency>
 		</dependencies>
 	</dependencyManagement>

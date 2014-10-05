@@ -6,14 +6,14 @@
 	<parent>
 		<groupId>com.anrisoftware.propertiesutils</groupId>
 		<artifactId>propertiesutils-parent</artifactId>
-		<version>1.11</version>
+		<version>1.12-SNAPSHOT</version>
 		<relativePath>../propertiesutils-parent</relativePath>
 	</parent>
 
 	<artifactId>propertiesutils-contextproperties</artifactId>
 	<name>Properties Utilities :: Context Properties</name>
 	<description>Loads properties in a context of a class.</description>
-	<url>https://anrisoftware.com/projects/propertiesutils-contextproperties</url>
+	<url>https://anrisoftware.com/projects/projects/propertiesutils-contextproperties</url>
 	<inceptionYear>2012</inceptionYear>
 
 	<issueManagement>
