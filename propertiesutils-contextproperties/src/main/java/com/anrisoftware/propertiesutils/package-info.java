@@ -1,5 +1,5 @@
 /*
- * Copyright 2012-2014 Erwin Müller <erwin.mueller@deventm.org>
+ * Copyright 2012-2015 Erwin Müller <erwin.mueller@deventm.org>
  *
  * This file is part of propertiesutils-contextproperties.
  *
@@ -28,19 +28,19 @@
  * &lt;dependency>
  * &lt;groupId>com.anrisoftware.propertiesutils&lt;/groupId>
  * &lt;artifactId>globalpomutils-contextproperties&lt;/artifactId>
- * &lt;version>1.10&lt;/version>
+ * &lt;version>1.13&lt;/version>
  * &lt;/dependency>
  * </pre>
  *
- * <h2>GitHub SCM</h2>
+ * <h2>SCM</h2>
  *
  * <ul>
- * <li><a href="https://github.com/devent/propertiesutils">Propertiesutils Repository</a></li>
- * <li><a href="git://git@github.com:devent/propertiesutils.git">Propertiesutils Repository SSH</a>
- * <li><a href="https://github.com/devent/propertiesutils.git">Propertiesutils Repository HTTPS</a>
+ * <li><a href="https://anrisoftware.com/projects/projects/propertiesutils-contextproperties/repository">Repository</a></li>
+ * <li><a href="git@anrisoftware.com:propertiesutils.git">SSH Access</a>
+ * <li><a href="https://github.com/devent/propertiesutils">Github Mirror</a>
  * </ul>
  *
- * @version 1.10
+ * @version 1.13
  * @author Erwin Mueller, erwin.mueller@deventm.org
  */
 package com.anrisoftware.propertiesutils;
