@@ -6,13 +6,13 @@
 	<parent>
 		<groupId>com.anrisoftware.globalpom</groupId>
 		<artifactId>globalpom-groovy</artifactId>
-		<version>1.24</version>
+		<version>1.25</version>
 	</parent>
 
 	<groupId>com.anrisoftware.propertiesutils</groupId>
 	<artifactId>propertiesutils-parent</artifactId>
 	<name>Properties Utilities :: Parent POM</name>
-	<version>1.12</version>
+	<version>1.13-SNAPSHOT</version>
 	<packaging>pom</packaging>
 	<url>https://anrisoftware.com/projects/projects/propertiesutils-parent</url>
 	<inceptionYear>2012</inceptionYear>
@@ -40,9 +40,9 @@
 	</licenses>
 
 	<scm>
-		<connection>scm:git:${custom.gitpublic.url}propertiesutils.git</connection>
-		<developerConnection>scm:git:${custom.gitpublic.url}propertiesutils.git</developerConnection>
-		<url>https://anrisoftware.com/gitpublic/propertiesutils.git/</url>
+		<connection>scm:git:git@anrisoftware.com:propertiesutils.git</connection>
+		<developerConnection>scm:git:git@anrisoftware.com:propertiesutils.git</developerConnection>
+		<url>https://anrisoftware.com/projects/projects/propertiesutils-parent/repository</url>
 	</scm>
 
 	<issueManagement>
@@ -51,6 +51,10 @@
 	</issueManagement>
 
 	<distributionManagement>
+        <site>
+          <id>anrisoftware</id>
+          <url>dav:https://anrisoftware.com/javadoc/${project.groupId}/${project.artifactId}</url>
+        </site>
         <repository>
             <id>osssonatype</id>
             <url>https://oss.sonatype.org/service/local/staging/deploy/maven2</url>
@@ -66,7 +70,7 @@
 			<dependency>
 				<groupId>com.anrisoftware.globalpom</groupId>
 				<artifactId>globalpom-groovytestutils</artifactId>
-                <version>1.24</version>
+                <version>1.25</version>
 			</dependency>
 		</dependencies>
 	</dependencyManagement>
