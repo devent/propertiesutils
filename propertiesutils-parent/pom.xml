@@ -12,7 +12,7 @@
 	<groupId>com.anrisoftware.propertiesutils</groupId>
 	<artifactId>propertiesutils-parent</artifactId>
 	<name>Properties Utilities :: Parent POM</name>
-	<version>1.13-SNAPSHOT</version>
+	<version>1.13</version>
 	<packaging>pom</packaging>
 	<url>https://anrisoftware.com/projects/projects/propertiesutils-parent</url>
 	<inceptionYear>2012</inceptionYear>
