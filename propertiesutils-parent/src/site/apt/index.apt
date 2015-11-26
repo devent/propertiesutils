@@ -17,26 +17,27 @@
 ~~ along with propertiesutils-parent. If not, see <http://www.gnu.org/licenses/>.
 ~~
 
-  Manages the dependencies versions for the properties utilities modules.
+Description
 
-Anrisoftware.com SCM
+    Manages the dependencies for the Properties modules.
 
-  * {{{https://anrisoftware.com/projects/projects/propertiesutils-parent/repository}Repository}}
+SCM
 
-  * {{{git@anrisoftware.com:propertiesutils.git}SSH Access}}
+    * {{{https://anrisoftware.com/projects/projects/propertiesutils/repository}Main Repository}}
 
-GitHub SCM
+    * git@anrisoftware.com:propertiesutils.git
 
-  * {{{https://github.com/devent/propertiesutils}Repository}}
+    * {{{https://github.com/devent/propertiesutils}Github Mirror Repository}}
 
-  * {{{git@github.com:devent/propertiesutils.git}SSH Access}}
+    * git@anrisoftware.com:propertiesutils.git
 
-Maven Module
+Maven
 
 ---
-<dependency>
-    <groupId>com.anrisoftware.propertiesutils</groupId>
+<parent>
     <artifactId>propertiesutils-parent</artifactId>
-    <version>1.13</version>
-</dependency>
+    <groupId>com.anrisoftware.propertiesutils</groupId>
+    <version>1.14</version>
+    <relativePath>../propertiesutils-parent</relativePath>
+</parent>
 ---

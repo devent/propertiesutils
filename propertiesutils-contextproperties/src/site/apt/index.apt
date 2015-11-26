@@ -17,33 +17,9 @@
 ~~ along with propertiesutils-contextproperties. If not, see <http://www.gnu.org/licenses/>.
 ~~
 
-  Loads properties in a context of a class.
-
-Anrisoftware.com SCM
-
-  * {{{https://anrisoftware.com/projects/projects/propertiesutils-contextproperties/repository}Repository}}
-
-  * git@anrisoftware.com:propertiesutils.git
-
-GitHub SCM
-
-  * {{{https://github.com/devent/propertiesutils}Repository}}
-
-  * git@github.com:devent/propertiesutils.git
-
-Maven Module
-
----
-<dependency>
-    <groupId>com.anrisoftware.propertiesutils</groupId>
-    <artifactId>propertiesutils-contextproperties</artifactId>
-    <version>1.13</version>
-</dependency>
----
-
 Description
 
-  Loads properties from a properties file. The properties keys are prefixed
+    Loads properties from a properties file. The properties keys are prefixed
 with the context, if not already present. The context is an object package
 name. For example, if the context object is the class ContextProperties then
 the context is "com.anrisoftware.propertiesutils". If then a property with
@@ -52,7 +28,7 @@ property "com.anrisoftware.propertiesutils.foo" is looked up.
 Defines additional methods to return different types of properties, like
 boolean, number, list.
 
-  The ContextPropertiesFactory class defines various methods to load a
+    The ContextPropertiesFactory class defines various methods to load a
 properties resource from the class path. Furthermore, the abstract provider
 AbstractContextPropertiesProvider can be used to inject loaded properties
 into a class. See the Javadoc of those classes for examples.
@@ -64,3 +40,24 @@ com.anrisoftware.propertiesutils.testString = Foo
 com.anrisoftware.propertiesutils.testWithReplacements = Foo ${foo}
 com.anrisoftware.propertiesutils.testWithReplacementsSystem = Foo ${os.name}
 ---
+
+SCM
+
+    * {{{https://anrisoftware.com/projects/projects/propertiesutils/repository}Main Repository}}
+
+    * git@anrisoftware.com:propertiesutils.git
+
+    * {{{https://github.com/devent/propertiesutils}Github Mirror Repository}}
+
+    * git@anrisoftware.com:propertiesutils.git
+
+Maven
+
+---
+<dependency>
+    <groupId>com.anrisoftware.propertiesutils</groupId>
+    <artifactId>propertiesutils-contextproperties</artifactId>
+    <version>1.14</version>
+</dependency>
+---
+
