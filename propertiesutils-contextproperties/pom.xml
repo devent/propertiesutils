@@ -64,6 +64,13 @@
 			<optional>true</optional>
 		</dependency>
 
+        <!-- for byte context properties -->
+        <dependency>
+            <groupId>com.thoughtworks.xstream</groupId>
+            <artifactId>xstream</artifactId>
+            <optional>true</optional>
+        </dependency>
+
 		<!-- for AbstractContextPropertiesProvider -->
 		<dependency>
 			<groupId>com.google.inject</groupId>
