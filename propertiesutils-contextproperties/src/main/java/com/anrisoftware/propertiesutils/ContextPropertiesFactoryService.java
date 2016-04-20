@@ -15,27 +15,29 @@
  */
 package com.anrisoftware.propertiesutils;
 
-import java.text.ParseException;
+import org.apache.felix.scr.annotations.Component;
+import org.apache.felix.scr.annotations.Service;
 
 /**
- * Parses the string value to the type.
+ * Provides {@link ContextPropertiesFactory}.
  *
  * @author Erwin Müller, erwin.mueller@deventm.de
- * @since 1.14
+ * @since 2.2
  */
-public interface StringToType<T> {
+@Component
+@Service(ContextPropertiesFactoryService.class)
+public class ContextPropertiesFactoryService {
 
-    /**
-     * Parses the string value to the type.
-     *
-     * @param value
-     *            the {@link String} value.
-     *
-     * @return the parses type.
-     *
-     * @throws ParseException
-     *             if there was an error parsing the value.
-     */
-    T stringToType(String value) throws ParseException;
+    public ContextPropertiesFactory create(Object context) {
+        return new ContextPropertiesFactory(context);
+    }
+
+    public ContextPropertiesFactory create(Class<?> context) {
+        return new ContextPropertiesFactory(context);
+    }
+
+    public ContextPropertiesFactory create(String context) {
+        return new ContextPropertiesFactory(context);
+    }
 
 }
