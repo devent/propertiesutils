@@ -15,11 +15,8 @@
  */
 package com.anrisoftware.propertiesutils;
 
-import java.io.ByteArrayInputStream;
 import java.io.InputStream;
 import java.util.Properties;
-
-import com.thoughtworks.xstream.XStream;
 
 /**
  * Properties with a specified context returning byte array data properties.
@@ -29,6 +26,8 @@ import com.thoughtworks.xstream.XStream;
  */
 @SuppressWarnings("serial")
 public class ByteContextProperties extends ContextProperties {
+
+    private final ByteProperties byteProperties;
 
     /**
      * Sets the context and the properties.
@@ -41,6 +40,7 @@ public class ByteContextProperties extends ContextProperties {
      */
     public ByteContextProperties(Class<?> context, Properties parentProperties) {
         super(context, parentProperties);
+        this.byteProperties = new ByteProperties(this);
     }
 
     /**
@@ -54,6 +54,7 @@ public class ByteContextProperties extends ContextProperties {
      */
     public ByteContextProperties(Object context, Properties parentProperties) {
         super(context, parentProperties);
+        this.byteProperties = new ByteProperties(this);
     }
 
     /**
@@ -67,6 +68,7 @@ public class ByteContextProperties extends ContextProperties {
      */
     public ByteContextProperties(String context, Properties parentProperties) {
         super(context, parentProperties);
+        this.byteProperties = new ByteProperties(this);
     }
 
     /**
@@ -78,9 +80,7 @@ public class ByteContextProperties extends ContextProperties {
      * @return the {@link Byte} array data.
      */
     public byte[] getDataProperty(String key) {
-        String property = getProperty(key);
-        byte[] data = (byte[]) new XStream().fromXML(property);
-        return data;
+        return byteProperties.getDataProperty(key);
     }
 
     /**
@@ -92,9 +92,7 @@ public class ByteContextProperties extends ContextProperties {
      * @return the {@link InputStream} data.
      */
     public InputStream getDataPropertyStream(String key) {
-        String property = getProperty(key);
-        byte[] data = (byte[]) new XStream().fromXML(property);
-        return new ByteArrayInputStream(data);
+        return byteProperties.getDataPropertyStream(key);
     }
 
 }

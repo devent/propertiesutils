@@ -15,29 +15,36 @@
  */
 package com.anrisoftware.propertiesutils;
 
+import java.util.Map;
+import java.util.Properties;
+
 import org.apache.felix.scr.annotations.Component;
 import org.apache.felix.scr.annotations.Service;
 
 /**
- * Provides {@link ContextPropertiesFactory}.
+ * Provides {@link ByteProperties}.
  *
  * @author Erwin Müller, erwin.mueller@deventm.de
  * @since 2.1
  */
 @Component
-@Service(ContextPropertiesFactoryService.class)
-public class ContextPropertiesFactoryService {
+@Service(BytePropertiesService.class)
+public class BytePropertiesService {
 
-    public ContextPropertiesFactory create(Object context) {
-        return new ContextPropertiesFactory(context);
+    public ByteProperties create(Map<String, Object> properties,
+            String listSepChars) {
+        return new ByteProperties(properties, listSepChars);
     }
 
-    public ContextPropertiesFactory create(Class<?> context) {
-        return new ContextPropertiesFactory(context);
+    public ByteProperties create(Map<String, Object> properties) {
+        return new ByteProperties(properties);
     }
 
-    public ContextPropertiesFactory create(String context) {
-        return new ContextPropertiesFactory(context);
+    public ByteProperties create(Properties properties, String listSepChars) {
+        return new ByteProperties(properties, listSepChars);
     }
 
+    public ByteProperties create(Properties properties) {
+        return new ByteProperties(properties);
+    }
 }

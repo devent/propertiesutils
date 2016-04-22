@@ -15,64 +15,37 @@
  */
 package com.anrisoftware.propertiesutils;
 
+import java.util.Map;
 import java.util.Properties;
 
+import org.apache.commons.lang3.builder.ToStringBuilder;
 import org.joda.time.Duration;
 import org.joda.time.Period;
 import org.joda.time.format.ISOPeriodFormat;
 import org.joda.time.format.PeriodFormatter;
 
 /**
- * Properties with a specified context returning data and time properties.
+ * Extends the utility to return typed properties for Joda-Time typed.
  *
- * @author Erwin Mueller, erwin.mueller@deventm.org
- * @since 1.5
+ * @author Erwin Müller, erwin.mueller@deventm.de
+ * @since 2.1
  */
-@SuppressWarnings("serial")
-public class DateContextProperties extends ContextProperties {
+public class DateProperties extends TypedProperties {
 
-    private final DateProperties dateProperties;
-
-    /**
-     * Sets the context and the properties.
-     *
-     * @param context
-     *            an {@link Class} that is used as the context.
-     *
-     * @param parentProperties
-     *            the {@link Properties} that are returned.
-     */
-    public DateContextProperties(Class<?> context, Properties parentProperties) {
-        super(context, parentProperties);
-        this.dateProperties = new DateProperties(this);
+    public DateProperties(Map<String, Object> properties, String listSepChars) {
+        super(properties, listSepChars);
     }
 
-    /**
-     * Sets the context and the properties.
-     *
-     * @param context
-     *            an {@link Object} that is used as the context.
-     *
-     * @param parentProperties
-     *            the {@link Properties} that are returned.
-     */
-    public DateContextProperties(Object context, Properties parentProperties) {
-        super(context, parentProperties);
-        this.dateProperties = new DateProperties(this);
+    public DateProperties(Map<String, Object> properties) {
+        super(properties);
     }
 
-    /**
-     * Sets the context and the properties.
-     *
-     * @param context
-     *            the context.
-     *
-     * @param parentProperties
-     *            the {@link Properties} that are returned.
-     */
-    public DateContextProperties(String context, Properties parentProperties) {
-        super(context, parentProperties);
-        this.dateProperties = new DateProperties(this);
+    public DateProperties(Properties properties, String listSepChars) {
+        super(properties, listSepChars);
+    }
+
+    public DateProperties(Properties properties) {
+        super(properties);
     }
 
     /**
@@ -85,7 +58,12 @@ public class DateContextProperties extends ContextProperties {
      * @return the {@link Period}.
      */
     public Period getPeriodProperty(String key) {
-        return dateProperties.getPeriodProperty(key);
+        String property = getProperty(key);
+        if (property == null) {
+            return null;
+        } else {
+            return new Period(property);
+        }
     }
 
     /**
@@ -101,7 +79,12 @@ public class DateContextProperties extends ContextProperties {
      * @return the {@link Period}.
      */
     public Period getPeriodProperty(String key, PeriodFormatter formatter) {
-        return dateProperties.getPeriodProperty(key, formatter);
+        String property = getProperty(key);
+        if (property == null) {
+            return null;
+        } else {
+            return formatter.parsePeriod(property);
+        }
     }
 
     /**
@@ -114,7 +97,12 @@ public class DateContextProperties extends ContextProperties {
      * @return the {@link Duration}.
      */
     public Duration getDurationProperty(String key) {
-        return dateProperties.getDurationProperty(key);
+        String property = getProperty(key);
+        if (property == null) {
+            return null;
+        } else {
+            return new Period(property).toStandardDuration();
+        }
     }
 
     /**
@@ -130,7 +118,17 @@ public class DateContextProperties extends ContextProperties {
      * @return the {@link Duration}.
      */
     public Duration getDurationProperty(String key, PeriodFormatter formatter) {
-        return dateProperties.getDurationProperty(key, formatter);
+        String property = getProperty(key);
+        if (property == null) {
+            return null;
+        } else {
+            return formatter.parsePeriod(property).toStandardDuration();
+        }
     }
 
+    @Override
+    public String toString() {
+        return new ToStringBuilder(this).appendSuper(super.toString())
+                .toString();
+    }
 }

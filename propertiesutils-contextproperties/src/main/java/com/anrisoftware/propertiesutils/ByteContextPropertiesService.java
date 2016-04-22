@@ -24,7 +24,7 @@ import org.apache.felix.scr.annotations.Service;
  * Provides {@link ByteContextProperties}.
  *
  * @author Erwin Müller, erwin.mueller@deventm.de
- * @since 2.2
+ * @since 2.1
  */
 @Component
 @Service(ByteContextPropertiesService.class)

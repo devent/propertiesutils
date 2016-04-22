@@ -15,29 +15,36 @@
  */
 package com.anrisoftware.propertiesutils;
 
+import java.util.Map;
+import java.util.Properties;
+
 import org.apache.felix.scr.annotations.Component;
 import org.apache.felix.scr.annotations.Service;
 
 /**
- * Provides {@link ContextPropertiesFactory}.
+ * Provides {@link TypedAllProperties}.
  *
  * @author Erwin Müller, erwin.mueller@deventm.de
  * @since 2.1
  */
 @Component
-@Service(ContextPropertiesFactoryService.class)
-public class ContextPropertiesFactoryService {
+@Service(TypedAllPropertiesService.class)
+public class TypedAllPropertiesService {
 
-    public ContextPropertiesFactory create(Object context) {
-        return new ContextPropertiesFactory(context);
+    public TypedAllProperties create(Map<String, Object> properties,
+            String listSepChars) {
+        return new TypedAllProperties(properties, listSepChars);
     }
 
-    public ContextPropertiesFactory create(Class<?> context) {
-        return new ContextPropertiesFactory(context);
+    public TypedAllProperties create(Map<String, Object> properties) {
+        return new TypedAllProperties(properties);
     }
 
-    public ContextPropertiesFactory create(String context) {
-        return new ContextPropertiesFactory(context);
+    public TypedAllProperties create(Properties properties, String listSepChars) {
+        return new TypedAllProperties(properties, listSepChars);
     }
 
+    public TypedAllProperties create(Properties properties) {
+        return new TypedAllProperties(properties);
+    }
 }
