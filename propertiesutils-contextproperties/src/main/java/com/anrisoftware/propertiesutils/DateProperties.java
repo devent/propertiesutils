@@ -30,6 +30,7 @@ import org.joda.time.format.PeriodFormatter;
  * @author Erwin Müller, erwin.mueller@deventm.de
  * @since 2.1
  */
+@SuppressWarnings("serial")
 public class DateProperties extends TypedProperties {
 
     public DateProperties(Map<String, Object> properties, String listSepChars) {

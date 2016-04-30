@@ -22,6 +22,7 @@ import static org.apache.commons.lang3.StringUtils.join;
 import static org.apache.commons.lang3.StringUtils.split;
 
 import java.io.File;
+import java.io.Serializable;
 import java.net.MalformedURLException;
 import java.net.URI;
 import java.net.URISyntaxException;
@@ -45,7 +46,8 @@ import org.apache.commons.lang3.builder.ToStringBuilder;
  * @author Erwin Müller, erwin.mueller@deventm.de
  * @since 2.1
  */
-public class TypedProperties {
+@SuppressWarnings("serial")
+public class TypedProperties implements Serializable {
 
     private static final String DEFAULT_LIST_SEPARATOR_CHARS = " ,;";
 

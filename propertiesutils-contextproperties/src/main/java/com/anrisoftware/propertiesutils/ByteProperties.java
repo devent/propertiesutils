@@ -30,6 +30,7 @@ import com.thoughtworks.xstream.XStream;
  * @author Erwin Müller, erwin.mueller@deventm.de
  * @since 2.1
  */
+@SuppressWarnings("serial")
 public class ByteProperties extends TypedProperties {
 
     public ByteProperties(Map<String, Object> properties, String listSepChars) {
