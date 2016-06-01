@@ -18,8 +18,13 @@ package com.anrisoftware.propertiesutils;
 import java.util.Map;
 import java.util.Properties;
 
+import javax.inject.Inject;
+
+import org.apache.felix.scr.annotations.Activate;
 import org.apache.felix.scr.annotations.Component;
 import org.apache.felix.scr.annotations.Service;
+
+import com.google.inject.Guice;
 
 /**
  * Provides {@link TypedAllProperties}.
@@ -29,22 +34,35 @@ import org.apache.felix.scr.annotations.Service;
  */
 @Component
 @Service(TypedAllPropertiesService.class)
-public class TypedAllPropertiesService {
+public class TypedAllPropertiesService implements TypedAllPropertiesFactory {
 
+    @Inject
+    private TypedAllPropertiesFactory factory;
+
+    @Override
     public TypedAllProperties create(Map<String, Object> properties,
             String listSepChars) {
-        return new TypedAllProperties(properties, listSepChars);
+        return factory.create(properties, listSepChars);
     }
 
+    @Override
     public TypedAllProperties create(Map<String, Object> properties) {
-        return new TypedAllProperties(properties);
+        return factory.create(properties);
     }
 
-    public TypedAllProperties create(Properties properties, String listSepChars) {
-        return new TypedAllProperties(properties, listSepChars);
+    @Override
+    public TypedAllProperties create(Properties properties,
+            String listSepChars) {
+        return factory.create(properties, listSepChars);
     }
 
+    @Override
     public TypedAllProperties create(Properties properties) {
-        return new TypedAllProperties(properties);
+        return factory.create(properties);
+    }
+
+    @Activate
+    protected void start() {
+        Guice.createInjector(new PropertiesUtilsModule()).injectMembers(this);
     }
 }

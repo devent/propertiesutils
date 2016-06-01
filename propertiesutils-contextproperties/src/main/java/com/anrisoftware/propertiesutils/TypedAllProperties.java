@@ -23,6 +23,9 @@ import org.joda.time.Duration;
 import org.joda.time.Period;
 import org.joda.time.format.PeriodFormatter;
 
+import com.google.inject.assistedinject.Assisted;
+import com.google.inject.assistedinject.AssistedInject;
+
 /**
  * Utility to return typed properties.
  *
@@ -34,23 +37,28 @@ public class TypedAllProperties extends TypedProperties {
 
     private final DateProperties dateProperties;
 
-    public TypedAllProperties(Map<String, Object> properties,
-            String listSepChars) {
+    @AssistedInject
+    TypedAllProperties(@Assisted Map<String, Object> properties,
+            @Assisted String listSepChars) {
         super(properties, listSepChars);
         this.dateProperties = new DateProperties(properties, listSepChars);
     }
 
-    public TypedAllProperties(Map<String, Object> properties) {
+    @AssistedInject
+    TypedAllProperties(@Assisted Map<String, Object> properties) {
         super(properties);
         this.dateProperties = new DateProperties(properties);
     }
 
-    public TypedAllProperties(Properties properties, String listSepChars) {
+    @AssistedInject
+    TypedAllProperties(@Assisted Properties properties,
+            @Assisted String listSepChars) {
         super(properties, listSepChars);
         this.dateProperties = new DateProperties(properties, listSepChars);
     }
 
-    public TypedAllProperties(Properties properties) {
+    @AssistedInject
+    TypedAllProperties(@Assisted Properties properties) {
         super(properties);
         this.dateProperties = new DateProperties(properties);
     }
