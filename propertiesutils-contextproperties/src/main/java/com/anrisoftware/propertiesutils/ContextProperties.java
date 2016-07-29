@@ -16,7 +16,6 @@
 package com.anrisoftware.propertiesutils;
 
 import static java.lang.String.format;
-import static org.apache.commons.lang3.StringUtils.replace;
 import static org.apache.commons.lang3.StringUtils.startsWith;
 import static org.apache.commons.lang3.Validate.notNull;
 
@@ -195,7 +194,9 @@ public class ContextProperties extends Properties {
         for (Map.Entry<String, Serializable> entry : replacements.entrySet()) {
             String replace = entry.getValue().toString();
             String key = entry.getKey();
-            value = replace(value, format(REPLACEMENT_PATTERN, key), replace);
+            if (replace(value, format(REPLACEMENT_PATTERN, key), replace)) {
+                value = replace;
+            }
         }
         return value;
     }
@@ -293,8 +294,8 @@ public class ContextProperties extends Properties {
 
     public <T> List<T> getTypedListProperty(String key, Format format,
             String separatorChars) throws ParseException {
-        return typedProperties
-                .getTypedListProperty(key, format, separatorChars);
+        return typedProperties.getTypedListProperty(key, format,
+                separatorChars);
     }
 
     public <T> List<T> getTypedListProperty(String key, Format format,
