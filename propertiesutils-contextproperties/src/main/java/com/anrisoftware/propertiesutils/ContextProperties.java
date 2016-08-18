@@ -28,10 +28,13 @@ import java.net.URL;
 import java.nio.charset.Charset;
 import java.text.Format;
 import java.text.ParseException;
+import java.util.Enumeration;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Properties;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 import org.apache.commons.lang3.builder.ToStringBuilder;
 
@@ -58,7 +61,7 @@ import org.apache.commons.lang3.builder.ToStringBuilder;
 @SuppressWarnings("serial")
 public class ContextProperties extends Properties {
 
-    private static final String REPLACEMENT_PATTERN = "${%s}";
+    private static final String REPLACEMENT_PATTERN = "\\$\\{%s\\}";
 
     private final String context;
 
@@ -147,7 +150,7 @@ public class ContextProperties extends Properties {
      * Adds the replacement with the specified key.
      * <p>
      * Each of the replacement entries is applied to the property. The
-     * replacement is of format <code>{$key}</code>.
+     * replacement is of format <code>${key}</code>.
      *
      * @param key
      *            the replacement key.
@@ -161,6 +164,22 @@ public class ContextProperties extends Properties {
      */
     public ContextProperties withReplacement(String key, Serializable replace) {
         replacements.put(key, replace);
+        return this;
+    }
+
+    /**
+     * Adds the system properties as replacements.
+     *
+     * @return this {@link ContextProperties}.
+     *
+     * @since 2.1
+     */
+    public ContextProperties withSystemReplacements() {
+        Enumeration<?> names = System.getProperties().propertyNames();
+        while (names.hasMoreElements()) {
+            String key = (String) names.nextElement();
+            replacements.put(key, System.getProperty(key));
+        }
         return this;
     }
 
@@ -194,8 +213,10 @@ public class ContextProperties extends Properties {
         for (Map.Entry<String, Serializable> entry : replacements.entrySet()) {
             String replace = entry.getValue().toString();
             String key = entry.getKey();
-            if (replace(value, format(REPLACEMENT_PATTERN, key), replace)) {
-                value = replace;
+            Pattern pattern = Pattern.compile(format(REPLACEMENT_PATTERN, key));
+            Matcher matcher = pattern.matcher(value);
+            if (matcher.find()) {
+                value = matcher.replaceAll(replace);
             }
         }
         return value;
