@@ -71,8 +71,9 @@ class ContextPropertiesFactoryTest {
     void "object context from URL resource with replacements with backslash"() {
         def properties = new ContextPropertiesFactory(this).
                 fromResource(RESOURCE_URL).
-                withReplacement("foo", "C:\\Users\\user\\Documents\\foo")
-        assertStringContent properties.getProperty("testWithReplacements"), "Foo C:\\Users\\user\\Documents\\foo"
+                withReplacement("foo", "C:\\\\Users\\\\user\\\\Documents\\\\foo")
+        def result = properties.getProperty("testWithReplacements")
+        assertStringContent result, "Foo C:\\Users\\user\\Documents\\foo"
     }
 
     @Test
