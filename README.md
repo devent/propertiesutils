@@ -30,7 +30,7 @@ com.anrisoftware.propertiesutils.testWithReplacementsSystem = Foo ${os.name}
 <dependency>
     <groupId>com.anrisoftware.propertiesutils</groupId>
     <artifactId>propertiesutils-contextproperties</artifactId>
-    <version>2.2</version>
+    <version>2.1</version>
 </dependency>
 ```
 
@@ -43,7 +43,7 @@ com.anrisoftware.propertiesutils.testWithReplacementsSystem = Foo ${os.name}
 
 # License
 
-Copyright 2012-2016 Erwin Müller <erwin.mueller@deventm.org>
+Copyright 2016 Erwin Müller <erwin.mueller@deventm.org>
 
 Licensed under the Apache License, Version 2.0 (the "License");
 you may not use this file except in compliance with the License.
