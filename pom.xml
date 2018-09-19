@@ -3,10 +3,18 @@
 
     <modelVersion>4.0.0</modelVersion>
 
+    <parent>
+        <groupId>com.anrisoftware.globalpom</groupId>
+        <artifactId>globalpom-groovy-osgi</artifactId>
+        <version>4.3.0</version>
+    </parent>
+
     <groupId>com.anrisoftware.propertiesutils</groupId>
     <artifactId>propertiesutils-root</artifactId>
-    <version>1.0-SNAPSHOT</version>
+    <version>4.3.0-SNAPSHOT</version>
+    <inceptionYear>2012</inceptionYear>
     <packaging>pom</packaging>
+    <url>https://javadoc.anrisoftware.com/${project.groupId}/${project.artifactId}/${project.version}/</url>
 
     <modules>
         <module>propertiesutils-parent</module>
@@ -14,5 +22,135 @@
         <!-- <module>propertiesutils-swingproperties</module> -->
     </modules>
 
-</project>
+    <properties>
+        <project.custom.home>https://project.anrisoftware.com/projects/propertiesutils</project.custom.home>
+        <project.custom.scm.pub>https://gitea.anrisoftware.com/anrisoftware.com/propertiesutils.git</project.custom.scm.pub>
+        <project.custom.scm.dev>scm:git:git@anrisoftware.com:anrisoftware.com/propertiesutils.git</project.custom.scm.dev>
+        <project.custom.scm.url>${project.custom.home}/repository</project.custom.scm.url>
+    </properties>
 
+    <developers>
+        <developer>
+            <id>EM</id>
+            <name>Erwin Müller</name>
+            <organization>Advanced Natural Research Institute</organization>
+            <email>erwin.mueller@deventm.org</email>
+            <roles>
+                <role>Owner</role>
+                <role>Developer</role>
+            </roles>
+            <timezone>Europe/Berlin</timezone>
+        </developer>
+    </developers>
+
+    <organization>
+        <name>Advanced Natural Research Institute</name>
+        <url>https://anrisoftware.com/</url>
+    </organization>
+
+    <licenses>
+        <license>
+            <name>Apache License, Version 2.0</name>
+            <url>http://www.apache.org/licenses/LICENSE-2.0</url>
+            <distribution>repo</distribution>
+        </license>
+    </licenses>
+
+    <issueManagement>
+        <system>Redmine</system>
+        <url>${project.custom.home}</url>
+    </issueManagement>
+
+    <scm>
+        <connection>${project.custom.scm.pub}</connection>
+        <developerConnection>${project.custom.scm.dev}</developerConnection>
+        <url>${project.custom.scm.url}</url>
+        <tag>HEAD</tag>
+    </scm>
+
+    <distributionManagement>
+        <site>
+            <id>site-ssh</id>
+            <url>${site.ssh.url}</url>
+        </site>
+        <repository>
+            <id>public_releases</id>
+            <url>https://maven.anrisoftware.com/repository/maven-releases/</url>
+        </repository>
+        <snapshotRepository>
+            <id>public_snapshots</id>
+            <url>https://maven.anrisoftware.com/repository/maven-snapshots/</url>
+        </snapshotRepository>
+    </distributionManagement>
+
+    <profiles>
+        <profile>
+            <id>private-repository</id>
+            <distributionManagement>
+                <repository>
+                    <id>private_repo_releases</id>
+                    <url>https://maven.anrisoftware.com/repository/internal/</url>
+                </repository>
+                <snapshotRepository>
+                    <id>private_repo_snapshots</id>
+                    <url>https://maven.anrisoftware.com/repository/snapshots/</url>
+                </snapshotRepository>
+            </distributionManagement>
+        </profile>
+
+        <profile>
+            <id>osssonatype</id>
+            <distributionManagement>
+                <site>
+                    <id>site-ssh</id>
+                    <url>${site.ssh.url}</url>
+                </site>
+                <repository>
+                    <id>osssonatype_releases</id>
+                    <url>https://oss.sonatype.org/service/local/staging/deploy/maven2</url>
+                </repository>
+                <snapshotRepository>
+                    <id>osssonatype_snapshots</id>
+                    <url>https://oss.sonatype.org/content/repositories/snapshots</url>
+                </snapshotRepository>
+            </distributionManagement>
+            <build>
+                <plugins>
+                    <plugin>
+                        <groupId>org.sonatype.plugins</groupId>
+                        <artifactId>nexus-staging-maven-plugin</artifactId>
+                        <extensions>true</extensions>
+                        <configuration>
+                            <serverId>osssonatype_releases</serverId>
+                            <nexusUrl>https://oss.sonatype.org/</nexusUrl>
+                            <autoReleaseAfterClose>true</autoReleaseAfterClose>
+                        </configuration>
+                    </plugin>
+                </plugins>
+            </build>
+        </profile>
+
+        <profile>
+            <!-- Activate profile with -Psign-artifact -->
+            <id>sign-artifact</id>
+            <build>
+                <plugins>
+                    <plugin>
+                        <groupId>org.apache.maven.plugins</groupId>
+                        <artifactId>maven-gpg-plugin</artifactId>
+                        <executions>
+                            <execution>
+                                <id>sign-artifacts</id>
+                                <phase>verify</phase>
+                                <goals>
+                                    <goal>sign</goal>
+                                </goals>
+                            </execution>
+                        </executions>
+                    </plugin>
+                </plugins>
+            </build>
+        </profile>
+    </profiles>
+
+</project>
