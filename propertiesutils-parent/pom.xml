@@ -5,7 +5,7 @@
     <parent>
         <groupId>com.anrisoftware.propertiesutils</groupId>
         <artifactId>propertiesutils-root</artifactId>
-        <version>4.3.0</version>
+        <version>4.3.1-SNAPSHOT</version>
     </parent>
 
     <artifactId>propertiesutils-parent</artifactId>
@@ -26,7 +26,7 @@
         <connection>${project.custom.scm.pub}</connection>
         <developerConnection>${project.custom.scm.dev}</developerConnection>
         <url>${project.custom.scm.url}</url>
-      <tag>propertiesutils-root-4.3.0</tag>
+      <tag>HEAD</tag>
   </scm>
 
     <distributionManagement>
