@@ -3,7 +3,7 @@
  *
  * @author Erwin Mueller, erwin.mueller@deventm.org
  * @since 4.5.0
- * @version 1.0.0
+ * @version 1.1.0
  */
 pipeline {
 
