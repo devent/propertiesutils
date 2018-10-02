@@ -162,8 +162,10 @@ pipeline {
 
     post {
         success {
-        	pom = readMavenPom file: 'pom.xml'
-            manager.createSummary("document.png").appendText("<a href='${env.JAVADOC_URL}'>View Maven Site</a>", false)
+	        script {
+	        	pom = readMavenPom file: 'pom.xml'
+	            manager.createSummary("document.png").appendText("<a href='${env.JAVADOC_URL}'>View Maven Site</a>", false)
+	        }
         }
 
     } // post
