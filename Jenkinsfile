@@ -164,7 +164,7 @@ pipeline {
         success {
 	        script {
 	        	pom = readMavenPom file: 'pom.xml'
-	            manager.createSummary("document.png").appendText("<a href='${env.JAVADOC_URL}'>View Maven Site</a>", false)
+	            manager.createSummary("document.png").appendText("<a href='${env.JAVADOC_URL}/a${pom.artifactId}/${pom.version}'>View Maven Site</a>", false)
 	        }
         }
 
