@@ -40,7 +40,6 @@
         <project.custom.sonarqube.qualitygate.link>${project.custom.sonarqube.url}</project.custom.sonarqube.qualitygate.link>
         <project.custom.bundle.namespace>com.anrisoftware.globalpom.propertiesutils</project.custom.bundle.namespace>
         <project.custom.bundle.namespace.internal>com.anrisoftware.globalpom.propertiesutils.internal</project.custom.bundle.namespace.internal>
-        <sonar.projectKey>${project.groupId}:resources</sonar.projectKey>
     </properties>
 
     <developers>
