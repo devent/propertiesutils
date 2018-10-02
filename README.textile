@@ -1,0 +1,32 @@
+!https://jenkins.anrisoftware.com/job/propertiesutils-public/job/master/badge/icon(Build Status)!:https://jenkins.anrisoftware.com/job/propertiesutils-public/job/master !https://sonarqube.anrisoftware.com/api/badges/gate?key=com.anrisoftware.propertiesutils%3Apropertiesutils-root(Quality Gate)!:https://sonarqube.anrisoftware.com/dashboard?id=com.anrisoftware.propertiesutils%3Apropertiesutils-root !https://project.anrisoftware.com/attachments/download/217/apache2.0-small.gif(Apache License, Version 2.0)!:http://www.apache.org/licenses/LICENSE-2.0 © 2012-2018 Erwin Müller
+
+h1. Description
+
+Adds Groovy support to compile Groovy sources and test sources as an OSGi bundle
+
+Loads properties from a properties file. The properties keys are prefixed with the context, if not already present. The context is an object package name. For example, if the context object is the class ContextProperties then the context is “com.anrisoftware.propertiesutils”. If then a property with the name “foo” is requested, then the property “com.anrisoftware.propertiesutils.foo” is looked up. Defines additional methods to return different types of properties, like boolean, number, list.
+
+The ContextPropertiesFactory class defines various methods to load a properties resource from the class path. Furthermore, the abstract provider AbstractContextPropertiesProvider can be used to inject loaded properties into a class. See the Javadoc of those classes for examples.
+
+h2. Example Properties File
+
+<pre>
+com.anrisoftware.propertiesutils.testString = Foo
+com.anrisoftware.propertiesutils.testWithReplacements = Foo ${foo}
+com.anrisoftware.propertiesutils.testWithReplacementsSystem = Foo ${os.name}
+</pre>
+
+h1. Links
+
+* "Generated Site":https://javadoc.anrisoftware.com/com.anrisoftware.propertiesutils/propertiesutils-root/4.5.0-SNAPSHOT/
+* "Download (Central)":https://search.maven.org/artifact/com.anrisoftware.propertiesutils/propertiesutils-root/4.5.0-SNAPSHOT/pom
+* "Source code":https://gitea.anrisoftware.com/anrisoftware.com/propertiesutils.git
+* "Source code (Github)":https://github.com/devent/propertiesutils
+* "Project Home":https://project.anrisoftware.com/projects/propertiesutils
+* "Project Roadmap":https://project.anrisoftware.com/projects/propertiesutils/roadmap
+* "Project Issues":https://project.anrisoftware.com/projects/propertiesutils/issues
+* "Jenkins":https://jenkins.anrisoftware.com/job/propertiesutils-public
+* "SonarQube":https://sonarqube.anrisoftware.com/dashboard?id=com.anrisoftware.propertiesutils%3Apropertiesutils-root
+
+Copyright ©2012 - 2018 "Advanced Natural Research Institute":https://anrisoftware.com/. All rights reserved.
+
