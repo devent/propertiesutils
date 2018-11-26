@@ -99,6 +99,11 @@
             <artifactId>org.osgi.framework</artifactId>
             <scope>test</scope>
         </dependency>
+        <dependency>
+            <groupId>org.junit.jupiter</groupId>
+            <artifactId>junit-jupiter-params</artifactId>
+            <scope>test</scope>
+        </dependency>
 
         <!-- compile dependencies -->
         <dependency>
