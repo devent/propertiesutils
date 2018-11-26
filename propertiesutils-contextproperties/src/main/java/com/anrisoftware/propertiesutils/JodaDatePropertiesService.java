@@ -22,28 +22,28 @@ import java.util.Properties;
 import org.osgi.service.component.annotations.Component;
 
 /**
- * Provides {@link DateProperties}.
+ * Provides {@link JodaDateProperties}.
  *
  * @author Erwin Müller, erwin.mueller@deventm.de
- * @since 2.1
+ * @since 4.5.1
  */
-@Component(service = DatePropertiesService.class)
-public class DatePropertiesService {
+@Component(service = JodaDatePropertiesService.class)
+public class JodaDatePropertiesService {
 
-    public DateProperties create(Map<String, Object> properties,
+    public JodaDateProperties create(Map<String, Object> properties,
             String listSepChars) {
-        return new DateProperties(properties, listSepChars);
+        return new JodaDateProperties(properties, listSepChars);
     }
 
-    public DateProperties create(Map<String, Object> properties) {
-        return new DateProperties(properties);
+    public JodaDateProperties create(Map<String, Object> properties) {
+        return new JodaDateProperties(properties);
     }
 
-    public DateProperties create(Properties properties, String listSepChars) {
-        return new DateProperties(properties, listSepChars);
+    public JodaDateProperties create(Properties properties, String listSepChars) {
+        return new JodaDateProperties(properties, listSepChars);
     }
 
-    public DateProperties create(Properties properties) {
-        return new DateProperties(properties);
+    public JodaDateProperties create(Properties properties) {
+        return new JodaDateProperties(properties);
     }
 }

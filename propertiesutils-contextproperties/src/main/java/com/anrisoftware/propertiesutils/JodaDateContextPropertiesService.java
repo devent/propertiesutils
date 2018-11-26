@@ -21,13 +21,13 @@ import java.util.Properties;
 import org.osgi.service.component.annotations.Component;
 
 /**
- * Provides {@link DateContextProperties}.
+ * Provides {@link JodaDateContextProperties}.
  *
  * @author Erwin Müller, erwin.mueller@deventm.de
- * @since 2.1
+ * @since 4.5.1
  */
-@Component(service = DateContextPropertiesService.class)
-public class DateContextPropertiesService {
+@Component(service = JodaDateContextPropertiesService.class)
+public class JodaDateContextPropertiesService {
 
     /**
      * Sets the context and the properties.
@@ -38,9 +38,9 @@ public class DateContextPropertiesService {
      * @param parentProperties
      *            the {@link Properties} that are returned.
      */
-    public DateContextProperties create(Object context,
+    public JodaDateContextProperties create(Object context,
             Properties parentProperties) {
-        return new DateContextProperties(context, parentProperties);
+        return new JodaDateContextProperties(context, parentProperties);
     }
 
     /**
@@ -52,9 +52,9 @@ public class DateContextPropertiesService {
      * @param parentProperties
      *            the {@link Properties} that are returned.
      */
-    public DateContextProperties create(Class<?> context,
+    public JodaDateContextProperties create(Class<?> context,
             Properties parentProperties) {
-        return new DateContextProperties(context, parentProperties);
+        return new JodaDateContextProperties(context, parentProperties);
     }
 
     /**
@@ -66,8 +66,8 @@ public class DateContextPropertiesService {
      * @param parentProperties
      *            the {@link Properties} that are returned.
      */
-    public DateContextProperties create(String context,
+    public JodaDateContextProperties create(String context,
             Properties parentProperties) {
-        return new DateContextProperties(context, parentProperties);
+        return new JodaDateContextProperties(context, parentProperties);
     }
 }

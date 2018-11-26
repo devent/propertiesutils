@@ -31,37 +31,37 @@ import com.google.inject.assistedinject.AssistedInject;
  * Utility to return typed properties.
  *
  * @author Erwin Müller, erwin.mueller@deventm.de
- * @since 2.1
+ * @since 4.5.1
  */
 @SuppressWarnings("serial")
-public class TypedAllProperties extends TypedProperties {
+public class JodaDateTypedProperties extends TypedProperties {
 
-    private final DateProperties dateProperties;
+    private final JodaDateProperties dateProperties;
 
     @AssistedInject
-    TypedAllProperties(@Assisted Map<String, Object> properties,
+    JodaDateTypedProperties(@Assisted Map<String, Object> properties,
             @Assisted String listSepChars) {
         super(properties, listSepChars);
-        this.dateProperties = new DateProperties(properties, listSepChars);
+        this.dateProperties = new JodaDateProperties(properties, listSepChars);
     }
 
     @AssistedInject
-    TypedAllProperties(@Assisted Map<String, Object> properties) {
+    JodaDateTypedProperties(@Assisted Map<String, Object> properties) {
         super(properties);
-        this.dateProperties = new DateProperties(properties);
+        this.dateProperties = new JodaDateProperties(properties);
     }
 
     @AssistedInject
-    TypedAllProperties(@Assisted Properties properties,
+    JodaDateTypedProperties(@Assisted Properties properties,
             @Assisted String listSepChars) {
         super(properties, listSepChars);
-        this.dateProperties = new DateProperties(properties, listSepChars);
+        this.dateProperties = new JodaDateProperties(properties, listSepChars);
     }
 
     @AssistedInject
-    TypedAllProperties(@Assisted Properties properties) {
+    JodaDateTypedProperties(@Assisted Properties properties) {
         super(properties);
-        this.dateProperties = new DateProperties(properties);
+        this.dateProperties = new JodaDateProperties(properties);
     }
 
     public Period getPeriodProperty(String key) {

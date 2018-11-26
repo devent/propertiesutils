@@ -20,20 +20,20 @@ import java.util.Map;
 import java.util.Properties;
 
 /**
- * Factory to create {@link TypedAllProperties}.
+ * Factory to create {@link JodaDateTypedProperties}.
  *
  * @author Erwin Müller, erwin.mueller@deventm.de
  * @since 2.1
  */
 public interface TypedAllPropertiesFactory {
 
-    TypedAllProperties create(Map<String, Object> properties,
+    JodaDateTypedProperties create(Map<String, Object> properties,
             String listSepChars);
 
-    TypedAllProperties create(Map<String, Object> properties);
+    JodaDateTypedProperties create(Map<String, Object> properties);
 
-    TypedAllProperties create(Properties properties, String listSepChars);
+    JodaDateTypedProperties create(Properties properties, String listSepChars);
 
-    TypedAllProperties create(Properties properties);
+    JodaDateTypedProperties create(Properties properties);
 
 }

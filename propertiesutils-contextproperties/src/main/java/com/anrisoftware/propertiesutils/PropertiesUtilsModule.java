@@ -30,7 +30,7 @@ public class PropertiesUtilsModule extends AbstractModule {
     @Override
     protected void configure() {
         install(new FactoryModuleBuilder()
-                .implement(TypedAllProperties.class, TypedAllProperties.class)
+                .implement(JodaDateTypedProperties.class, JodaDateTypedProperties.class)
                 .build(TypedAllPropertiesFactory.class));
     }
 

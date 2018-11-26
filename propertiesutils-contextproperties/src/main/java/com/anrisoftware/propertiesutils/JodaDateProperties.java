@@ -29,24 +29,24 @@ import org.joda.time.format.PeriodFormatter;
  * Extends the utility to return typed properties for Joda-Time typed.
  *
  * @author Erwin Müller, erwin.mueller@deventm.de
- * @since 2.1
+ * @since 4.5.1
  */
 @SuppressWarnings("serial")
-public class DateProperties extends TypedProperties {
+public class JodaDateProperties extends TypedProperties {
 
-    public DateProperties(Map<String, Object> properties, String listSepChars) {
+    public JodaDateProperties(Map<String, Object> properties, String listSepChars) {
         super(properties, listSepChars);
     }
 
-    public DateProperties(Map<String, Object> properties) {
+    public JodaDateProperties(Map<String, Object> properties) {
         super(properties);
     }
 
-    public DateProperties(Properties properties, String listSepChars) {
+    public JodaDateProperties(Properties properties, String listSepChars) {
         super(properties, listSepChars);
     }
 
-    public DateProperties(Properties properties) {
+    public JodaDateProperties(Properties properties) {
         super(properties);
     }
 

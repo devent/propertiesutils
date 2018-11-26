@@ -27,12 +27,12 @@ import org.joda.time.format.PeriodFormatter;
  * Properties with a specified context returning data and time properties.
  *
  * @author Erwin Mueller, erwin.mueller@deventm.org
- * @since 1.5
+ * @since 4.5.1
  */
 @SuppressWarnings("serial")
-public class DateContextProperties extends ContextProperties {
+public class JodaDateContextProperties extends ContextProperties {
 
-    private final DateProperties dateProperties;
+    private final JodaDateProperties dateProperties;
 
     /**
      * Sets the context and the properties.
@@ -43,9 +43,9 @@ public class DateContextProperties extends ContextProperties {
      * @param parentProperties
      *            the {@link Properties} that are returned.
      */
-    public DateContextProperties(Class<?> context, Properties parentProperties) {
+    public JodaDateContextProperties(Class<?> context, Properties parentProperties) {
         super(context, parentProperties);
-        this.dateProperties = new DateProperties(this);
+        this.dateProperties = new JodaDateProperties(this);
     }
 
     /**
@@ -57,9 +57,9 @@ public class DateContextProperties extends ContextProperties {
      * @param parentProperties
      *            the {@link Properties} that are returned.
      */
-    public DateContextProperties(Object context, Properties parentProperties) {
+    public JodaDateContextProperties(Object context, Properties parentProperties) {
         super(context, parentProperties);
-        this.dateProperties = new DateProperties(this);
+        this.dateProperties = new JodaDateProperties(this);
     }
 
     /**
@@ -71,9 +71,9 @@ public class DateContextProperties extends ContextProperties {
      * @param parentProperties
      *            the {@link Properties} that are returned.
      */
-    public DateContextProperties(String context, Properties parentProperties) {
+    public JodaDateContextProperties(String context, Properties parentProperties) {
         super(context, parentProperties);
-        this.dateProperties = new DateProperties(this);
+        this.dateProperties = new JodaDateProperties(this);
     }
 
     /**

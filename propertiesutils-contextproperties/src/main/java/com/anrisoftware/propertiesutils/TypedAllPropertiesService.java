@@ -27,7 +27,7 @@ import org.osgi.service.component.annotations.Component;
 import com.google.inject.Guice;
 
 /**
- * Provides {@link TypedAllProperties}.
+ * Provides {@link JodaDateTypedProperties}.
  *
  * @author Erwin Müller, erwin.mueller@deventm.de
  * @since 2.1
@@ -39,24 +39,24 @@ public class TypedAllPropertiesService implements TypedAllPropertiesFactory {
     private TypedAllPropertiesFactory factory;
 
     @Override
-    public TypedAllProperties create(Map<String, Object> properties,
+    public JodaDateTypedProperties create(Map<String, Object> properties,
             String listSepChars) {
         return factory.create(properties, listSepChars);
     }
 
     @Override
-    public TypedAllProperties create(Map<String, Object> properties) {
+    public JodaDateTypedProperties create(Map<String, Object> properties) {
         return factory.create(properties);
     }
 
     @Override
-    public TypedAllProperties create(Properties properties,
+    public JodaDateTypedProperties create(Properties properties,
             String listSepChars) {
         return factory.create(properties, listSepChars);
     }
 
     @Override
-    public TypedAllProperties create(Properties properties) {
+    public JodaDateTypedProperties create(Properties properties) {
         return factory.create(properties);
     }
 
