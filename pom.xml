@@ -167,6 +167,22 @@
                 </plugins>
             </build>
         </profile>
+
+        <profile>
+            <!-- Skip signing -Pno-sign -->
+            <id>no-sign</id>
+            <build>
+                <plugins>
+                    <plugin>
+                        <groupId>org.apache.maven.plugins</groupId>
+                        <artifactId>maven-gpg-plugin</artifactId>
+                        <configuration>
+                            <skip>true</skip>
+                        </configuration>
+                    </plugin>
+                </plugins>
+            </build>
+        </profile>
     </profiles>
 
 </project>
