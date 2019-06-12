@@ -68,8 +68,6 @@ public class MapEntryToString {
      *
      * @param arg the argument.
      *
-     * @param key the key.
-     *
      * @return the {@link String} or {@code null} if the argument was {@code null}.
      */
     @SuppressWarnings("deprecation")
@@ -84,8 +82,6 @@ public class MapEntryToString {
      * Converts the argument to a {@link String}.
      *
      * @param arg the argument.
-     *
-     * @param key the key.
      *
      * @throws NullPointerException if the argument is {@code null}.
      *
