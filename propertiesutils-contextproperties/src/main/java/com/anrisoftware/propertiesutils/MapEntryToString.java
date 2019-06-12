@@ -44,7 +44,7 @@ public class MapEntryToString {
         if (value == null) {
             return null;
         }
-        return toString(value, key);
+        return toStringNull(value);
     }
 
     /**
@@ -60,20 +60,20 @@ public class MapEntryToString {
      */
     public String toString(Map<String, Object> args, String key) {
         Object value = args.get(key);
-        return toString(value, key);
+        return toString(value);
     }
 
     /**
      * Converts the argument to a {@link String}.
      *
-     * @param args the {@link Map} that should contain the key.
+     * @param arg the argument.
      *
-     * @param key  the key.
+     * @param key the key.
      *
-     * @return the {@link String} or {@code null} if the argument doesn't exists.
+     * @return the {@link String} or {@code null} if the argument was {@code null}.
      */
     @SuppressWarnings("deprecation")
-    public String toStringNull(Object arg, String name) {
+    public String toStringNull(Object arg) {
         if (arg == null) {
             return null;
         }
@@ -83,16 +83,16 @@ public class MapEntryToString {
     /**
      * Converts the argument to a {@link String}.
      *
-     * @param args the {@link Map} that should contain the key.
+     * @param arg the argument.
      *
-     * @param key  the key.
+     * @param key the key.
      *
      * @throws NullPointerException if the argument is {@code null}.
      *
      * @return the {@link String}.
      */
     @SuppressWarnings("deprecation")
-    public String toString(Object arg, String name) {
+    public String toString(Object arg) {
         notNull(arg, "arg");
         return ObjectUtils.toString(arg);
     }
