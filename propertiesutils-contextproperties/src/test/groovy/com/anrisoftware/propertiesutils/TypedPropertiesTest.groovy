@@ -16,9 +16,14 @@
 
 package com.anrisoftware.propertiesutils
 
-import org.junit.jupiter.api.Test
+import static org.junit.jupiter.api.Assertions.*
+import static org.junit.jupiter.params.provider.Arguments.of
 
-import groovy.transform.CompileStatic
+import java.util.stream.Stream
+
+import org.junit.jupiter.params.ParameterizedTest
+import org.junit.jupiter.params.provider.MethodSource
+
 import groovy.util.logging.Slf4j
 
 /**
@@ -27,37 +32,60 @@ import groovy.util.logging.Slf4j
  * @author Erwin Müller, erwin.mueller@deventm.de
  * @since 2.1
  */
-@CompileStatic
 @Slf4j
 class TypedPropertiesTest {
 
-    @Test
-    void "get properties"() {
-        def testCases = [
-            [
-                input: 'string_foo = some string foo',
-                expected: { TypedProperties properties ->
-                    assert properties.getProperty('string_foo') == 'some string foo'
-                },
-            ],
-            [
-                input: 'int_foo = 12',
-                expected: { TypedProperties properties ->
-                    assert properties.getNumberProperty('int_foo').intValue() == 12
-                },
-            ],
-            [
-                input: 'double_foo = 12.0',
-                expected: { TypedProperties properties ->
-                    assert properties.getNumberProperty('int_foo').doubleValue() == 12.0
-                },
-            ],
-        ]
-        testCases.eachWithIndex { Map test, int k ->
-            log.info '{}. case: {}', k, test
-            def parentProperties = new Properties()
-            parentProperties.load new StringReader(test.input as String)
-            def properties = new TypedProperties(parentProperties)
-        }
+    static def getPropertyDataString() {
+        Stream.of of('string_foo = some string foo', 'some string foo')
+    }
+
+    @ParameterizedTest
+    @MethodSource("getPropertyDataString")
+    void "getProperty"(String input, String expected) {
+        def parentProperties = new Properties()
+        parentProperties.load new StringReader(input)
+        def properties = new TypedProperties(parentProperties)
+        assert properties.getProperty('string_foo') == expected
+    }
+
+    static def getPropertyDataInt() {
+        Stream.of of('int_foo = 12', 12)
+    }
+
+    @ParameterizedTest
+    @MethodSource("getPropertyDataInt")
+    void "getNumberProperty-int"(String input, int expected) {
+        def parentProperties = new Properties()
+        parentProperties.load new StringReader(input)
+        def properties = new TypedProperties(parentProperties)
+        assert properties.getNumberProperty('int_foo').intValue() == expected
+    }
+
+    static def getPropertyDataDouble() {
+        Stream.of of('double_foo = 12.0', (double)12.0)
+    }
+
+    @ParameterizedTest
+    @MethodSource("getPropertyDataDouble")
+    void "getNumberProperty-double"(String input, double expected) {
+        def parentProperties = new Properties()
+        parentProperties.load new StringReader(input)
+        def properties = new TypedProperties(parentProperties)
+        assert properties.getNumberProperty('double_foo').doubleValue() == expected
+    }
+
+    static def getListPropertyData() {
+        Stream.of of('list_foo = foo,bar,baz', ['foo', 'bar', 'baz'], ','),
+        of('list_foo = foo;bar;baz', ['foo', 'bar', 'baz'], ';')
+    }
+
+    @ParameterizedTest
+    @MethodSource("getListPropertyData")
+    void "getListProperty-separatorChars"(String input, List expected, def separatorChars) {
+        def parentProperties = new Properties()
+        parentProperties.load new StringReader(input)
+        def properties = new TypedProperties(parentProperties)
+        def output = properties.getListProperty('list_foo')
+        assertIterableEquals expected, output
     }
 }
