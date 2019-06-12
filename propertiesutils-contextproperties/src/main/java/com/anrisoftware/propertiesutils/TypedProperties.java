@@ -39,8 +39,6 @@ import java.util.Map;
 import java.util.Map.Entry;
 import java.util.Properties;
 
-import org.apache.commons.lang3.builder.ToStringBuilder;
-
 /**
  * Utility to return typed properties.
  *
@@ -602,9 +600,4 @@ public class TypedProperties implements Serializable {
         return Arrays.asList(split(property, separatorChars));
     }
 
-    @Override
-    public String toString() {
-        return new ToStringBuilder(this).append("list-seperator-characters", listSepChars).appendSuper(super.toString())
-                .toString();
-    }
 }

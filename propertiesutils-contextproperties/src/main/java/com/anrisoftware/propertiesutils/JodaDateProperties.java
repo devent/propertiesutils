@@ -19,7 +19,6 @@ package com.anrisoftware.propertiesutils;
 import java.util.Map;
 import java.util.Properties;
 
-import org.apache.commons.lang3.builder.ToStringBuilder;
 import org.joda.time.Duration;
 import org.joda.time.Period;
 import org.joda.time.format.ISOPeriodFormat;
@@ -123,8 +122,4 @@ public class JodaDateProperties extends TypedProperties {
         }
     }
 
-    @Override
-    public String toString() {
-        return new ToStringBuilder(this).appendSuper(super.toString()).toString();
-    }
 }
