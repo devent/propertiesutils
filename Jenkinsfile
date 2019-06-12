@@ -69,7 +69,7 @@ pipeline {
                     configFileProvider([configFile(fileId: 'maven-settings-global', variable: 'MAVEN_SETTINGS')]) {
                         withMaven() {
 	                        sh '/setup-ssh.sh'
-                            sh '$MVN_CMD -s $MAVEN_SETTINGS -B clean install deploy'
+                            sh '$MVN_CMD -s $MAVEN_SETTINGS -B clean install site:site deploy'
                         }
                     }
                 }
@@ -108,7 +108,7 @@ pipeline {
                 	configFileProvider([configFile(fileId: 'maven-settings-global', variable: 'MAVEN_SETTINGS')]) {
                     	withMaven() {
 	                        sh '/setup-ssh.sh'
-                        	sh '$MVN_CMD -s $MAVEN_SETTINGS -B site:site site:deploy'
+                        	sh '$MVN_CMD -s $MAVEN_SETTINGS -B site:deploy'
                     	}
                     }
                 }
