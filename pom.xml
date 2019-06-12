@@ -59,7 +59,7 @@
         <!-- Dependencies -->
         <project.custom.globalpom-groovy.version>4.5.1-SNAPSHOT</project.custom.globalpom-groovy.version>
         <!-- sonar -->
-        <sonar.coverage.jacoco.xmlReportPaths>../globalpom-groovy-it/target/site/jacoco-aggregate/jacoco.xml</sonar.coverage.jacoco.xmlReportPaths>
+        <sonar.coverage.jacoco.xmlReportPaths>../propertiesutils-it/target/site/jacoco-aggregate/jacoco.xml</sonar.coverage.jacoco.xmlReportPaths>
     </properties>
 
     <developers>
