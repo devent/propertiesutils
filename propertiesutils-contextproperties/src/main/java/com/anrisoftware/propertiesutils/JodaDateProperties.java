@@ -54,8 +54,7 @@ public class JodaDateProperties extends TypedProperties {
      * Returns a time period property using the format defined in
      * {@link ISOPeriodFormat#standard()}.
      *
-     * @param key
-     *            the property key.
+     * @param key the property key.
      *
      * @return the {@link Period}.
      */
@@ -72,11 +71,9 @@ public class JodaDateProperties extends TypedProperties {
      * Returns a time period property using the format defined in
      * {@link ISOPeriodFormat#standard()}.
      *
-     * @param key
-     *            the property key.
+     * @param key       the property key.
      *
-     * @param formatter
-     *            the {@link PeriodFormatter} that parses the period property.
+     * @param formatter the {@link PeriodFormatter} that parses the period property.
      *
      * @return the {@link Period}.
      */
@@ -93,8 +90,7 @@ public class JodaDateProperties extends TypedProperties {
      * Returns a time duration property using the format defined in
      * {@link ISOPeriodFormat#standard()}.
      *
-     * @param key
-     *            the property key.
+     * @param key the property key.
      *
      * @return the {@link Duration}.
      */
@@ -109,13 +105,12 @@ public class JodaDateProperties extends TypedProperties {
 
     /**
      * Returns a time duration property using the format defined in
-     * {@link ISODurationFormat#standard()}.
+     * {@link ISOPeriodFormat#standard()}.
      *
-     * @param key
-     *            the property key.
+     * @param key       the property key.
      *
-     * @param formatter
-     *            the {@link PeriodFormatter} that parses the duration property.
+     * @param formatter the {@link PeriodFormatter} that parses the duration
+     *                  property.
      *
      * @return the {@link Duration}.
      */
@@ -130,7 +125,6 @@ public class JodaDateProperties extends TypedProperties {
 
     @Override
     public String toString() {
-        return new ToStringBuilder(this).appendSuper(super.toString())
-                .toString();
+        return new ToStringBuilder(this).appendSuper(super.toString()).toString();
     }
 }

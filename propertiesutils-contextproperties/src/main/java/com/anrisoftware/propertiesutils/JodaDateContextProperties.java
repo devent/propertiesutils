@@ -37,11 +37,9 @@ public class JodaDateContextProperties extends ContextProperties {
     /**
      * Sets the context and the properties.
      *
-     * @param context
-     *            an {@link Class} that is used as the context.
+     * @param context          an {@link Class} that is used as the context.
      *
-     * @param parentProperties
-     *            the {@link Properties} that are returned.
+     * @param parentProperties the {@link Properties} that are returned.
      */
     public JodaDateContextProperties(Class<?> context, Properties parentProperties) {
         super(context, parentProperties);
@@ -51,11 +49,9 @@ public class JodaDateContextProperties extends ContextProperties {
     /**
      * Sets the context and the properties.
      *
-     * @param context
-     *            an {@link Object} that is used as the context.
+     * @param context          an {@link Object} that is used as the context.
      *
-     * @param parentProperties
-     *            the {@link Properties} that are returned.
+     * @param parentProperties the {@link Properties} that are returned.
      */
     public JodaDateContextProperties(Object context, Properties parentProperties) {
         super(context, parentProperties);
@@ -65,11 +61,9 @@ public class JodaDateContextProperties extends ContextProperties {
     /**
      * Sets the context and the properties.
      *
-     * @param context
-     *            the context.
+     * @param context          the context.
      *
-     * @param parentProperties
-     *            the {@link Properties} that are returned.
+     * @param parentProperties the {@link Properties} that are returned.
      */
     public JodaDateContextProperties(String context, Properties parentProperties) {
         super(context, parentProperties);
@@ -80,8 +74,7 @@ public class JodaDateContextProperties extends ContextProperties {
      * Returns a time period property using the format defined in
      * {@link ISOPeriodFormat#standard()}.
      *
-     * @param key
-     *            the property key.
+     * @param key the property key.
      *
      * @return the {@link Period}.
      */
@@ -93,11 +86,9 @@ public class JodaDateContextProperties extends ContextProperties {
      * Returns a time period property using the format defined in
      * {@link ISOPeriodFormat#standard()}.
      *
-     * @param key
-     *            the property key.
+     * @param key       the property key.
      *
-     * @param formatter
-     *            the {@link PeriodFormatter} that parses the period property.
+     * @param formatter the {@link PeriodFormatter} that parses the period property.
      *
      * @return the {@link Period}.
      */
@@ -109,8 +100,7 @@ public class JodaDateContextProperties extends ContextProperties {
      * Returns a time duration property using the format defined in
      * {@link ISOPeriodFormat#standard()}.
      *
-     * @param key
-     *            the property key.
+     * @param key the property key.
      *
      * @return the {@link Duration}.
      */
@@ -120,13 +110,12 @@ public class JodaDateContextProperties extends ContextProperties {
 
     /**
      * Returns a time duration property using the format defined in
-     * {@link ISODurationFormat#standard()}.
+     * {@link ISOPeriodFormat#standard()}.
      *
-     * @param key
-     *            the property key.
+     * @param key       the property key.
      *
-     * @param formatter
-     *            the {@link PeriodFormatter} that parses the duration property.
+     * @param formatter the {@link PeriodFormatter} that parses the duration
+     *                  property.
      *
      * @return the {@link Duration}.
      */

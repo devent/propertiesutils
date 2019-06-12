@@ -22,15 +22,14 @@ import com.google.inject.assistedinject.FactoryModuleBuilder;
 /**
  * @see TypedAllPropertiesFactory
  *
- * @author Erwin Müller <erwin.mueller@deventm.de>
+ * @author Erwin Müller {@literal <erwin.mueller@deventm.de>}
  * @version 2.1
  */
 public class PropertiesUtilsModule extends AbstractModule {
 
     @Override
     protected void configure() {
-        install(new FactoryModuleBuilder()
-                .implement(JodaDateTypedProperties.class, JodaDateTypedProperties.class)
+        install(new FactoryModuleBuilder().implement(JodaDateTypedProperties.class, JodaDateTypedProperties.class)
                 .build(TypedAllPropertiesFactory.class));
     }
 

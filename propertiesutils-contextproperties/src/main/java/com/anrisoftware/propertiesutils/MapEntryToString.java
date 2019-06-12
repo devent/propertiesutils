@@ -33,8 +33,11 @@ public class MapEntryToString {
     /**
      * Converts the argument to a {@link String}.
      *
-     * @return the {@link String} or {@code null} if the argument doesn't
-     *         exists.
+     * @param args the {@link Map} that should contain the key.
+     *
+     * @param key  the key.
+     *
+     * @return the {@link String} or {@code null} if the argument doesn't exists.
      */
     public String toStringNull(Map<String, Object> args, String key) {
         Object value = args.get(key);
@@ -47,8 +50,13 @@ public class MapEntryToString {
     /**
      * Converts the argument to a {@link String}.
      *
-     * @throws NullPointerException
-     *             if the argument is {@code null}.
+     * @param args the {@link Map} that should contain the key.
+     *
+     * @param key  the key.
+     *
+     * @throws NullPointerException if the argument is {@code null}.
+     *
+     * @return the {@link String}.
      */
     public String toString(Map<String, Object> args, String key) {
         Object value = args.get(key);
@@ -58,8 +66,11 @@ public class MapEntryToString {
     /**
      * Converts the argument to a {@link String}.
      *
-     * @return the {@link String} or {@code null} if the argument doesn't
-     *         exists.
+     * @param args the {@link Map} that should contain the key.
+     *
+     * @param key  the key.
+     *
+     * @return the {@link String} or {@code null} if the argument doesn't exists.
      */
     @SuppressWarnings("deprecation")
     public String toStringNull(Object arg, String name) {
@@ -72,8 +83,13 @@ public class MapEntryToString {
     /**
      * Converts the argument to a {@link String}.
      *
-     * @throws NullPointerException
-     *             if the argument is {@code null}.
+     * @param args the {@link Map} that should contain the key.
+     *
+     * @param key  the key.
+     *
+     * @throws NullPointerException if the argument is {@code null}.
+     *
+     * @return the {@link String}.
      */
     @SuppressWarnings("deprecation")
     public String toString(Object arg, String name) {
