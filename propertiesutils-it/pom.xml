@@ -27,14 +27,10 @@
         <version>4.5.1-SNAPSHOT</version>
     </parent>
 
-    <artifactId>propertiesutils-parent</artifactId>
-    <name>Properties Utilities :: Parent POM</name>
+    <artifactId>propertiesutils-it</artifactId>
+    <name>Properties Utilities :: IT</name>
     <packaging>pom</packaging>
     <url>https://javadoc.anrisoftware.com/${project.groupId}/${project.artifactId}/${project.version}/</url>
-
-    <properties>
-        <project.custom.globalpom-groovy.version>4.5.1-SNAPSHOT</project.custom.globalpom-groovy.version>
-    </properties>
 
     <issueManagement>
         <system>Redmine</system>
@@ -63,14 +59,30 @@
         </snapshotRepository>
     </distributionManagement>
 
-    <dependencyManagement>
-        <dependencies>
-            <dependency>
-                <groupId>com.anrisoftware.globalpom</groupId>
-                <artifactId>globalpom-groovytestutils</artifactId>
-                <version>${project.custom.globalpom-groovy.version}</version>
-            </dependency>
-        </dependencies>
-    </dependencyManagement>
+    <dependencies>
+        <dependency>
+            <groupId>${project.groupId}</groupId>
+            <artifactId>propertiesutils-contextproperties</artifactId>
+            <version>${project.version}</version>
+        </dependency>
+    </dependencies>
+
+    <build>
+        <plugins>
+            <plugin>
+                <groupId>org.jacoco</groupId>
+                <artifactId>jacoco-maven-plugin</artifactId>
+                <executions>
+                    <execution>
+                        <id>aggregate-report</id>
+                        <phase>verify</phase>
+                        <goals>
+                            <goal>report-aggregate</goal>
+                        </goals>
+                    </execution>
+                </executions>
+            </plugin>
+        </plugins>
+    </build>
 
 </project>

@@ -18,7 +18,7 @@
  *
  * @author Erwin Mueller, erwin.mueller@deventm.org
  * @since 4.5.0
- * @version 1.1.0
+ * @version 1.2.0
  */
 pipeline {
 
@@ -29,7 +29,7 @@ pipeline {
     }
 
     agent {
-        label 'maven-3-jdk-8'
+        label 'maven-3-jdk-12'
     }
 
     stages {
@@ -177,10 +177,13 @@ pipeline {
 
     post {
         success {
-	        script {
-	        	pom = readMavenPom file: 'pom.xml'
-	            manager.createSummary("document.png").appendText("<a href='${env.JAVADOC_URL}/${pom.groupId}/${pom.artifactId}/${pom.version}/'>View Maven Site</a>", false)
-	        }
+            timeout(time: 15, unit: 'MINUTES') {
+                waitForQualityGate abortPipeline: true
+                script {
+                	pom = readMavenPom file: 'pom.xml'
+                   	manager.createSummary("document.png").appendText("<a href='${env.JAVADOC_URL}/${pom.groupId}/${pom.artifactId}/${pom.version}/'>View Maven Site</a>", false)
+                }
+            }
         }
 
     } // post
