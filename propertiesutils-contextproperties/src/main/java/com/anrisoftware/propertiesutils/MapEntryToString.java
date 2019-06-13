@@ -19,8 +19,7 @@ package com.anrisoftware.propertiesutils;
 import static org.apache.commons.lang3.Validate.notNull;
 
 import java.util.Map;
-
-import org.apache.commons.lang3.ObjectUtils;
+import java.util.Objects;
 
 /**
  * Converts a map entry to a {@link String}.
@@ -70,12 +69,11 @@ public class MapEntryToString {
      *
      * @return the {@link String} or {@code null} if the argument was {@code null}.
      */
-    @SuppressWarnings("deprecation")
     public String toStringNull(Object arg) {
         if (arg == null) {
             return null;
         }
-        return ObjectUtils.toString(arg);
+        return Objects.toString(arg);
     }
 
     /**
@@ -87,10 +85,9 @@ public class MapEntryToString {
      *
      * @return the {@link String}.
      */
-    @SuppressWarnings("deprecation")
     public String toString(Object arg) {
         notNull(arg, "arg");
-        return ObjectUtils.toString(arg);
+        return Objects.toString(arg);
     }
 
 }
