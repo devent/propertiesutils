@@ -369,7 +369,7 @@ public class ContextProperties extends Properties {
     }
 
     @Override
-    public String toString() {
+    public synchronized String toString() {
         return new ToStringBuilder(this).append("context", context)
                 .appendSuper(super.toString()).toString();
     }
