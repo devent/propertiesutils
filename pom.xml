@@ -30,6 +30,7 @@
     <groupId>com.anrisoftware.propertiesutils</groupId>
     <artifactId>propertiesutils</artifactId>
     <version>4.5.1-SNAPSHOT</version>
+    <name>Properties Utilities</name>
     <inceptionYear>2012</inceptionYear>
     <packaging>pom</packaging>
     <url>https://javadoc.anrisoftware.com/${project.groupId}/${project.artifactId}/${project.version}/</url>
