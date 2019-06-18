@@ -1,21 +1,17 @@
-/*-
- * #%L
- * Properties Utilities :: Context Properties
- * %%
- * Copyright (C) 2012 - 2018 Advanced Natural Research Institute
- * %%
+/**
+ * Copyright © 2012 Erwin Müller (erwin.mueller@anrisoftware.com)
+ *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
- * 
- *      http://www.apache.org/licenses/LICENSE-2.0
- * 
+ *
+ *     http://www.apache.org/licenses/LICENSE-2.0
+ *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
  * limitations under the License.
- * #L%
  */
 
 package com.anrisoftware.propertiesutils;
@@ -42,8 +38,6 @@ import java.util.List;
 import java.util.Map;
 import java.util.Map.Entry;
 import java.util.Properties;
-
-import org.apache.commons.lang3.builder.ToStringBuilder;
 
 /**
  * Utility to return typed properties.
@@ -83,11 +77,10 @@ public class TypedProperties implements Serializable {
     /**
      * Returns a {@link String} property.
      *
-     * @param key
-     *            the property key.
+     * @param key the property key.
      *
-     * @return the {@link String} from the property or {@code null} if no
-     *         property with the key was found.
+     * @return the {@link String} from the property or {@code null} if no property
+     *         with the key was found.
      */
     public String getProperty(String key) {
         return properties.getProperty(key);
@@ -96,11 +89,9 @@ public class TypedProperties implements Serializable {
     /**
      * Returns a {@link String} property.
      *
-     * @param key
-     *            the property key.
+     * @param key          the property key.
      *
-     * @param defaultValue
-     *            the default {@link String}.
+     * @param defaultValue the default {@link String}.
      *
      * @return the {@link String} from the property or the default value if no
      *         property with the key was found.
@@ -112,11 +103,10 @@ public class TypedProperties implements Serializable {
     /**
      * Returns a boolean property.
      *
-     * @param key
-     *            the property key.
+     * @param key the property key.
      *
-     * @return the {@link Boolean} from the property or {@code null} if no
-     *         property with the key was found.
+     * @return the {@link Boolean} from the property or {@code null} if no property
+     *         with the key was found.
      */
     public Boolean getBooleanProperty(String key) {
         String property = getProperty(key);
@@ -126,11 +116,9 @@ public class TypedProperties implements Serializable {
     /**
      * Returns a boolean property.
      *
-     * @param key
-     *            the property key.
+     * @param key          the property key.
      *
-     * @param defaultValue
-     *            the default {@link Boolean}.
+     * @param defaultValue the default {@link Boolean}.
      *
      * @return the {@link Boolean} from the property or the default value if no
      *         property with the key was found.
@@ -143,11 +131,10 @@ public class TypedProperties implements Serializable {
     /**
      * Returns a number property.
      *
-     * @param key
-     *            the property key.
+     * @param key the property key.
      *
-     * @return the {@link Number} from the property or {@code null} if no
-     *         property with the key was found.
+     * @return the {@link Number} from the property or {@code null} if no property
+     *         with the key was found.
      */
     public Number getNumberProperty(String key) {
         String property = getProperty(key);
@@ -157,17 +144,15 @@ public class TypedProperties implements Serializable {
     /**
      * Returns a number property.
      *
-     * @param key
-     *            the property key.
+     * @param key          the property key.
      *
-     * @param defaultValue
-     *            the default {@link Number}.
+     * @param defaultValue the default {@link Number}.
      *
      * @return the {@link Number} from the property or the default value if no
      *         property with the key was found.
      *
-     * @throws NumberFormatException
-     *             if the string does not contain a parseble {@code double}.
+     * @throws NumberFormatException if the string does not contain a parseble
+     *                               {@code double}.
      */
     public Number getNumberProperty(String key, Number defaultValue) {
         String property = getProperty(key, String.valueOf(defaultValue));
@@ -177,14 +162,12 @@ public class TypedProperties implements Serializable {
     /**
      * Returns a character property.
      *
-     * @param key
-     *            the property key.
+     * @param key the property key.
      *
      * @return the {@link Character} from the property or {@code null} if no
      *         property with the key was found.
      *
-     * @throws IndexOutOfBoundsException
-     *             if the property is an empty string.
+     * @throws IndexOutOfBoundsException if the property is an empty string.
      */
     public Character getCharProperty(String key) {
         String property = getProperty(key);
@@ -194,17 +177,14 @@ public class TypedProperties implements Serializable {
     /**
      * Returns a character property.
      *
-     * @param key
-     *            the property key.
+     * @param key          the property key.
      *
-     * @param defaultValue
-     *            the default {@link Character}.
+     * @param defaultValue the default {@link Character}.
      *
-     * @return the {@link Character} from the property or the default value if
-     *         no property with the key was found.
+     * @return the {@link Character} from the property or the default value if no
+     *         property with the key was found.
      *
-     * @throws IndexOutOfBoundsException
-     *             if the property is an empty string.
+     * @throws IndexOutOfBoundsException if the property is an empty string.
      */
     public Character getCharProperty(String key, Character defaultValue) {
         String property = getProperty(key);
@@ -214,15 +194,14 @@ public class TypedProperties implements Serializable {
     /**
      * Returns a character set property.
      *
-     * @param key
-     *            the property key.
+     * @param key the property key.
      *
-     * @return the {@link Charset} from the property or {@code null} if no
-     *         property with the key was found.
+     * @return the {@link Charset} from the property or {@code null} if no property
+     *         with the key was found.
      *
-     * @throws UnsupportedCharsetException
-     *             If no support for the named character set is available in
-     *             this instance of the Java virtual machine.
+     * @throws UnsupportedCharsetException If no support for the named character set
+     *                                     is available in this instance of the Java
+     *                                     virtual machine.
      */
     public Charset getCharsetProperty(String key) {
         String property = getProperty(key);
@@ -232,18 +211,16 @@ public class TypedProperties implements Serializable {
     /**
      * Returns a character set property.
      *
-     * @param key
-     *            the property key.
+     * @param key          the property key.
      *
-     * @param defaultValue
-     *            the default {@link Charset}.
+     * @param defaultValue the default {@link Charset}.
      *
      * @return the {@link Charset} from the property or the default value if no
      *         property with the key was found.
      *
-     * @throws UnsupportedCharsetException
-     *             If no support for the named character set is available in
-     *             this instance of the Java virtual machine.
+     * @throws UnsupportedCharsetException If no support for the named character set
+     *                                     is available in this instance of the Java
+     *                                     virtual machine.
      */
     public Charset getCharsetProperty(String key, Charset defaultValue) {
         String property = getProperty(key, String.valueOf(defaultValue));
@@ -253,14 +230,12 @@ public class TypedProperties implements Serializable {
     /**
      * Returns a URL property.
      *
-     * @param key
-     *            the property key.
+     * @param key the property key.
      *
-     * @return the {@link URL} from the property or {@code null} if no property
-     *         with the key was found.
+     * @return the {@link URL} from the property or {@code null} if no property with
+     *         the key was found.
      *
-     * @throws MalformedURLException
-     *             if the property value is not a valid URL.
+     * @throws MalformedURLException if the property value is not a valid URL.
      */
     public URL getURLProperty(String key) throws MalformedURLException {
         String property = getProperty(key);
@@ -270,20 +245,16 @@ public class TypedProperties implements Serializable {
     /**
      * Returns a URL property.
      *
-     * @param key
-     *            the property key.
+     * @param key          the property key.
      *
-     * @param defaultValue
-     *            the default {@link URL}.
+     * @param defaultValue the default {@link URL}.
      *
-     * @return the {@link URL} from the property or the default value if no
-     *         property with the key was found.
+     * @return the {@link URL} from the property or the default value if no property
+     *         with the key was found.
      *
-     * @throws MalformedURLException
-     *             if the property value is not a valid URL.
+     * @throws MalformedURLException if the property value is not a valid URL.
      */
-    public URL getURLProperty(String key, URL defaultValue)
-            throws MalformedURLException {
+    public URL getURLProperty(String key, URL defaultValue) throws MalformedURLException {
         String property = getProperty(key);
         return property == null ? defaultValue : new URL(property);
     }
@@ -291,14 +262,12 @@ public class TypedProperties implements Serializable {
     /**
      * Returns a URI property.
      *
-     * @param key
-     *            the property key.
+     * @param key the property key.
      *
-     * @return the {@link URI} from the property or {@code null} if no property
-     *         with the key was found.
+     * @return the {@link URI} from the property or {@code null} if no property with
+     *         the key was found.
      *
-     * @throws URISyntaxException
-     *             if the property value is not a valid URI.
+     * @throws URISyntaxException if the property value is not a valid URI.
      */
     public URI getURIProperty(String key) throws URISyntaxException {
         String property = getProperty(key);
@@ -308,20 +277,16 @@ public class TypedProperties implements Serializable {
     /**
      * Returns a URI property.
      *
-     * @param key
-     *            the property key.
+     * @param key          the property key.
      *
-     * @param defaultValue
-     *            the default {@link URI}.
+     * @param defaultValue the default {@link URI}.
      *
-     * @return the {@link URI} from the property or the default value if no
-     *         property with the key was found.
+     * @return the {@link URI} from the property or the default value if no property
+     *         with the key was found.
      *
-     * @throws URISyntaxException
-     *             if the property value is not a valid URI.
+     * @throws URISyntaxException if the property value is not a valid URI.
      */
-    public URI getURIProperty(String key, URI defaultValue)
-            throws URISyntaxException {
+    public URI getURIProperty(String key, URI defaultValue) throws URISyntaxException {
         String property = getProperty(key, String.valueOf(defaultValue));
         return new URI(property);
     }
@@ -329,8 +294,7 @@ public class TypedProperties implements Serializable {
     /**
      * Returns a File property.
      *
-     * @param key
-     *            the property key.
+     * @param key the property key.
      *
      * @return the {@link File} from the property or {@code null} if no property
      *         with the key was found.
@@ -343,11 +307,9 @@ public class TypedProperties implements Serializable {
     /**
      * Returns a File property.
      *
-     * @param key
-     *            the property key.
+     * @param key          the property key.
      *
-     * @param defaultValue
-     *            the default {@link File}.
+     * @param defaultValue the default {@link File}.
      *
      * @return the {@link File} from the property or the default value if no
      *         property with the key was found.
@@ -360,44 +322,39 @@ public class TypedProperties implements Serializable {
     /**
      * Returns a property of the specified type.
      *
-     * @param key
-     *            the property key.
+     * @param key    the property key.
      *
-     * @param format
-     *            the {@link Format} to parse the type.
+     * @param format the {@link Format} to parse the type.
+     *
+     * @param        <T> the type.
      *
      * @return the the property or {@code null} if no property with the key was
      *         found.
      *
-     * @throws ParseException
-     *             if the property cannot be parsed to the type.
+     * @throws ParseException if the property cannot be parsed to the type.
      */
-    public <T> T getTypedProperty(String key, Format format)
-            throws ParseException {
+    public <T> T getTypedProperty(String key, Format format) throws ParseException {
         return getTypedProperty(key, format, null);
     }
 
     /**
      * Returns a property of the specified type.
      *
-     * @param key
-     *            the property key.
+     * @param key          the property key.
      *
-     * @param defaultValue
-     *            the default value.
+     * @param defaultValue the default value.
      *
-     * @param format
-     *            the {@link Format} to parse the type.
+     * @param format       the {@link Format} to parse the type.
      *
-     * @return the the property or the default value if no property with the key
-     *         was found.
+     * @param              <T> the type.
      *
-     * @throws ParseException
-     *             if the property cannot be parsed to the type.
+     * @return the the property or the default value if no property with the key was
+     *         found.
+     *
+     * @throws ParseException if the property cannot be parsed to the type.
      */
     @SuppressWarnings("unchecked")
-    public <T> T getTypedProperty(String key, Format format, T defaultValue)
-            throws ParseException {
+    public <T> T getTypedProperty(String key, Format format, T defaultValue) throws ParseException {
         String property = getProperty(key, String.valueOf(defaultValue));
         return property == null ? null : (T) format.parseObject(property);
     }
@@ -405,45 +362,40 @@ public class TypedProperties implements Serializable {
     /**
      * Returns a list property.
      *
-     * @param key
-     *            the property key.
+     * @param key    the property key.
      *
-     * @param format
-     *            the {@link Format} to parse the key values.
+     * @param format the {@link Format} to parse the key values.
      *
-     * @return the {@link List} from the property or an empty list if no
-     *         property with the key was found.
+     * @param        <T> the type.
      *
-     * @throws ParseException
-     *             if there was an error to parse a key value.
+     * @return the {@link List} from the property or an empty list if no property
+     *         with the key was found.
+     *
+     * @throws ParseException if there was an error to parse a key value.
      */
-    public <T> List<T> getTypedListProperty(String key, Format format)
-            throws ParseException {
+    public <T> List<T> getTypedListProperty(String key, Format format) throws ParseException {
         return getTypedListProperty(key, format, listSepChars);
     }
 
     /**
      * Returns a list property.
      *
-     * @param key
-     *            the property key.
+     * @param key            the property key.
      *
-     * @param format
-     *            the {@link Format} to parse the key values.
+     * @param format         the {@link Format} to parse the key values.
      *
-     * @param separatorChars
-     *            the characters used as the delimiters, {@code null} splits on
-     *            whitespace.
+     * @param separatorChars the characters used as the delimiters, {@code null}
+     *                       splits on whitespace.
      *
-     * @return the {@link List} from the property or an empty list if no
-     *         property with the key was found.
+     * @param                <T> the type.
      *
-     * @throws ParseException
-     *             if there was an error to parse a key value.
+     * @return the {@link List} from the property or an empty list if no property
+     *         with the key was found.
+     *
+     * @throws ParseException if there was an error to parse a key value.
      */
-    public <T> List<T> getTypedListProperty(String key, Format format,
-            String separatorChars) throws ParseException {
-        List<T> list = new ArrayList<T>();
+    public <T> List<T> getTypedListProperty(String key, Format format, String separatorChars) throws ParseException {
+        List<T> list = new ArrayList<>();
         String property = getProperty(key);
         if (property == null) {
             return list;
@@ -457,51 +409,45 @@ public class TypedProperties implements Serializable {
     /**
      * Returns a list property.
      *
-     * @param key
-     *            the property key.
+     * @param key          the property key.
      *
-     * @param format
-     *            the {@link Format} to parse the key values.
+     * @param format       the {@link Format} to parse the key values.
      *
-     * @param defaultValue
-     *            the default {@link List}.
+     * @param defaultValue the default {@link List}.
+     *
+     * @param              <T> the type.
      *
      * @return the {@link List} from the property or the default value if no
      *         property with the key was found.
      *
-     * @throws ParseException
-     *             if there was an error to parse a key value.
+     * @throws ParseException if there was an error to parse a key value.
      */
-    public <T> List<T> getTypedListProperty(String key, Format format,
-            List<T> defaultValue) throws ParseException {
+    public <T> List<T> getTypedListProperty(String key, Format format, List<T> defaultValue) throws ParseException {
         return getTypedListProperty(key, format, defaultValue, listSepChars);
     }
 
     /**
      * Returns a list property.
      *
-     * @param key
-     *            the property key.
+     * @param key            the property key.
      *
-     * @param format
-     *            the {@link Format} to parse the key values.
+     * @param format         the {@link Format} to parse the key values.
      *
-     * @param defaultValue
-     *            the default {@link List}.
+     * @param defaultValue   the default {@link List}.
      *
-     * @param separatorChars
-     *            the characters used as the delimiters, {@code null} splits on
-     *            whitespace.
+     * @param separatorChars the characters used as the delimiters, {@code null}
+     *                       splits on whitespace.
+     *
+     * @param                <T> the type.
      *
      * @return the {@link List} from the property or the default value if no
      *         property with the key was found.
      *
-     * @throws ParseException
-     *             if there was an error to parse a key value.
+     * @throws ParseException if there was an error to parse a key value.
      */
-    public <T> List<T> getTypedListProperty(String key, Format format,
-            List<T> defaultValue, String separatorChars) throws ParseException {
-        List<T> list = new ArrayList<T>();
+    public <T> List<T> getTypedListProperty(String key, Format format, List<T> defaultValue, String separatorChars)
+            throws ParseException {
+        List<T> list = new ArrayList<>();
         String property = getProperty(key, join(defaultValue, ","));
         for (String value : split(property, listSepChars)) {
             addParsedObject(list, format, value);
@@ -510,54 +456,50 @@ public class TypedProperties implements Serializable {
     }
 
     @SuppressWarnings("unchecked")
-    private <T> void addParsedObject(List<T> list, Format format, String value)
-            throws ParseException {
+    private <T> void addParsedObject(List<T> list, Format format, String value) throws ParseException {
         list.add((T) format.parseObject(value));
     }
 
     /**
      * Returns a list property.
      *
-     * @param key
-     *            the property key.
+     * @param key          the property key.
      *
-     * @param stringToType
-     *            the {@link StringToType} that parses the string to the type.
+     * @param stringToType the {@link StringToType} that parses the string to the
+     *                     type.
      *
-     * @return the {@link List} from the property or an empty list if no
-     *         property with the key was found.
+     * @param              <T> the type.
      *
-     * @throws ParseException
-     *             if there was an error to parse a key value.
+     * @return the {@link List} from the property or an empty list if no property
+     *         with the key was found.
+     *
+     * @throws ParseException if there was an error to parse a key value.
      */
-    public <T> List<T> getTypedListProperty(String key,
-            StringToType<T> stringToType) throws ParseException {
+    public <T> List<T> getTypedListProperty(String key, StringToType<T> stringToType) throws ParseException {
         return getTypedListProperty(key, stringToType, listSepChars);
     }
 
     /**
      * Returns a typed list property.
      *
-     * @param key
-     *            the property key.
+     * @param key            the property key.
      *
-     * @param stringToType
-     *            the {@link StringToType} that parses the string to the type.
+     * @param stringToType   the {@link StringToType} that parses the string to the
+     *                       type.
      *
-     * @param separatorChars
-     *            the characters used as the delimiters, {@code null} splits on
-     *            whitespace.
+     * @param separatorChars the characters used as the delimiters, {@code null}
+     *                       splits on whitespace.
      *
-     * @return the {@link List} from the property or an empty list if no
-     *         property with the key was found.
+     * @param                <T> the type.
      *
-     * @throws ParseException
-     *             if there was an error to parse a key value.
+     * @return the {@link List} from the property or an empty list if no property
+     *         with the key was found.
+     *
+     * @throws ParseException if there was an error to parse a key value.
      */
-    public <T> List<T> getTypedListProperty(String key,
-            StringToType<T> stringToType, String separatorChars)
+    public <T> List<T> getTypedListProperty(String key, StringToType<T> stringToType, String separatorChars)
             throws ParseException {
-        List<T> list = new ArrayList<T>();
+        List<T> list = new ArrayList<>();
         String property = getProperty(key);
         if (property == null) {
             return list;
@@ -571,29 +513,26 @@ public class TypedProperties implements Serializable {
     /**
      * Returns a typed list property.
      *
-     * @param key
-     *            the property key.
+     * @param key            the property key.
      *
-     * @param stringToType
-     *            the {@link StringToType} that parses the string to the type.
+     * @param stringToType   the {@link StringToType} that parses the string to the
+     *                       type.
      *
-     * @param defaultValue
-     *            the default {@link List}.
+     * @param defaultValue   the default {@link List}.
      *
-     * @param separatorChars
-     *            the characters used as the delimiters, {@code null} splits on
-     *            whitespace.
+     * @param separatorChars the characters used as the delimiters, {@code null}
+     *                       splits on whitespace.
+     *
+     * @param                <T> the type.
      *
      * @return the {@link List} from the property or the default value if no
      *         property with the key was found.
      *
-     * @throws ParseException
-     *             if there was an error to parse a key value.
+     * @throws ParseException if there was an error to parse a key value.
      */
-    public <T> List<T> getTypedListProperty(String key,
-            StringToType<T> stringToType, List<T> defaultValue,
+    public <T> List<T> getTypedListProperty(String key, StringToType<T> stringToType, List<T> defaultValue,
             String separatorChars) throws ParseException {
-        List<T> list = new ArrayList<T>();
+        List<T> list = new ArrayList<>();
         String property = getProperty(key, join(defaultValue, ","));
         for (String value : split(property, listSepChars)) {
             list.add(stringToType.stringToType(value));
@@ -604,11 +543,10 @@ public class TypedProperties implements Serializable {
     /**
      * Returns a list property.
      *
-     * @param key
-     *            the property key.
+     * @param key the property key.
      *
-     * @return the {@link List} from the property or an empty list if no
-     *         property with the key was found.
+     * @return the {@link List} from the property or an empty list if no property
+     *         with the key was found.
      */
     public List<String> getListProperty(String key) {
         return getListProperty(key, listSepChars);
@@ -617,30 +555,25 @@ public class TypedProperties implements Serializable {
     /**
      * Returns a list property.
      *
-     * @param key
-     *            the property key.
+     * @param key            the property key.
      *
-     * @param separatorChars
-     *            the characters used as the delimiters, {@code null} splits on
-     *            whitespace.
+     * @param separatorChars the characters used as the delimiters, {@code null}
+     *                       splits on whitespace.
      *
-     * @return the {@link List} from the property or an empty list if no
-     *         property with the key was found.
+     * @return the {@link List} from the property or an empty list if no property
+     *         with the key was found.
      */
     public List<String> getListProperty(String key, String separatorChars) {
         String property = getProperty(key);
-        return property == null ? new ArrayList<String>() : asList(split(
-                property, separatorChars));
+        return property == null ? new ArrayList<>() : asList(split(property, separatorChars));
     }
 
     /**
      * Returns a list property.
      *
-     * @param key
-     *            the property key.
+     * @param key          the property key.
      *
-     * @param defaultValue
-     *            the default {@link List}.
+     * @param defaultValue the default {@link List}.
      *
      * @return the {@link List} from the property or the default value if no
      *         property with the key was found.
@@ -652,29 +585,19 @@ public class TypedProperties implements Serializable {
     /**
      * Returns a list property.
      *
-     * @param key
-     *            the property key.
+     * @param key            the property key.
      *
-     * @param defaultValue
-     *            the default {@link List}.
+     * @param defaultValue   the default {@link List}.
      *
-     * @param separatorChars
-     *            the characters used as the delimiters, {@code null} splits on
-     *            whitespace.
+     * @param separatorChars the characters used as the delimiters, {@code null}
+     *                       splits on whitespace.
      *
      * @return the {@link List} from the property or the default value if no
      *         property with the key was found.
      */
-    public List<String> getListProperty(String key, List<String> defaultValue,
-            String separatorChars) {
+    public List<String> getListProperty(String key, List<String> defaultValue, String separatorChars) {
         String property = getProperty(key, join(defaultValue, ","));
         return Arrays.asList(split(property, separatorChars));
     }
 
-    @Override
-    public String toString() {
-        return new ToStringBuilder(this)
-                .append("list-seperator-characters", listSepChars)
-                .appendSuper(super.toString()).toString();
-    }
 }

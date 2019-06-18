@@ -1,21 +1,17 @@
-/*-
- * #%L
- * Properties Utilities :: Context Properties
- * %%
- * Copyright (C) 2012 - 2018 Advanced Natural Research Institute
- * %%
+/**
+ * Copyright © 2012 Erwin Müller (erwin.mueller@anrisoftware.com)
+ *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
- * 
- *      http://www.apache.org/licenses/LICENSE-2.0
- * 
+ *
+ *     http://www.apache.org/licenses/LICENSE-2.0
+ *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
  * limitations under the License.
- * #L%
  */
 
 package com.anrisoftware.propertiesutils;
@@ -41,6 +37,8 @@ import java.util.Properties;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
+import org.apache.commons.lang3.builder.EqualsBuilder;
+import org.apache.commons.lang3.builder.HashCodeBuilder;
 import org.apache.commons.lang3.builder.ToStringBuilder;
 
 /**
@@ -77,11 +75,9 @@ public class ContextProperties extends Properties {
     /**
      * Sets the context and the properties.
      *
-     * @param context
-     *            an {@link Object} that is used as the context.
+     * @param context          an {@link Object} that is used as the context.
      *
-     * @param parentProperties
-     *            the {@link Properties} that are returned.
+     * @param parentProperties the {@link Properties} that are returned.
      */
     public ContextProperties(Object context, Properties parentProperties) {
         this(context.getClass(), parentProperties);
@@ -90,11 +86,9 @@ public class ContextProperties extends Properties {
     /**
      * Sets the context and the properties.
      *
-     * @param context
-     *            an {@link Class} that is used as the context.
+     * @param context          an {@link Class} that is used as the context.
      *
-     * @param parentProperties
-     *            the {@link Properties} that are returned.
+     * @param parentProperties the {@link Properties} that are returned.
      */
     public ContextProperties(Class<?> context, Properties parentProperties) {
         this(context.getPackage().getName(), parentProperties);
@@ -103,36 +97,32 @@ public class ContextProperties extends Properties {
     /**
      * Sets the context and the properties.
      *
-     * @param context
-     *            the context.
+     * @param context          the context.
      *
-     * @param parentProperties
-     *            the {@link Properties} that are returned.
+     * @param parentProperties the {@link Properties} that are returned.
      */
     public ContextProperties(String context, Properties parentProperties) {
         super(parentProperties);
         this.typedProperties = new TypedProperties(this);
         this.context = context;
-        this.replacements = new HashMap<String, Serializable>();
+        this.replacements = new HashMap<>();
     }
 
     /**
      * Adds the replacements from the specified map.
      * <p>
-     * Each of the replacement entries is applied to the property. The
-     * replacement is of format <code>{$key}</code>.
+     * Each of the replacement entries is applied to the property. The replacement
+     * is of format <code>{$key}</code>.
      * <p>
      * It is possible to add the system properties directly as in
      * {@code p.withReplacements(System.getProperties())}.
      *
-     * @param map
-     *            the {@link Map} that contains the replacements as
+     * @param map the {@link Map} that contains the replacements as
      *            {@code <key>: <value>}.
      *
      * @return this {@link ContextProperties}.
      *
-     * @throws NullPointerException
-     *             if the specified map is {@code null}.
+     * @throws NullPointerException if the specified map is {@code null}.
      *
      * @since 1.3
      */
@@ -154,14 +144,12 @@ public class ContextProperties extends Properties {
     /**
      * Adds the replacement with the specified key.
      * <p>
-     * Each of the replacement entries is applied to the property. The
-     * replacement is of format <code>${key}</code>.
+     * Each of the replacement entries is applied to the property. The replacement
+     * is of format <code>${key}</code>.
      *
-     * @param key
-     *            the replacement key.
+     * @param key     the replacement key.
      *
-     * @param replace
-     *            the {@link Serializable} object as the replacement.
+     * @param replace the {@link Serializable} object as the replacement.
      *
      * @return this {@link ContextProperties}.
      *
@@ -281,8 +269,7 @@ public class ContextProperties extends Properties {
         return typedProperties.getURLProperty(key);
     }
 
-    public URL getURLProperty(String key, URL defaultValue)
-            throws MalformedURLException {
+    public URL getURLProperty(String key, URL defaultValue) throws MalformedURLException {
         return typedProperties.getURLProperty(key, defaultValue);
     }
 
@@ -290,8 +277,7 @@ public class ContextProperties extends Properties {
         return typedProperties.getURIProperty(key);
     }
 
-    public URI getURIProperty(String key, URI defaultValue)
-            throws URISyntaxException {
+    public URI getURIProperty(String key, URI defaultValue) throws URISyntaxException {
         return typedProperties.getURIProperty(key, defaultValue);
     }
 
@@ -303,55 +289,43 @@ public class ContextProperties extends Properties {
         return typedProperties.getFileProperty(key, defaultValue);
     }
 
-    public <T> T getTypedProperty(String key, Format format)
-            throws ParseException {
+    public <T> T getTypedProperty(String key, Format format) throws ParseException {
         return typedProperties.getTypedProperty(key, format);
     }
 
-    public <T> T getTypedProperty(String key, Format format, T defaultValue)
-            throws ParseException {
+    public <T> T getTypedProperty(String key, Format format, T defaultValue) throws ParseException {
         return typedProperties.getTypedProperty(key, format, defaultValue);
     }
 
-    public <T> List<T> getTypedListProperty(String key, Format format)
-            throws ParseException {
+    public <T> List<T> getTypedListProperty(String key, Format format) throws ParseException {
         return typedProperties.getTypedListProperty(key, format);
     }
 
-    public <T> List<T> getTypedListProperty(String key, Format format,
-            String separatorChars) throws ParseException {
-        return typedProperties.getTypedListProperty(key, format,
-                separatorChars);
+    public <T> List<T> getTypedListProperty(String key, Format format, String separatorChars) throws ParseException {
+        return typedProperties.getTypedListProperty(key, format, separatorChars);
     }
 
-    public <T> List<T> getTypedListProperty(String key, Format format,
-            List<T> defaultValue) throws ParseException {
+    public <T> List<T> getTypedListProperty(String key, Format format, List<T> defaultValue) throws ParseException {
         return typedProperties.getTypedListProperty(key, format, defaultValue);
     }
 
-    public <T> List<T> getTypedListProperty(String key, Format format,
-            List<T> defaultValue, String separatorChars) throws ParseException {
-        return typedProperties.getTypedListProperty(key, format, defaultValue,
-                separatorChars);
+    public <T> List<T> getTypedListProperty(String key, Format format, List<T> defaultValue, String separatorChars)
+            throws ParseException {
+        return typedProperties.getTypedListProperty(key, format, defaultValue, separatorChars);
     }
 
-    public <T> List<T> getTypedListProperty(String key,
-            StringToType<T> stringToType) throws ParseException {
+    public <T> List<T> getTypedListProperty(String key, StringToType<T> stringToType) throws ParseException {
         return typedProperties.getTypedListProperty(key, stringToType);
     }
 
-    public <T> List<T> getTypedListProperty(String key,
-            StringToType<T> stringToType, String separatorChars)
+    public <T> List<T> getTypedListProperty(String key, StringToType<T> stringToType, String separatorChars)
             throws ParseException {
-        return typedProperties.getTypedListProperty(key, stringToType,
-                separatorChars);
+        return typedProperties.getTypedListProperty(key, stringToType, separatorChars);
     }
 
-    public <T> List<T> getTypedListProperty(String key,
-            StringToType<T> stringToType, List<T> defaultValue,
+    public <T> List<T> getTypedListProperty(String key, StringToType<T> stringToType, List<T> defaultValue,
             String separatorChars) throws ParseException {
-        return typedProperties.getTypedListProperty(key, stringToType,
-                defaultValue, separatorChars);
+        return typedProperties.getTypedListProperty(key, stringToType, defaultValue, separatorChars);
     }
 
     public List<String> getListProperty(String key) {
@@ -366,15 +340,32 @@ public class ContextProperties extends Properties {
         return typedProperties.getListProperty(key, defaultValue);
     }
 
-    public List<String> getListProperty(String key, List<String> defaultValue,
-            String separatorChars) {
-        return typedProperties.getListProperty(key, defaultValue,
-                separatorChars);
+    public List<String> getListProperty(String key, List<String> defaultValue, String separatorChars) {
+        return typedProperties.getListProperty(key, defaultValue, separatorChars);
     }
 
     @Override
-    public String toString() {
-        return new ToStringBuilder(this).append("context", context)
-                .appendSuper(super.toString()).toString();
+    public synchronized boolean equals(Object obj) {
+        if (obj == null) {
+            return false;
+        }
+        if (obj == this) {
+            return true;
+        }
+        if (obj.getClass() != getClass()) {
+            return false;
+        }
+        ContextProperties rhs = (ContextProperties) obj;
+        return new EqualsBuilder().appendSuper(super.equals(obj)).append(context, rhs.getContext()).isEquals();
+    }
+
+    @Override
+    public synchronized int hashCode() {
+        return new HashCodeBuilder().appendSuper(super.hashCode()).append(context).toHashCode();
+    }
+
+    @Override
+    public synchronized String toString() {
+        return new ToStringBuilder(this).append("context", context).appendSuper(super.toString()).toString();
     }
 }

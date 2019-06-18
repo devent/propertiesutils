@@ -21,13 +21,13 @@ import java.util.Properties;
 import org.osgi.service.component.annotations.Component;
 
 /**
- * Provides {@link ByteContextProperties}.
+ * Provides {@link JodaDateContextProperties}.
  *
  * @author Erwin Müller, erwin.mueller@deventm.de
- * @since 2.1
+ * @since 4.5.1
  */
-@Component(service = ByteContextPropertiesService.class)
-public class ByteContextPropertiesService {
+@Component(service = JodaDateContextPropertiesService.class)
+public class JodaDateContextPropertiesService {
 
     /**
      * Sets the context and the properties.
@@ -36,10 +36,10 @@ public class ByteContextPropertiesService {
      *
      * @param parentProperties the {@link Properties} that are returned.
      *
-     * @return {@link ByteContextProperties}
+     * @return {@link JodaDateContextProperties}
      */
-    public ByteContextProperties create(Object context, Properties parentProperties) {
-        return new ByteContextProperties(context, parentProperties);
+    public JodaDateContextProperties create(Object context, Properties parentProperties) {
+        return new JodaDateContextProperties(context, parentProperties);
     }
 
     /**
@@ -49,10 +49,10 @@ public class ByteContextPropertiesService {
      *
      * @param parentProperties the {@link Properties} that are returned.
      *
-     * @return {@link ByteContextProperties}
+     * @return {@link JodaDateContextProperties}
      */
-    public ByteContextProperties create(Class<?> context, Properties parentProperties) {
-        return new ByteContextProperties(context, parentProperties);
+    public JodaDateContextProperties create(Class<?> context, Properties parentProperties) {
+        return new JodaDateContextProperties(context, parentProperties);
     }
 
     /**
@@ -62,9 +62,9 @@ public class ByteContextPropertiesService {
      *
      * @param parentProperties the {@link Properties} that are returned.
      *
-     * @return {@link ByteContextProperties}
+     * @return {@link JodaDateContextProperties}
      */
-    public ByteContextProperties create(String context, Properties parentProperties) {
-        return new ByteContextProperties(context, parentProperties);
+    public JodaDateContextProperties create(String context, Properties parentProperties) {
+        return new JodaDateContextProperties(context, parentProperties);
     }
 }
