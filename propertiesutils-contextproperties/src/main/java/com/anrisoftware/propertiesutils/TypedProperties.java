@@ -499,7 +499,7 @@ public class TypedProperties implements Serializable {
      */
     public <T> List<T> getTypedListProperty(String key, StringToType<T> stringToType, String separatorChars)
             throws ParseException {
-        List<T> list = new ArrayList<T>();
+        List<T> list = new ArrayList<>();
         String property = getProperty(key);
         if (property == null) {
             return list;
@@ -532,7 +532,7 @@ public class TypedProperties implements Serializable {
      */
     public <T> List<T> getTypedListProperty(String key, StringToType<T> stringToType, List<T> defaultValue,
             String separatorChars) throws ParseException {
-        List<T> list = new ArrayList<T>();
+        List<T> list = new ArrayList<>();
         String property = getProperty(key, join(defaultValue, ","));
         for (String value : split(property, listSepChars)) {
             list.add(stringToType.stringToType(value));
@@ -565,7 +565,7 @@ public class TypedProperties implements Serializable {
      */
     public List<String> getListProperty(String key, String separatorChars) {
         String property = getProperty(key);
-        return property == null ? new ArrayList<String>() : asList(split(property, separatorChars));
+        return property == null ? new ArrayList<>() : asList(split(property, separatorChars));
     }
 
     /**

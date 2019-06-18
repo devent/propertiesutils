@@ -26,7 +26,7 @@ h1. Links
 * "Project Roadmap":https://project.anrisoftware.com/projects/propertiesutils/roadmap
 * "Project Issues":https://project.anrisoftware.com/projects/propertiesutils/issues
 * "Jenkins":https://jenkins.anrisoftware.com/job/propertiesutils-public
-* "SonarQube":https://sonar.anrisoftware.com/dashboard?id=com.anrisoftware.propertiesutils%3Apropertiesutils-root
+* "SonarQube":https://sonar.anrisoftware.com/dashboard?id=com.anrisoftware.propertiesutils%3Apropertiesutils
 
 h1. License
 
