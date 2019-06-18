@@ -55,8 +55,8 @@
         <project.custom.sonarqube.url>https://sonar.anrisoftware.com/dashboard?id=com.anrisoftware.propertiesutils%3Apropertiesutils</project.custom.sonarqube.url>
         <project.custom.sonarqube.qualitygate.badge>https://sonar.anrisoftware.com/api/badges/gate?key=com.anrisoftware.propertiesutils%3Apropertiesutils</project.custom.sonarqube.qualitygate.badge>
         <project.custom.sonarqube.qualitygate.link>${project.custom.sonarqube.url}</project.custom.sonarqube.qualitygate.link>
-        <project.custom.bundle.namespace>com.anrisoftware.globalpom.propertiesutils</project.custom.bundle.namespace>
-        <project.custom.bundle.namespace.internal>com.anrisoftware.globalpom.propertiesutils.internal</project.custom.bundle.namespace.internal>
+        <project.custom.bundle.namespace>com.anrisoftware.propertiesutils</project.custom.bundle.namespace>
+        <project.custom.bundle.namespace.internal>com.anrisoftware.propertiesutils.internal</project.custom.bundle.namespace.internal>
         <!-- Dependencies -->
         <project.custom.globalpom-groovy.version>4.5.1</project.custom.globalpom-groovy.version>
         <!-- sonar -->
