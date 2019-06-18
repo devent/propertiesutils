@@ -17,7 +17,7 @@
  * Builds and deploys the project.
  *
  * @author Erwin Mueller, erwin.mueller@deventm.org
- * @since 4.5.0
+ * @since 4.5.1
  * @version 1.2.0
  */
 pipeline {
@@ -64,6 +64,11 @@ pipeline {
 		* The stage will compile, test and deploy on all branches.
 		*/
         stage('Compile, Test and Deploy') {
+    		when {
+    			allOf {
+					not { branch 'master' }
+				}
+			}
             steps {
                 container('maven') {
                     configFileProvider([configFile(fileId: 'maven-settings-global', variable: 'MAVEN_SETTINGS')]) {
@@ -72,16 +77,6 @@ pipeline {
                             sh '$MVN_CMD -s $MAVEN_SETTINGS -B clean install site:site deploy'
                         }
                     }
-                }
-            }
-        }
-
-		/**
-		* The stage will perform the SonarQube analysis on all branches.
-		*/
-        stage('SonarQube Analysis') {
-            steps {
-                container('maven') {
 					withSonarQubeEnv('sonarqube') {
 	                    configFileProvider([configFile(fileId: 'maven-settings-global', variable: 'MAVEN_SETTINGS')]) {
 	                        withMaven() {
@@ -127,11 +122,16 @@ pipeline {
 				}
 			}
             steps {
+            	timeout(time: 5, unit: 'MINUTES') {
+		            sleep 10
+                	waitForQualityGate abortPipeline: true
+            	}
                 container('maven') {
                 	configFileProvider([configFile(fileId: 'maven-settings-global', variable: 'MAVEN_SETTINGS')]) {
                     	withMaven() {
 	                        sh '/setup-ssh.sh'
                     	    sh 'git checkout develop && git pull origin develop'
+                        	sh '$MVN_CMD -s $MAVEN_SETTINGS -B release:clean'
                         	sh '$MVN_CMD -s $MAVEN_SETTINGS -B release:prepare'
                         	sh '$MVN_CMD -s $MAVEN_SETTINGS -B release:perform'
                     	}
@@ -157,18 +157,16 @@ pipeline {
                 }
             }
         } // stage
-        
+
     } // stages
 
     post {
         success {
-            script {
-            	pom = readMavenPom file: 'pom.xml'
-               	manager.createSummary("document.png").appendText("<a href='${env.JAVADOC_URL}/${pom.groupId}/${pom.artifactId}/${pom.version}/'>View Maven Site</a>", false)
-            }
-            timeout(time: 15, unit: 'MINUTES') {
-                waitForQualityGate abortPipeline: true
+           script {
+               pom = readMavenPom file: 'pom.xml'
+               manager.createSummary("document.png").appendText("<a href='${env.JAVADOC_URL}/${pom.groupId}/${pom.artifactId}/${pom.version}/'>View Maven Site</a>", false)
             }
         }
     } // post
+        
 }

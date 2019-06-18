@@ -24,7 +24,7 @@
     <parent>
         <groupId>com.anrisoftware.globalpom</groupId>
         <artifactId>globalpom-groovy-osgi</artifactId>
-        <version>4.5.1-SNAPSHOT</version>
+        <version>4.5.1</version>
     </parent>
 
     <groupId>com.anrisoftware.propertiesutils</groupId>
@@ -58,7 +58,7 @@
         <project.custom.bundle.namespace>com.anrisoftware.globalpom.propertiesutils</project.custom.bundle.namespace>
         <project.custom.bundle.namespace.internal>com.anrisoftware.globalpom.propertiesutils.internal</project.custom.bundle.namespace.internal>
         <!-- Dependencies -->
-        <project.custom.globalpom-groovy.version>4.5.1-SNAPSHOT</project.custom.globalpom-groovy.version>
+        <project.custom.globalpom-groovy.version>4.5.1</project.custom.globalpom-groovy.version>
         <!-- sonar -->
         <sonar.coverage.jacoco.xmlReportPaths>../propertiesutils-it/target/site/jacoco-aggregate/jacoco.xml</sonar.coverage.jacoco.xmlReportPaths>
     </properties>
