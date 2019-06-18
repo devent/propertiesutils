@@ -13,27 +13,21 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-
-package com.anrisoftware.propertiesutils;
-
-import java.util.Map;
-import java.util.Properties;
+package com.anrisoftware.propertiesutils
 
 /**
- * Factory to create {@link JodaDateTypedProperties}.
  *
  * @author Erwin Müller, erwin.mueller@deventm.de
- * @since 2.1
+ * @since 4.5.1
  */
-public interface TypedAllPropertiesFactory {
+class AbstractContextPropertiesTest {
 
-    JodaDateTypedProperties create(Map<String, Object> properties,
-            String listSepChars);
-
-    JodaDateTypedProperties create(Map<String, Object> properties);
-
-    JodaDateTypedProperties create(Properties properties, String listSepChars);
-
-    JodaDateTypedProperties create(Properties properties);
-
+    /**
+     * Creates the parent properties from the input string.
+     */
+    final def createParentProperties(String input) {
+        def p = new Properties()
+        p.load(new StringReader(input))
+        return p
+    }
 }

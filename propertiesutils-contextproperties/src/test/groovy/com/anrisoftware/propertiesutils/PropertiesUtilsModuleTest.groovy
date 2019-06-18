@@ -14,26 +14,28 @@
  * limitations under the License.
  */
 
-package com.anrisoftware.propertiesutils;
+package com.anrisoftware.propertiesutils
 
-import java.util.Map;
-import java.util.Properties;
+import static org.junit.jupiter.api.Assertions.*
+
+import org.junit.jupiter.api.Test
+
+import com.google.inject.Guice
+
+import groovy.util.logging.Slf4j
 
 /**
- * Factory to create {@link JodaDateTypedProperties}.
+ * @see MapEntryToString
  *
  * @author Erwin Müller, erwin.mueller@deventm.de
- * @since 2.1
+ * @since 4.5.2
  */
-public interface TypedAllPropertiesFactory {
+@Slf4j
+class PropertiesUtilsModuleTest extends AbstractContextPropertiesTest {
 
-    JodaDateTypedProperties create(Map<String, Object> properties,
-            String listSepChars);
-
-    JodaDateTypedProperties create(Map<String, Object> properties);
-
-    JodaDateTypedProperties create(Properties properties, String listSepChars);
-
-    JodaDateTypedProperties create(Properties properties);
-
+    @Test
+    void "create TypedAllPropertiesFactory"() {
+        def instance = Guice.createInjector(new PropertiesUtilsModule()).getInstance(TypedAllPropertiesFactory.class)
+        assertNotNull instance
+    }
 }

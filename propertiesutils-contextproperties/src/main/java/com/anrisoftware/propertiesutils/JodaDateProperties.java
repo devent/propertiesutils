@@ -1,21 +1,17 @@
-/*-
- * #%L
- * Properties Utilities :: Context Properties
- * %%
- * Copyright (C) 2012 - 2018 Advanced Natural Research Institute
- * %%
+/**
+ * Copyright © 2012 Erwin Müller (erwin.mueller@anrisoftware.com)
+ *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
- * 
- *      http://www.apache.org/licenses/LICENSE-2.0
- * 
+ *
+ *     http://www.apache.org/licenses/LICENSE-2.0
+ *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
  * limitations under the License.
- * #L%
  */
 
 package com.anrisoftware.propertiesutils;
@@ -23,7 +19,6 @@ package com.anrisoftware.propertiesutils;
 import java.util.Map;
 import java.util.Properties;
 
-import org.apache.commons.lang3.builder.ToStringBuilder;
 import org.joda.time.Duration;
 import org.joda.time.Period;
 import org.joda.time.format.ISOPeriodFormat;
@@ -33,24 +28,24 @@ import org.joda.time.format.PeriodFormatter;
  * Extends the utility to return typed properties for Joda-Time typed.
  *
  * @author Erwin Müller, erwin.mueller@deventm.de
- * @since 2.1
+ * @since 4.5.1
  */
 @SuppressWarnings("serial")
-public class DateProperties extends TypedProperties {
+public class JodaDateProperties extends TypedProperties {
 
-    public DateProperties(Map<String, Object> properties, String listSepChars) {
+    public JodaDateProperties(Map<String, Object> properties, String listSepChars) {
         super(properties, listSepChars);
     }
 
-    public DateProperties(Map<String, Object> properties) {
+    public JodaDateProperties(Map<String, Object> properties) {
         super(properties);
     }
 
-    public DateProperties(Properties properties, String listSepChars) {
+    public JodaDateProperties(Properties properties, String listSepChars) {
         super(properties, listSepChars);
     }
 
-    public DateProperties(Properties properties) {
+    public JodaDateProperties(Properties properties) {
         super(properties);
     }
 
@@ -58,8 +53,7 @@ public class DateProperties extends TypedProperties {
      * Returns a time period property using the format defined in
      * {@link ISOPeriodFormat#standard()}.
      *
-     * @param key
-     *            the property key.
+     * @param key the property key.
      *
      * @return the {@link Period}.
      */
@@ -76,11 +70,9 @@ public class DateProperties extends TypedProperties {
      * Returns a time period property using the format defined in
      * {@link ISOPeriodFormat#standard()}.
      *
-     * @param key
-     *            the property key.
+     * @param key       the property key.
      *
-     * @param formatter
-     *            the {@link PeriodFormatter} that parses the period property.
+     * @param formatter the {@link PeriodFormatter} that parses the period property.
      *
      * @return the {@link Period}.
      */
@@ -97,8 +89,7 @@ public class DateProperties extends TypedProperties {
      * Returns a time duration property using the format defined in
      * {@link ISOPeriodFormat#standard()}.
      *
-     * @param key
-     *            the property key.
+     * @param key the property key.
      *
      * @return the {@link Duration}.
      */
@@ -113,13 +104,12 @@ public class DateProperties extends TypedProperties {
 
     /**
      * Returns a time duration property using the format defined in
-     * {@link ISODurationFormat#standard()}.
+     * {@link ISOPeriodFormat#standard()}.
      *
-     * @param key
-     *            the property key.
+     * @param key       the property key.
      *
-     * @param formatter
-     *            the {@link PeriodFormatter} that parses the duration property.
+     * @param formatter the {@link PeriodFormatter} that parses the duration
+     *                  property.
      *
      * @return the {@link Duration}.
      */
@@ -132,9 +122,4 @@ public class DateProperties extends TypedProperties {
         }
     }
 
-    @Override
-    public String toString() {
-        return new ToStringBuilder(this).appendSuper(super.toString())
-                .toString();
-    }
 }
