@@ -1,4 +1,4 @@
-!https://jenkins.anrisoftware.com/job/propertiesutils-public/job/master/badge/icon(Build Status)!:https://jenkins.anrisoftware.com/job/propertiesutils-public/job/master !https://sonar.anrisoftware.com/api/badges/gate?key=com.anrisoftware.propertiesutils%3Apropertiesutils-root(Quality Gate)!:https://sonar.anrisoftware.com/dashboard?id=com.anrisoftware.propertiesutils%3Apropertiesutils-root !https://project.anrisoftware.com/attachments/download/217/apache2.0-small.gif(Apache License, Version 2.0)!:http://www.apache.org/licenses/LICENSE-2.0 © 2012-2019 Erwin Müller
+!https://jenkins.anrisoftware.com/job/propertiesutils-public/job/master/badge/icon(Build Status)!:https://jenkins.anrisoftware.com/job/propertiesutils-public/job/master !https://sonar.anrisoftware.com/api/badges/gate?key=com.anrisoftware.propertiesutils%3Apropertiesutils(Quality Gate)!:https://sonar.anrisoftware.com/dashboard?id=com.anrisoftware.propertiesutils%3Apropertiesutils !https://project.anrisoftware.com/attachments/download/217/apache2.0-small.gif(Apache License, Version 2.0)!:http://www.apache.org/licenses/LICENSE-2.0 © 2012-2019 Erwin Müller
 
 h1. Description
 
@@ -18,8 +18,8 @@ com.anrisoftware.propertiesutils.testWithReplacementsSystem = Foo ${os.name}
 
 h1. Links
 
-* "Generated Site":https://javadoc.anrisoftware.com/com.anrisoftware.propertiesutils/propertiesutils-root/4.5.0-SNAPSHOT/
-* "Download (Central)":https://search.maven.org/artifact/com.anrisoftware.propertiesutils/propertiesutils-root/4.5.0-SNAPSHOT/pom
+* "Generated Site":https://javadoc.anrisoftware.com/com.anrisoftware.propertiesutils/propertiesutils/4.5.1-SNAPSHOT/
+* "Download (Central)":https://search.maven.org/artifact/com.anrisoftware.propertiesutils/propertiesutils/4.5.1-SNAPSHOT/pom
 * "Source code":https://gitea.anrisoftware.com/anrisoftware.com/propertiesutils.git
 * "Source code (Github)":https://github.com/devent/propertiesutils
 * "Project Home":https://project.anrisoftware.com/projects/propertiesutils
