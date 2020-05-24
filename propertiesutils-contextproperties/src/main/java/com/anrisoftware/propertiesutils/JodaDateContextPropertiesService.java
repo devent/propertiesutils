@@ -1,21 +1,17 @@
-/*-
- * #%L
- * Properties Utilities :: Context Properties
- * %%
- * Copyright (C) 2012 - 2018 Advanced Natural Research Institute
- * %%
+/**
+ * Copyright © 2012 Erwin Müller (erwin.mueller@anrisoftware.com)
+ *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
- * 
- *      http://www.apache.org/licenses/LICENSE-2.0
- * 
+ *
+ *     http://www.apache.org/licenses/LICENSE-2.0
+ *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
  * limitations under the License.
- * #L%
  */
 
 package com.anrisoftware.propertiesutils;
@@ -25,13 +21,13 @@ import java.util.Properties;
 import org.osgi.service.component.annotations.Component;
 
 /**
- * Provides {@link DateContextProperties}.
+ * Provides {@link JodaDateContextProperties}.
  *
  * @author Erwin Müller, erwin.mueller@deventm.de
- * @since 2.1
+ * @since 4.5.1
  */
-@Component(service = DateContextPropertiesService.class)
-public class DateContextPropertiesService {
+@Component(service = JodaDateContextPropertiesService.class)
+public class JodaDateContextPropertiesService {
 
     /**
      * Sets the context and the properties.
@@ -42,9 +38,9 @@ public class DateContextPropertiesService {
      * @param parentProperties
      *            the {@link Properties} that are returned.
      */
-    public DateContextProperties create(Object context,
+    public JodaDateContextProperties create(Object context,
             Properties parentProperties) {
-        return new DateContextProperties(context, parentProperties);
+        return new JodaDateContextProperties(context, parentProperties);
     }
 
     /**
@@ -56,9 +52,9 @@ public class DateContextPropertiesService {
      * @param parentProperties
      *            the {@link Properties} that are returned.
      */
-    public DateContextProperties create(Class<?> context,
+    public JodaDateContextProperties create(Class<?> context,
             Properties parentProperties) {
-        return new DateContextProperties(context, parentProperties);
+        return new JodaDateContextProperties(context, parentProperties);
     }
 
     /**
@@ -70,8 +66,8 @@ public class DateContextPropertiesService {
      * @param parentProperties
      *            the {@link Properties} that are returned.
      */
-    public DateContextProperties create(String context,
+    public JodaDateContextProperties create(String context,
             Properties parentProperties) {
-        return new DateContextProperties(context, parentProperties);
+        return new JodaDateContextProperties(context, parentProperties);
     }
 }
