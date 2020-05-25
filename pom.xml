@@ -24,12 +24,12 @@
     <parent>
         <groupId>com.anrisoftware.globalpom</groupId>
         <artifactId>globalpom-groovy-osgi</artifactId>
-        <version>4.5.1-SNAPSHOT</version>
+        <version>4.5.2-SNAPSHOT</version>
     </parent>
 
     <groupId>com.anrisoftware.propertiesutils</groupId>
     <artifactId>propertiesutils</artifactId>
-    <version>4.5.1-SNAPSHOT</version>
+    <version>4.5.2-SNAPSHOT</version>
     <inceptionYear>2012</inceptionYear>
     <packaging>pom</packaging>
     <url>https://javadoc.anrisoftware.com/${project.groupId}/${project.artifactId}/${project.version}/</url>
