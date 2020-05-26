@@ -14,23 +14,28 @@
  * limitations under the License.
  */
 
-package com.anrisoftware.propertiesutils;
+package com.anrisoftware.propertiesutils
 
-import com.google.inject.AbstractModule;
-import com.google.inject.assistedinject.FactoryModuleBuilder;
+import static org.junit.jupiter.api.Assertions.*
+
+import org.junit.jupiter.api.Test
+
+import com.google.inject.Guice
+
+import groovy.util.logging.Slf4j
 
 /**
- * @see TypedAllPropertiesFactory
+ * @see MapEntryToString
  *
- * @author Erwin Müller {@literal <erwin.mueller@deventm.de>}
- * @version 2.1
+ * @author Erwin Müller, erwin.mueller@deventm.de
+ * @since 4.5.2
  */
-public class PropertiesUtilsModule extends AbstractModule {
+@Slf4j
+class PropertiesUtilsModuleTest extends AbstractContextPropertiesTest {
 
-    @Override
-    protected void configure() {
-        install(new FactoryModuleBuilder().implement(JodaDateTypedProperties.class, JodaDateTypedProperties.class)
-                .build(TypedAllPropertiesFactory.class));
+    @Test
+    void "create TypedAllPropertiesFactory"() {
+        def instance = Guice.createInjector(new PropertiesUtilsModule()).getInstance(TypedAllPropertiesFactory.class)
+        assertNotNull instance
     }
-
 }

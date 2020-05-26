@@ -32,42 +32,39 @@ public class JodaDateContextPropertiesService {
     /**
      * Sets the context and the properties.
      *
-     * @param context
-     *            an {@link Object} that is used as the context.
+     * @param context          an {@link Object} that is used as the context.
      *
-     * @param parentProperties
-     *            the {@link Properties} that are returned.
+     * @param parentProperties the {@link Properties} that are returned.
+     *
+     * @return {@link JodaDateContextProperties}
      */
-    public JodaDateContextProperties create(Object context,
-            Properties parentProperties) {
+    public JodaDateContextProperties create(Object context, Properties parentProperties) {
         return new JodaDateContextProperties(context, parentProperties);
     }
 
     /**
      * Sets the context and the properties.
      *
-     * @param context
-     *            an {@link Class} that is used as the context.
+     * @param context          an {@link Class} that is used as the context.
      *
-     * @param parentProperties
-     *            the {@link Properties} that are returned.
+     * @param parentProperties the {@link Properties} that are returned.
+     *
+     * @return {@link JodaDateContextProperties}
      */
-    public JodaDateContextProperties create(Class<?> context,
-            Properties parentProperties) {
+    public JodaDateContextProperties create(Class<?> context, Properties parentProperties) {
         return new JodaDateContextProperties(context, parentProperties);
     }
 
     /**
      * Sets the context and the properties.
      *
-     * @param context
-     *            the context.
+     * @param context          the context.
      *
-     * @param parentProperties
-     *            the {@link Properties} that are returned.
+     * @param parentProperties the {@link Properties} that are returned.
+     *
+     * @return {@link JodaDateContextProperties}
      */
-    public JodaDateContextProperties create(String context,
-            Properties parentProperties) {
+    public JodaDateContextProperties create(String context, Properties parentProperties) {
         return new JodaDateContextProperties(context, parentProperties);
     }
 }

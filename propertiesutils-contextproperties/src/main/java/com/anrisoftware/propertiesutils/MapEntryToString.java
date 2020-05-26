@@ -19,8 +19,7 @@ package com.anrisoftware.propertiesutils;
 import static org.apache.commons.lang3.Validate.notNull;
 
 import java.util.Map;
-
-import org.apache.commons.lang3.ObjectUtils;
+import java.util.Objects;
 
 /**
  * Converts a map entry to a {@link String}.
@@ -33,52 +32,62 @@ public class MapEntryToString {
     /**
      * Converts the argument to a {@link String}.
      *
-     * @return the {@link String} or {@code null} if the argument doesn't
-     *         exists.
+     * @param args the {@link Map} that should contain the key.
+     *
+     * @param key  the key.
+     *
+     * @return the {@link String} or {@code null} if the argument doesn't exists.
      */
     public String toStringNull(Map<String, Object> args, String key) {
         Object value = args.get(key);
         if (value == null) {
             return null;
         }
-        return toString(value, key);
+        return toStringNull(value);
     }
 
     /**
      * Converts the argument to a {@link String}.
      *
-     * @throws NullPointerException
-     *             if the argument is {@code null}.
+     * @param args the {@link Map} that should contain the key.
+     *
+     * @param key  the key.
+     *
+     * @throws NullPointerException if the argument is {@code null}.
+     *
+     * @return the {@link String}.
      */
     public String toString(Map<String, Object> args, String key) {
         Object value = args.get(key);
-        return toString(value, key);
+        return toString(value);
     }
 
     /**
      * Converts the argument to a {@link String}.
      *
-     * @return the {@link String} or {@code null} if the argument doesn't
-     *         exists.
+     * @param arg the argument.
+     *
+     * @return the {@link String} or {@code null} if the argument was {@code null}.
      */
-    @SuppressWarnings("deprecation")
-    public String toStringNull(Object arg, String name) {
+    public String toStringNull(Object arg) {
         if (arg == null) {
             return null;
         }
-        return ObjectUtils.toString(arg);
+        return Objects.toString(arg);
     }
 
     /**
      * Converts the argument to a {@link String}.
      *
-     * @throws NullPointerException
-     *             if the argument is {@code null}.
+     * @param arg the argument.
+     *
+     * @throws NullPointerException if the argument is {@code null}.
+     *
+     * @return the {@link String}.
      */
-    @SuppressWarnings("deprecation")
-    public String toString(Object arg, String name) {
+    public String toString(Object arg) {
         notNull(arg, "arg");
-        return ObjectUtils.toString(arg);
+        return Objects.toString(arg);
     }
 
 }

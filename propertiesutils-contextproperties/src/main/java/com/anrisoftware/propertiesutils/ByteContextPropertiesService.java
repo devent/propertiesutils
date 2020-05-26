@@ -32,42 +32,39 @@ public class ByteContextPropertiesService {
     /**
      * Sets the context and the properties.
      *
-     * @param context
-     *            an {@link Object} that is used as the context.
+     * @param context          an {@link Object} that is used as the context.
      *
-     * @param parentProperties
-     *            the {@link Properties} that are returned.
+     * @param parentProperties the {@link Properties} that are returned.
+     *
+     * @return {@link ByteContextProperties}
      */
-    public ByteContextProperties create(Object context,
-            Properties parentProperties) {
+    public ByteContextProperties create(Object context, Properties parentProperties) {
         return new ByteContextProperties(context, parentProperties);
     }
 
     /**
      * Sets the context and the properties.
      *
-     * @param context
-     *            an {@link Class} that is used as the context.
+     * @param context          an {@link Class} that is used as the context.
      *
-     * @param parentProperties
-     *            the {@link Properties} that are returned.
+     * @param parentProperties the {@link Properties} that are returned.
+     *
+     * @return {@link ByteContextProperties}
      */
-    public ByteContextProperties create(Class<?> context,
-            Properties parentProperties) {
+    public ByteContextProperties create(Class<?> context, Properties parentProperties) {
         return new ByteContextProperties(context, parentProperties);
     }
 
     /**
      * Sets the context and the properties.
      *
-     * @param context
-     *            the context.
+     * @param context          the context.
      *
-     * @param parentProperties
-     *            the {@link Properties} that are returned.
+     * @param parentProperties the {@link Properties} that are returned.
+     *
+     * @return {@link ByteContextProperties}
      */
-    public ByteContextProperties create(String context,
-            Properties parentProperties) {
+    public ByteContextProperties create(String context, Properties parentProperties) {
         return new ByteContextProperties(context, parentProperties);
     }
 }

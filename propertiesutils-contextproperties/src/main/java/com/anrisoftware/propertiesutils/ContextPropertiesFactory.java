@@ -22,7 +22,6 @@ import static org.apache.commons.lang3.Validate.notNull;
 import java.io.BufferedInputStream;
 import java.io.File;
 import java.io.FileInputStream;
-import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
@@ -54,8 +53,7 @@ public class ContextPropertiesFactory implements Serializable {
     /**
      * Sets the specified context object.
      * 
-     * @param context
-     *            the context {@link Object}.
+     * @param context the context {@link Object}.
      */
     public ContextPropertiesFactory(Object context) {
         this(context.getClass());
@@ -64,8 +62,7 @@ public class ContextPropertiesFactory implements Serializable {
     /**
      * Sets the specified context class.
      * 
-     * @param context
-     *            the context {@link Class}.
+     * @param context the context {@link Class}.
      */
     public ContextPropertiesFactory(Class<?> context) {
         this(context.getPackage().getName());
@@ -74,8 +71,7 @@ public class ContextPropertiesFactory implements Serializable {
     /**
      * Sets the specified context.
      * 
-     * @param context
-     *            the context.
+     * @param context the context.
      */
     public ContextPropertiesFactory(String context) {
         this.context = context;
@@ -84,54 +80,49 @@ public class ContextPropertiesFactory implements Serializable {
     }
 
     /**
-     * Sets the default properties for the context. The default properties are
-     * used if the context does not contain a specified key.
+     * Sets the default properties for the context. The default properties are used
+     * if the context does not contain a specified key.
      * <p>
      * The method is to use in a fluent API style:
      * 
      * <pre>
-     * ContextProperties p = new ContextPropertiesFactory(context)
-     *         .withDefaultProperties(properties).fromResource(resource);
+     * ContextProperties p = new ContextPropertiesFactory(context).withDefaultProperties(properties)
+     *         .fromResource(resource);
      * </pre>
      * 
-     * @param properties
-     *            the default {@link Properties}.
+     * @param properties the default {@link Properties}.
      * 
      * @return this {@link ContextPropertiesFactory}.
      * 
      * @since 1.2
      */
-    public ContextPropertiesFactory withDefaultProperties(
-            Properties properties) {
+    public ContextPropertiesFactory withDefaultProperties(Properties properties) {
         notNull(properties, "The default properties cannot be null.");
         defaultProperties = properties;
         return this;
     }
 
     /**
-     * Sets the default properties for the context. The default properties are
-     * used if the context does not contain a specified key.
+     * Sets the default properties for the context. The default properties are used
+     * if the context does not contain a specified key.
      * <p>
      * The method is to use in a fluent API style:
      * 
      * <pre>
-     * ContextProperties p = new ContextPropertiesFactory(context)
-     *         .withDefaultProperties(propertiesUrl).fromResource(resource);
+     * ContextProperties p = new ContextPropertiesFactory(context).withDefaultProperties(propertiesUrl)
+     *         .fromResource(resource);
      * </pre>
      * 
-     * @param resource
-     *            the resource {@link URL} of the default properties.
+     * @param resource the resource {@link URL} of the default properties.
      * 
      * @return this {@link ContextPropertiesFactory}.
      * 
-     * @throws IOException
-     *             if there was an I/O exception while loading the properties
-     *             from the resource URL.
+     * @throws IOException if there was an I/O exception while loading the
+     *                     properties from the resource URL.
      * 
      * @since 1.4
      */
-    public ContextPropertiesFactory withDefaultProperties(URL resource)
-            throws IOException {
+    public ContextPropertiesFactory withDefaultProperties(URL resource) throws IOException {
         defaultProperties = new Properties();
         defaultProperties.load(resource.openStream());
         return this;
@@ -146,12 +137,11 @@ public class ContextPropertiesFactory implements Serializable {
      * <pre>
      * // loads the properties from the resource but lets the user overwrite
      * // the properties with the system properties:
-     * ContextProperties p = new ContextPropertiesFactory(context)
-     *         .withProperties(System.getProperties()).fromResource(resource);
+     * ContextProperties p = new ContextPropertiesFactory(context).withProperties(System.getProperties())
+     *         .fromResource(resource);
      * </pre>
      * 
-     * @param properties
-     *            the default {@link Properties}.
+     * @param properties the default {@link Properties}.
      * 
      * @return this {@link ContextPropertiesFactory}.
      * 
@@ -166,13 +156,11 @@ public class ContextPropertiesFactory implements Serializable {
     /**
      * Loads the properties from a resource with a default character set.
      * 
-     * @param resource
-     *            the resource {@link URL}.
+     * @param resource the resource {@link URL}.
      * 
      * @return the {@link ContextProperties}.
      * 
-     * @throws IOException
-     *             if there was an error loading the resource.
+     * @throws IOException if there was an error loading the resource.
      */
     public ContextProperties fromResource(URL resource) throws IOException {
         return fromResource(resource, DEFAULT_CHARSET);
@@ -181,19 +169,15 @@ public class ContextPropertiesFactory implements Serializable {
     /**
      * Loads the properties from a resource with a specified character set.
      * 
-     * @param url
-     *            the resource {@link URL}.
+     * @param url     the resource {@link URL}.
      * 
-     * @param charset
-     *            the {@link Charset} of the resource.
+     * @param charset the {@link Charset} of the resource.
      * 
      * @return the {@link ContextProperties}.
      * 
-     * @throws IOException
-     *             if there was an error loading the resource.
+     * @throws IOException if there was an error loading the resource.
      */
-    public ContextProperties fromResource(URL url, Charset charset)
-            throws IOException {
+    public ContextProperties fromResource(URL url, Charset charset) throws IOException {
         InputStream resource = new BufferedInputStream(url.openStream());
         Properties properties = loadProperties(resource, charset);
         return new ContextProperties(context, properties);
@@ -202,13 +186,11 @@ public class ContextPropertiesFactory implements Serializable {
     /**
      * Loads the properties from a resource with a default character set.
      * 
-     * @param resource
-     *            the resource {@link URI}.
+     * @param resource the resource {@link URI}.
      * 
      * @return the {@link ContextProperties}.
      * 
-     * @throws IOException
-     *             if there was an error loading the resource.
+     * @throws IOException if there was an error loading the resource.
      */
     public ContextProperties fromResource(URI resource) throws IOException {
         return fromResource(resource, DEFAULT_CHARSET);
@@ -217,34 +199,28 @@ public class ContextPropertiesFactory implements Serializable {
     /**
      * Loads the properties from a resource with a specified character set.
      * 
-     * @param resource
-     *            the resource {@link URI}.
+     * @param resource the resource {@link URI}.
      * 
-     * @param charset
-     *            the {@link Charset} of the resource.
+     * @param charset  the {@link Charset} of the resource.
      * 
      * @return the {@link ContextProperties}.
      * 
-     * @throws IOException
-     *             if there was an error loading the resource.
+     * @throws IOException if there was an error loading the resource.
      * 
      * @since 1.1
      */
-    public ContextProperties fromResource(URI resource, Charset charset)
-            throws IOException {
+    public ContextProperties fromResource(URI resource, Charset charset) throws IOException {
         return fromResource(new File(resource), charset);
     }
 
     /**
      * Loads the properties from a resource with a default character set.
      * 
-     * @param resource
-     *            the resource {@link File}.
+     * @param resource the resource {@link File}.
      * 
      * @return the {@link ContextProperties}.
      * 
-     * @throws IOException
-     *             if there was an error loading the resource.
+     * @throws IOException if there was an error loading the resource.
      */
     public ContextProperties fromResource(File resource) throws IOException {
         return fromResource(resource, DEFAULT_CHARSET);
@@ -253,29 +229,25 @@ public class ContextPropertiesFactory implements Serializable {
     /**
      * Loads the properties from a resource with a specified character set.
      * 
-     * @param file
-     *            the resource {@link File}.
+     * @param file    the resource {@link File}.
      * 
-     * @param charset
-     *            the {@link Charset} of the resource.
+     * @param charset the {@link Charset} of the resource.
      * 
      * @return the {@link ContextProperties}.
      * 
-     * @throws IOException
-     *             if there was an error loading the resource.
+     * @throws IOException if there was an error loading the resource.
      * 
      * @since 1.1
      */
-    public ContextProperties fromResource(File file, Charset charset)
-            throws IOException {
+    public ContextProperties fromResource(File file, Charset charset) throws IOException {
         FileInputStream resource = new FileInputStream(file);
         Properties properties = loadProperties(resource, charset);
         return new ContextProperties(context, properties);
     }
 
     /**
-     * Loads the properties from user specified resource with the default
-     * character set.
+     * Loads the properties from user specified resource with the default character
+     * set.
      * <p>
      * The user can specify a location for the user specific properties in the
      * system properties:
@@ -283,37 +255,30 @@ public class ContextPropertiesFactory implements Serializable {
      * <li>{@code <context>.<fileKey>}</li>
      * <li>{@code <context>.<urlKey>}</li>
      * </ul>
-     * If the file key property or the URL key property are set then the
-     * properties are loaded from the specified location. If the user have not
-     * set any of the properties then the properties are loaded from the
-     * specified resource URL.
+     * If the file key property or the URL key property are set then the properties
+     * are loaded from the specified location. If the user have not set any of the
+     * properties then the properties are loaded from the specified resource URL.
      * 
      * 
-     * @param resource
-     *            the resource {@link URL} if the user is not specifying a
-     *            custom properties resource.
+     * @param resource the resource {@link URL} if the user is not specifying a
+     *                 custom properties resource.
      * 
-     * @param fileKey
-     *            the key for the user specific properties file resource.
+     * @param fileKey  the key for the user specific properties file resource.
      * 
-     * @param urlKey
-     *            the key for the user specific properties URL resource.
+     * @param urlKey   the key for the user specific properties URL resource.
      * 
      * @return the {@link ContextProperties}.
      * 
-     * @throws IOException
-     *             if there was an error loading the resource.
+     * @throws IOException if there was an error loading the resource.
      * 
      * @since 1.4
      */
-    public ContextProperties fromUserResources(URL resource, String fileKey,
-            String urlKey) throws IOException {
+    public ContextProperties fromUserResources(URL resource, String fileKey, String urlKey) throws IOException {
         URL userResource = getUserResourceURL(fileKey, urlKey);
         return fromResource(userResource == null ? resource : userResource);
     }
 
-    private URL getUserResourceURL(String fileKey, String urlKey)
-            throws MalformedURLException {
+    private URL getUserResourceURL(String fileKey, String urlKey) throws MalformedURLException {
         ContextProperties properties;
         properties = new ContextProperties(context, getProperties());
         File file = properties.getFileProperty(fileKey, null);
@@ -324,8 +289,7 @@ public class ContextPropertiesFactory implements Serializable {
         return url;
     }
 
-    private Properties loadProperties(InputStream resource, Charset charset)
-            throws FileNotFoundException, IOException {
+    private Properties loadProperties(InputStream resource, Charset charset) throws IOException {
         Properties resourceP = new Properties(defaultProperties);
         Reader reader = new InputStreamReader(resource, charset);
         resourceP.load(reader);

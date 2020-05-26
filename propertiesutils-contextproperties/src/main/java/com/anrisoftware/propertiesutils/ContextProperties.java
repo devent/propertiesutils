@@ -37,6 +37,8 @@ import java.util.Properties;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
+import org.apache.commons.lang3.builder.EqualsBuilder;
+import org.apache.commons.lang3.builder.HashCodeBuilder;
 import org.apache.commons.lang3.builder.ToStringBuilder;
 
 /**
@@ -343,7 +345,27 @@ public class ContextProperties extends Properties {
     }
 
     @Override
-    public String toString() {
+    public synchronized boolean equals(Object obj) {
+        if (obj == null) {
+            return false;
+        }
+        if (obj == this) {
+            return true;
+        }
+        if (obj.getClass() != getClass()) {
+            return false;
+        }
+        ContextProperties rhs = (ContextProperties) obj;
+        return new EqualsBuilder().appendSuper(super.equals(obj)).append(context, rhs.getContext()).isEquals();
+    }
+
+    @Override
+    public synchronized int hashCode() {
+        return new HashCodeBuilder().appendSuper(super.hashCode()).append(context).toHashCode();
+    }
+
+    @Override
+    public synchronized String toString() {
         return new ToStringBuilder(this).append("context", context).appendSuper(super.toString()).toString();
     }
 }
