@@ -24,7 +24,7 @@
     <parent>
         <groupId>com.anrisoftware.globalpom</groupId>
         <artifactId>globalpom-groovy-osgi</artifactId>
-        <version>4.5.2-SNAPSHOT</version>
+        <version>4.5.2</version>
     </parent>
 
     <groupId>com.anrisoftware.propertiesutils</groupId>
@@ -57,6 +57,7 @@
         <project.custom.sonarqube.qualitygate.link>${project.custom.sonarqube.url}</project.custom.sonarqube.qualitygate.link>
         <project.custom.bundle.namespace>com.anrisoftware.globalpom.propertiesutils</project.custom.bundle.namespace>
         <project.custom.bundle.namespace.internal>com.anrisoftware.globalpom.propertiesutils.internal</project.custom.bundle.namespace.internal>
+        <project.custom.globalpom-groovy.version>4.5.2</project.custom.globalpom-groovy.version>
     </properties>
 
     <developers>
