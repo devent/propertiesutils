@@ -22,12 +22,12 @@
     <parent>
         <groupId>com.anrisoftware.globalpom</groupId>
         <artifactId>globalpom-groovy-osgi</artifactId>
-        <version>4.5.1</version>
+        <version>4.5.2</version>
     </parent>
 
     <groupId>com.anrisoftware.propertiesutils</groupId>
     <artifactId>propertiesutils</artifactId>
-    <version>4.5.1</version>
+    <version>4.5.2</version>
     <name>Properties Utilities</name>
     <inceptionYear>2012</inceptionYear>
     <packaging>pom</packaging>
@@ -55,8 +55,7 @@
         <project.custom.sonarqube.qualitygate.link>${project.custom.sonarqube.url}</project.custom.sonarqube.qualitygate.link>
         <project.custom.bundle.namespace>com.anrisoftware.propertiesutils</project.custom.bundle.namespace>
         <project.custom.bundle.namespace.internal>com.anrisoftware.propertiesutils.internal</project.custom.bundle.namespace.internal>
-        <!-- Dependencies -->
-        <project.custom.globalpom-groovy.version>4.5.1</project.custom.globalpom-groovy.version>
+        <project.custom.globalpom-groovy.version>4.5.2</project.custom.globalpom-groovy.version>
         <!-- sonar -->
         <sonar.coverage.jacoco.xmlReportPaths>../propertiesutils-it/target/site/jacoco-aggregate/jacoco.xml</sonar.coverage.jacoco.xmlReportPaths>
     </properties>
@@ -97,7 +96,7 @@
         <connection>${project.custom.scm.pub}</connection>
         <developerConnection>${project.custom.scm.dev}</developerConnection>
         <url>${project.custom.scm.url}</url>
-        <tag>propertiesutils-4.5.1</tag>
+        <tag>HEAD</tag>
     </scm>
 
     <distributionManagement>

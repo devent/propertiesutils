@@ -204,7 +204,7 @@ public class ContextProperties extends Properties {
             return value;
         }
         for (Map.Entry<String, Serializable> entry : replacements.entrySet()) {
-            String replace = entry.getValue().toString();
+            String replace = Matcher.quoteReplacement(entry.getValue().toString());
             String key = entry.getKey();
             Pattern pattern = Pattern.compile(format(REPLACEMENT_PATTERN, key));
             Matcher matcher = pattern.matcher(value);

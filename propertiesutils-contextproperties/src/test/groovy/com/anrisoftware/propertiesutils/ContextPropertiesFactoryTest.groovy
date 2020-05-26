@@ -72,7 +72,7 @@ class ContextPropertiesFactoryTest {
     void "object context from URL resource with replacements with backslash"() {
         def properties = new ContextPropertiesFactory(this).
                 fromResource(RESOURCE_URL).
-                withReplacement("foo", "C:\\\\Users\\\\user\\\\Documents\\\\foo")
+                withReplacement("foo", "C:\\Users\\user\\Documents\\foo")
         def result = properties.getProperty("testWithReplacements")
         assertStringContent result, "Foo C:\\Users\\user\\Documents\\foo"
     }
@@ -85,5 +85,20 @@ class ContextPropertiesFactoryTest {
                 withReplacements(System.getProperties())
         assertStringContent properties.getProperty("testWithReplacementsSystem"),
                 "Foo $os"
+    }
+
+    /**
+     * @see https://project.anrisoftware.com/issues/4376
+     */
+    @Test
+    void "object context from URL resource with replacements system properties for Windows Backslash"() {
+        def dir = "C:\\Users\\erwin\\AppData\\Local\\Temp\\"
+        def p = new Properties()
+        p.setProperty("java.io.tmpdir", dir)
+        def properties = new ContextPropertiesFactory(this).
+                fromResource(RESOURCE_URL).
+                withReplacements(p)
+        assertStringContent properties.getProperty("testWithReplacementsWindows"),
+                "Foo $dir"
     }
 }
