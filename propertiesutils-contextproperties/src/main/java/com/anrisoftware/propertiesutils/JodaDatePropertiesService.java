@@ -19,21 +19,31 @@ package com.anrisoftware.propertiesutils;
 import java.util.Map;
 import java.util.Properties;
 
+import org.osgi.service.component.annotations.Component;
+
 /**
- * Factory to create {@link JodaDateTypedProperties}.
+ * Provides {@link JodaDateProperties}.
  *
  * @author Erwin Müller, erwin.mueller@deventm.de
- * @since 2.1
+ * @since 4.5.1
  */
-public interface TypedAllPropertiesFactory {
+@Component(service = JodaDatePropertiesService.class)
+public class JodaDatePropertiesService {
 
-    JodaDateTypedProperties create(Map<String, Object> properties,
-            String listSepChars);
+    public JodaDateProperties create(Map<String, Object> properties,
+            String listSepChars) {
+        return new JodaDateProperties(properties, listSepChars);
+    }
 
-    JodaDateTypedProperties create(Map<String, Object> properties);
+    public JodaDateProperties create(Map<String, Object> properties) {
+        return new JodaDateProperties(properties);
+    }
 
-    JodaDateTypedProperties create(Properties properties, String listSepChars);
+    public JodaDateProperties create(Properties properties, String listSepChars) {
+        return new JodaDateProperties(properties, listSepChars);
+    }
 
-    JodaDateTypedProperties create(Properties properties);
-
+    public JodaDateProperties create(Properties properties) {
+        return new JodaDateProperties(properties);
+    }
 }

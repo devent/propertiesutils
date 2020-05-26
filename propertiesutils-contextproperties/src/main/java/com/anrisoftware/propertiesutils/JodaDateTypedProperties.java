@@ -1,21 +1,17 @@
-/*-
- * #%L
- * Properties Utilities :: Context Properties
- * %%
- * Copyright (C) 2012 - 2018 Advanced Natural Research Institute
- * %%
+/**
+ * Copyright © 2012 Erwin Müller (erwin.mueller@anrisoftware.com)
+ *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
- * 
- *      http://www.apache.org/licenses/LICENSE-2.0
- * 
+ *
+ *     http://www.apache.org/licenses/LICENSE-2.0
+ *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
  * limitations under the License.
- * #L%
  */
 
 package com.anrisoftware.propertiesutils;
@@ -35,37 +31,37 @@ import com.google.inject.assistedinject.AssistedInject;
  * Utility to return typed properties.
  *
  * @author Erwin Müller, erwin.mueller@deventm.de
- * @since 2.1
+ * @since 4.5.1
  */
 @SuppressWarnings("serial")
-public class TypedAllProperties extends TypedProperties {
+public class JodaDateTypedProperties extends TypedProperties {
 
-    private final DateProperties dateProperties;
+    private final JodaDateProperties dateProperties;
 
     @AssistedInject
-    TypedAllProperties(@Assisted Map<String, Object> properties,
+    JodaDateTypedProperties(@Assisted Map<String, Object> properties,
             @Assisted String listSepChars) {
         super(properties, listSepChars);
-        this.dateProperties = new DateProperties(properties, listSepChars);
+        this.dateProperties = new JodaDateProperties(properties, listSepChars);
     }
 
     @AssistedInject
-    TypedAllProperties(@Assisted Map<String, Object> properties) {
+    JodaDateTypedProperties(@Assisted Map<String, Object> properties) {
         super(properties);
-        this.dateProperties = new DateProperties(properties);
+        this.dateProperties = new JodaDateProperties(properties);
     }
 
     @AssistedInject
-    TypedAllProperties(@Assisted Properties properties,
+    JodaDateTypedProperties(@Assisted Properties properties,
             @Assisted String listSepChars) {
         super(properties, listSepChars);
-        this.dateProperties = new DateProperties(properties, listSepChars);
+        this.dateProperties = new JodaDateProperties(properties, listSepChars);
     }
 
     @AssistedInject
-    TypedAllProperties(@Assisted Properties properties) {
+    JodaDateTypedProperties(@Assisted Properties properties) {
         super(properties);
-        this.dateProperties = new DateProperties(properties);
+        this.dateProperties = new JodaDateProperties(properties);
     }
 
     public Period getPeriodProperty(String key) {

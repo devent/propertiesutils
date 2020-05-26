@@ -1,28 +1,28 @@
-/*-
- * #%L
- * Properties Utilities :: Context Properties
- * %%
- * Copyright (C) 2012 - 2018 Advanced Natural Research Institute
- * %%
+/**
+ * Copyright © 2012 Erwin Müller (erwin.mueller@anrisoftware.com)
+ *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
- * 
- *      http://www.apache.org/licenses/LICENSE-2.0
- * 
+ *
+ *     http://www.apache.org/licenses/LICENSE-2.0
+ *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
  * limitations under the License.
- * #L%
  */
 
 package com.anrisoftware.propertiesutils
 
-import org.junit.jupiter.api.Test
+import static org.junit.jupiter.params.provider.Arguments.of
 
-import groovy.transform.CompileStatic
+import java.util.stream.Stream
+
+import org.junit.jupiter.params.ParameterizedTest
+import org.junit.jupiter.params.provider.MethodSource
+
 import groovy.util.logging.Slf4j
 
 /**
@@ -31,37 +31,40 @@ import groovy.util.logging.Slf4j
  * @author Erwin Müller, erwin.mueller@deventm.de
  * @since 2.1
  */
-@CompileStatic
 @Slf4j
-class ContextPropertiesTest {
+class ContextPropertiesTest extends AbstractContextPropertiesTest {
 
-    @Test
-    void "get properties"() {
-        def testCases = [
-            [
-                input: 'test.string_foo = some string foo',
-                expected: { ContextProperties properties ->
-                    assert properties.getProperty('string_foo') == 'some string foo'
-                },
-            ],
-            [
-                input: 'test.int_foo = 12',
-                expected: { ContextProperties properties ->
-                    assert properties.getNumberProperty('int_foo').intValue() == 12
-                },
-            ],
-            [
-                input: 'test.double_foo = 12.0',
-                expected: { ContextProperties properties ->
-                    assert properties.getNumberProperty('int_foo').doubleValue() == 12.0
-                },
-            ],
-        ]
-        testCases.eachWithIndex { Map test, int k ->
-            log.info '{}. case: {}', k, test
-            def parentProperties = new Properties()
-            parentProperties.load new StringReader(test.input as String)
-            def properties = new ContextProperties('test', parentProperties)
-        }
+    static def getPropertyProvider() {
+        Stream.of of('test.foo = some string foo', 'some string foo')
     }
+
+    @ParameterizedTest
+    @MethodSource("getPropertyProvider")
+    void getPropertyTest(String input, def expected) {
+        def properties = new ContextProperties('test', createParentProperties(input))
+        assert properties.getProperty('foo') == expected
+    }
+
+    static def getNumberPropertyTest_intProvider() {
+        Stream.of of('test.foo = 12', 12)
+    }
+
+    @ParameterizedTest
+    @MethodSource("getNumberPropertyTest_intProvider")
+    void getNumberPropertyTest_int(String input, def expected) {
+        def properties = new ContextProperties('test', createParentProperties(input))
+        assert properties.getNumberProperty('foo').intValue() == expected
+    }
+    
+    static def getNumberPropertyTest_doubleProvider() {
+        Stream.of of('test.foo = 12.0', 12.0)
+    }
+
+    @ParameterizedTest
+    @MethodSource("getNumberPropertyTest_doubleProvider")
+    void getNumberPropertyTest_double(String input, def expected) {
+        def properties = new ContextProperties('test', createParentProperties(input))
+        assert properties.getNumberProperty('foo').doubleValue() == expected
+    }
+
 }
