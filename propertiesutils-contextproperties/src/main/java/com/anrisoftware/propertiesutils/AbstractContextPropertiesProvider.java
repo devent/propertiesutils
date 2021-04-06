@@ -75,13 +75,14 @@ public class AbstractContextPropertiesProvider
      * Sets the properties context and the properties resource.
      *
      * @param context
-     *            the properties context {@link Object}.
+     *            the properties context {@link String}.
      *
      * @param res
      *            the properties resource {@link URL}.
      */
-    protected AbstractContextPropertiesProvider(Object context, URL res) {
-        this(context.getClass(), res);
+    protected AbstractContextPropertiesProvider(String context, URL res) {
+        this.context = context;
+        this.resource = res;
     }
 
     /**
@@ -101,14 +102,13 @@ public class AbstractContextPropertiesProvider
      * Sets the properties context and the properties resource.
      *
      * @param context
-     *            the properties context {@link String}.
+     *            the properties context {@link Object}.
      *
      * @param res
      *            the properties resource {@link URL}.
      */
-    protected AbstractContextPropertiesProvider(String context, URL res) {
-        this.context = context;
-        this.resource = res;
+    protected AbstractContextPropertiesProvider(Object context, URL res) {
+        this(context.getClass(), res);
     }
 
     /**
