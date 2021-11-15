@@ -55,7 +55,7 @@
         <project.custom.sonarqube.qualitygate.link>${project.custom.sonarqube.url}</project.custom.sonarqube.qualitygate.link>
         <project.custom.bundle.namespace>com.anrisoftware.propertiesutils</project.custom.bundle.namespace>
         <project.custom.bundle.namespace.internal>com.anrisoftware.propertiesutils.internal</project.custom.bundle.namespace.internal>
-        <project.custom.globalpom-groovy.version>4.6.0-SNAPSHOT</project.custom.globalpom-groovy.version>
+        <project.custom.globalpom-groovy.version>4.6.0</project.custom.globalpom-groovy.version>
         <!-- sonar -->
         <sonar.coverage.jacoco.xmlReportPaths>../propertiesutils-it/target/site/jacoco-aggregate/jacoco.xml</sonar.coverage.jacoco.xmlReportPaths>
     </properties>
