@@ -22,7 +22,7 @@
     <parent>
         <groupId>com.anrisoftware.propertiesutils</groupId>
         <artifactId>propertiesutils</artifactId>
-        <version>4.6.0</version>
+        <version>4.6.1-SNAPSHOT</version>
     </parent>
 
     <artifactId>propertiesutils-it</artifactId>
@@ -44,8 +44,8 @@
 
     <distributionManagement>
         <site>
-            <id>site-ssh</id>
-            <url>${site.ssh.url}</url>
+            <id>site-dav</id>
+            <url>${site.dav.url}</url>
         </site>
         <repository>
             <id>public_releases</id>
