@@ -22,7 +22,7 @@
     <parent>
         <groupId>com.anrisoftware.globalpom</groupId>
         <artifactId>globalpom-groovy-gmavenplus</artifactId>
-        <version>4.6.0</version>
+        <version>4.6.1</version>
     </parent>
 
     <groupId>com.anrisoftware.propertiesutils</groupId>
@@ -129,8 +129,8 @@
             <id>osssonatype</id>
             <distributionManagement>
                 <site>
-                    <id>site-ssh</id>
-                    <url>${site.ssh.url}</url>
+                    <id>site-dav</id>
+                    <url>${site.dav.url}</url>
                 </site>
                 <repository>
                     <id>osssonatype_releases</id>
