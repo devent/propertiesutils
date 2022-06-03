@@ -31,7 +31,7 @@ xsi:schemaLocation="http://maven.apache.org/DECORATION/1.0.0 http://maven.apache
     <bannerRight>
         <name>Advanced Natural Research Institute Projects</name>
         <src>images/anri_logo_48.png</src>
-        <href>${globalpom.custom.homepage}</href>
+        <href>${this.globalpom.custom.homepage}</href>
     </bannerRight>
     <skin>
         <groupId>org.apache.maven.skins</groupId>
