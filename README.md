@@ -26,7 +26,7 @@ Links
 -   [Generated
     Site](https://javadoc.anrisoftware.com/com.anrisoftware.propertiesutils/propertiesutils/4.6.2/index.html)
 -   [Download
-    (Central)](https://search.maven.org/artifact/com.anrisoftware.globalpom/globalpom-parent/4.6.2/pom)
+    (Central)](https://search.maven.org/search?q=g:com.anrisoftware.propertiesutils)
 -   [Source
     code](https://gitea.anrisoftware.com/com.anrisoftware.propertiesutils/propertiesutils)
 -   [Source code (Github)](https://github.com/devent/propertiesutils)
