@@ -17,7 +17,7 @@
 
 -->
 <!--
-version 1.0.0
+version 1.0.1
 since 4.6.2
 -->
 <project name="${project.name}" xmlns="http://maven.apache.org/DECORATION/1.0.0"
