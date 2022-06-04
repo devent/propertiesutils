@@ -1,6 +1,6 @@
 <!--
 
-    Copyright 2012-2021 Erwin Müller <erwin.mueller@anrisoftware.com>
+    Copyright 2012-2022 Erwin Müller <erwin.mueller@anrisoftware.com>
 
     Licensed under the Apache License, Version 2.0 (the "License");
     you may not use this file except in compliance with the License.
@@ -22,7 +22,7 @@
     <parent>
         <groupId>com.anrisoftware.propertiesutils</groupId>
         <artifactId>propertiesutils</artifactId>
-        <version>4.6.1</version>
+        <version>4.6.2</version>
     </parent>
 
     <artifactId>propertiesutils-it</artifactId>
