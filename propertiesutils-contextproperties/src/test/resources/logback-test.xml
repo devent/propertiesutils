@@ -5,9 +5,9 @@
 
 	<appender name="TESTING_STYLE" class="ch.qos.logback.core.ConsoleAppender">
 		<target>System.err</target>
+        <immediateFlush>false</immediateFlush>
 		<encoder>
 			<pattern>[%level] %-4relative [%thread] %logger{0} - %msg%n%rEx{short}</pattern>
-			<immediateFlush>false</immediateFlush>
 		</encoder>
 	</appender>
 

@@ -1,4 +1,5 @@
-[![Build Status](https://jenkins.anrisoftware.com/job/com.anrisoftware.propertiesutils-propertiesutils/job/main/badge/icon)](https://jenkins.anrisoftware.com/job/com.anrisoftware.propertiesutils-propertiesutils/job/main)
+[![Build Status](https://jenkins.anrisoftware.com/job/com.anrisoftware.propertiesutils-propertiesutils/job/main/badge/icon)](https://jenkins.anrisoftware.com/job/com.anrisoftware.propertiesutils-propertiesutils)
+[![Gate](https://sonarcloud.io/api/project_badges/measure?project=devent_propertiesutils&metric=alert_status)](https://sonarcloud.io/project/overview?id=devent_propertiesutils)
 [![Apache License, Version 2.0](https://project.anrisoftware.com/attachments/download/217/apache2.0-small.gif)](http://www.apache.org/licenses/LICENSE-2.0)
 © 2012-2022 Erwin Müller
 
@@ -24,7 +25,7 @@ Links
 =====
 
 -   [Generated
-    Site](https://javadoc.anrisoftware.com/com.anrisoftware.propertiesutils/propertiesutils/4.6.2/index.html)
+    Site](https://javadoc.anrisoftware.com/com.anrisoftware.propertiesutils/propertiesutils/4.6.3-SNAPSHOT/index.html)
 -   [Download
     (Central)](https://search.maven.org/search?q=g:com.anrisoftware.propertiesutils)
 -   [Source
@@ -36,7 +37,7 @@ Links
     Roadmap](https://project.anrisoftware.com/projects/propertiesutils/roadmap)
 -   [Project
     Issues](https://project.anrisoftware.com/projects/propertiesutils/issues)
--   [Jenkins](https://jenkins.anrisoftware.com/job/com.anrisoftware.propertiesutils-propertiesutils/)
+-   [Jenkins](https://jenkins.anrisoftware.com/job/com.anrisoftware.propertiesutils-propertiesutils)
 
 Example Properties File
 =======================
@@ -48,8 +49,7 @@ Example Properties File
 License
 =======
 
-Copyright ©2012 - 2019 [Advanced Natural Research
-Institute](https://anrisoftware.com/). All rights reserved.
+Copyright ©2012 - 2022 Erwin Müller. All rights reserved.
 
 Licensed under the Apache License, Version 2.0 (the "License");\
 you may not use this file except in compliance with the License.\
@@ -63,9 +63,3 @@ WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or
 implied.\
 See the License for the specific language governing permissions and\
 limitations under the License.
-
-##### Markdown
-
-    [![Build Status](https://jenkins.anrisoftware.com/job/com.anrisoftware.propertiesutils-propertiesutils/job/main/badge/icon)](https://jenkins.anrisoftware.com/job/com.anrisoftware.propertiesutils-propertiesutils/job/main)
-    [![Apache License, Version 2.0](https://project.anrisoftware.com/attachments/download/217/apache2.0-small.gif)](http://www.apache.org/licenses/LICENSE-2.0)
-    © 2012-2022 Erwin Müller

@@ -18,6 +18,10 @@ package com.anrisoftware.propertiesutils;
 import java.io.InputStream;
 import java.util.Properties;
 
+import org.apache.commons.lang3.builder.EqualsBuilder;
+import org.apache.commons.lang3.builder.HashCodeBuilder;
+import org.apache.commons.lang3.builder.ToStringBuilder;
+
 /**
  * Properties with a specified context returning byte array data properties.
  *
@@ -93,6 +97,31 @@ public class ByteContextProperties extends ContextProperties {
      */
     public InputStream getDataPropertyStream(String key) {
         return byteProperties.getDataPropertyStream(key);
+    }
+
+    @Override
+    public synchronized boolean equals(Object obj) {
+        if (obj == null) {
+            return false;
+        }
+        if (obj == this) {
+            return true;
+        }
+        if (obj.getClass() != getClass()) {
+            return false;
+        }
+        var rhs = (ByteContextProperties) obj;
+        return new EqualsBuilder().appendSuper(super.equals(rhs)).isEquals();
+    }
+
+    @Override
+    public synchronized int hashCode() {
+        return new HashCodeBuilder().appendSuper(super.hashCode()).toHashCode();
+    }
+
+    @Override
+    public synchronized String toString() {
+        return new ToStringBuilder(this).appendSuper(super.toString()).toString();
     }
 
 }

@@ -1,4 +1,4 @@
-!https://jenkins.anrisoftware.com/job/com.anrisoftware.propertiesutils-propertiesutils/job/main/badge/icon(Build Status)!:https://jenkins.anrisoftware.com/job/com.anrisoftware.propertiesutils-propertiesutils/job/main !https://sonarcloud.io/api/project_badges/measure?project=devent_propertiesutils&metric=alert_status(Gate)!:https://sonarcloud.io/project/overview?id=devent_propertiesutils !https://project.anrisoftware.com/attachments/download/217/apache2.0-small.gif(Apache License, Version 2.0)!:http://www.apache.org/licenses/LICENSE-2.0 © 2012&#45;2022 Erwin Müller
+!%globalpom.custom.jenkins.build.badge.main%(Build Status)!:%globalpom.custom.jenkins.url%/job/main !%globalpom.custom.sonarqube.qualitygate.badge%(Gate)!:%globalpom.custom.sonarqube.qualitygate.link% !https://project.anrisoftware.com/attachments/download/217/apache2.0-small.gif(Apache License, Version 2.0)!:http://www.apache.org/licenses/LICENSE-2.0 © %project.inceptionYear%&#45;%globalpom.custom.current.year% Erwin Müller
 
 h1. Description
 
@@ -8,14 +8,14 @@ The ContextPropertiesFactory class defines various methods to load a properties 
 
 h1. Links
 
-* "Generated Site":https://javadoc.anrisoftware.com/com.anrisoftware.propertiesutils/propertiesutils/4.6.3-SNAPSHOT/index.html
+* "Generated Site":https://javadoc.anrisoftware.com/com.anrisoftware.propertiesutils/propertiesutils/%project.version%/index.html
 * "Download (Central)":https://search.maven.org/search?q=g:com.anrisoftware.propertiesutils
 * "Source code":https://gitea.anrisoftware.com/com.anrisoftware.propertiesutils/propertiesutils
 * "Source code (Github)":https://github.com/devent/propertiesutils
 * "Project Home":https://project.anrisoftware.com/projects/propertiesutils
 * "Project Roadmap":https://project.anrisoftware.com/projects/propertiesutils/roadmap
 * "Project Issues":https://project.anrisoftware.com/projects/propertiesutils/issues
-* "Jenkins":https://jenkins.anrisoftware.com/job/com.anrisoftware.propertiesutils-propertiesutils
+* "Jenkins":%globalpom.custom.jenkins.url%
 
 h1. Example Properties File
 
@@ -27,7 +27,7 @@ com.anrisoftware.propertiesutils.testWithReplacementsSystem = Foo ${os.name}
 
 h1. License
 
-Copyright ©2012 - 2022 Erwin Müller. All rights reserved.
+Copyright ©%project.inceptionYear% - %globalpom.custom.current.year% Erwin Müller. All rights reserved.
 
 Licensed under the Apache License, Version 2.0 (the "License");
 you may not use this file except in compliance with the License.

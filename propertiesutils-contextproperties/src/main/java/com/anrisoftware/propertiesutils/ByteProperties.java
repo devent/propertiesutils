@@ -59,8 +59,7 @@ public class ByteProperties extends TypedProperties {
      */
     public byte[] getDataProperty(String key) {
         String property = getProperty(key);
-        byte[] data = (byte[]) new XStream().fromXML(property);
-        return data;
+        return (byte[]) new XStream().fromXML(property);
     }
 
     /**

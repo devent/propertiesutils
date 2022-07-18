@@ -17,6 +17,9 @@ package com.anrisoftware.propertiesutils;
 
 import java.util.Properties;
 
+import org.apache.commons.lang3.builder.EqualsBuilder;
+import org.apache.commons.lang3.builder.HashCodeBuilder;
+import org.apache.commons.lang3.builder.ToStringBuilder;
 import org.joda.time.Duration;
 import org.joda.time.Period;
 import org.joda.time.format.ISOPeriodFormat;
@@ -120,6 +123,31 @@ public class JodaDateContextProperties extends ContextProperties {
      */
     public Duration getDurationProperty(String key, PeriodFormatter formatter) {
         return dateProperties.getDurationProperty(key, formatter);
+    }
+
+    @Override
+    public synchronized boolean equals(Object obj) {
+        if (obj == null) {
+            return false;
+        }
+        if (obj == this) {
+            return true;
+        }
+        if (obj.getClass() != getClass()) {
+            return false;
+        }
+        var rhs = (JodaDateContextProperties) obj;
+        return new EqualsBuilder().appendSuper(super.equals(rhs)).isEquals();
+    }
+
+    @Override
+    public synchronized int hashCode() {
+        return new HashCodeBuilder().appendSuper(super.hashCode()).toHashCode();
+    }
+
+    @Override
+    public synchronized String toString() {
+        return new ToStringBuilder(this).appendSuper(super.toString()).toString();
     }
 
 }
