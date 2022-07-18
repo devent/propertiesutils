@@ -110,7 +110,7 @@ public class ByteContextProperties extends ContextProperties {
         if (obj.getClass() != getClass()) {
             return false;
         }
-        ContextProperties rhs = (ContextProperties) obj;
+        var rhs = (ByteContextProperties) obj;
         return new EqualsBuilder().appendSuper(super.equals(rhs)).isEquals();
     }
 
