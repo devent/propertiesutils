@@ -25,7 +25,7 @@ Links
 =====
 
 -   [Generated
-    Site](https://javadoc.anrisoftware.com/com.anrisoftware.propertiesutils/propertiesutils/4.6.3-SNAPSHOT/index.html)
+    Site](https://javadoc.anrisoftware.com/com.anrisoftware.propertiesutils/propertiesutils/4.6.3/index.html)
 -   [Download
     (Central)](https://search.maven.org/search?q=g:com.anrisoftware.propertiesutils)
 -   [Source
