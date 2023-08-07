@@ -1,5 +1,5 @@
 /*
- * Copyright 2012-2022 Erwin Müller <erwin.mueller@anrisoftware.com>
+ * Copyright 2012-2023 Erwin Müller <erwin.mueller@anrisoftware.com>
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -34,7 +34,7 @@ import groovy.util.logging.Slf4j
 @Slf4j
 class JodaDateContextPropertiesTest extends AbstractContextPropertiesTest {
 
-    static def getDurationPropertyTestProvider() {
+    static Stream getDurationPropertyTestProvider() {
         Stream.of of('test.duration_foo = PT10H5M30S', new Period('PT10H5M30S').toStandardDuration())
     }
 
@@ -45,7 +45,7 @@ class JodaDateContextPropertiesTest extends AbstractContextPropertiesTest {
         assert properties.getDurationProperty('duration_foo') == expected
     }
 
-    static def getPeriodPropertyTestProvider() {
+    static Stream getPeriodPropertyTestProvider() {
         Stream.of of('test.period_foo = PT10H5M30S', new Period('PT10H5M30S'))
     }
 

@@ -1,5 +1,5 @@
 /*
- * Copyright 2012-2022 Erwin Müller <erwin.mueller@anrisoftware.com>
+ * Copyright 2012-2023 Erwin Müller <erwin.mueller@anrisoftware.com>
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -37,7 +37,7 @@ class MapEntryToStringTest extends AbstractContextPropertiesTest {
 
     static mapEntryToString = new MapEntryToString()
 
-    static def getArgsWithNull() {
+    static Stream getArgsWithNull() {
         Stream.of of([test: 'test'], 'test', 'test'),
         of([test: null], 'test', null),
         of([test: 12], 'test', '12')
@@ -50,7 +50,7 @@ class MapEntryToStringTest extends AbstractContextPropertiesTest {
         assert output == expected
     }
 
-    static def getArgs() {
+    static Stream getArgs() {
         Stream.of of([test: 'test'], 'test', 'test'),
         of([test: 12], 'test', '12')
     }

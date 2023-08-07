@@ -1,5 +1,5 @@
 /*
- * Copyright 2012-2022 Erwin Müller <erwin.mueller@anrisoftware.com>
+ * Copyright 2012-2023 Erwin Müller <erwin.mueller@anrisoftware.com>
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -34,7 +34,7 @@ import groovy.util.logging.Slf4j
 @Slf4j
 class TypedPropertiesTest {
 
-    static def getPropertyDataString() {
+    static Stream getPropertyDataString() {
         Stream.of of('string_foo = some string foo', 'some string foo')
     }
 
@@ -47,7 +47,7 @@ class TypedPropertiesTest {
         assert properties.getProperty('string_foo') == expected
     }
 
-    static def getPropertyDataInt() {
+    static Stream getPropertyDataInt() {
         Stream.of of('int_foo = 12', 12)
     }
 
@@ -60,7 +60,7 @@ class TypedPropertiesTest {
         assert properties.getNumberProperty('int_foo').intValue() == expected
     }
 
-    static def getPropertyDataDouble() {
+    static Stream getPropertyDataDouble() {
         Stream.of of('double_foo = 12.0', (double)12.0)
     }
 
@@ -73,7 +73,7 @@ class TypedPropertiesTest {
         assert properties.getNumberProperty('double_foo').doubleValue() == expected
     }
 
-    static def getListPropertyData() {
+    static Stream getListPropertyData() {
         Stream.of of('list_foo = foo,bar,baz', ['foo', 'bar', 'baz'], ','),
         of('list_foo = foo;bar;baz', ['foo', 'bar', 'baz'], ';')
     }

@@ -1,5 +1,5 @@
 /*
- * Copyright 2012-2022 Erwin Müller <erwin.mueller@anrisoftware.com>
+ * Copyright 2012-2023 Erwin Müller <erwin.mueller@anrisoftware.com>
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -37,7 +37,7 @@ import groovy.util.logging.Slf4j
 @Slf4j
 class ContextPropertiesTest extends AbstractContextPropertiesTest {
 
-    static def getPropertyProvider() {
+    static Stream getPropertyProvider() {
         Stream.of of('test.foo = some string foo', 'some string foo')
     }
 
@@ -48,7 +48,7 @@ class ContextPropertiesTest extends AbstractContextPropertiesTest {
         assert properties.getProperty('foo') == expected
     }
 
-    static def getNumberPropertyTest_intProvider() {
+    static Stream getNumberPropertyTest_intProvider() {
         Stream.of of('test.foo = 12', 12)
     }
 
@@ -58,8 +58,8 @@ class ContextPropertiesTest extends AbstractContextPropertiesTest {
         def properties = new ContextProperties('test', createParentProperties(input))
         assert properties.getNumberProperty('foo').intValue() == expected
     }
-    
-    static def getNumberPropertyTest_doubleProvider() {
+
+    static Stream getNumberPropertyTest_doubleProvider() {
         Stream.of of('test.foo = 12.0', 12.0)
     }
 
@@ -70,7 +70,7 @@ class ContextPropertiesTest extends AbstractContextPropertiesTest {
         assert properties.getNumberProperty('foo').doubleValue() == expected
     }
 
-    static def getTypedListPropertyData_key_format_separatorChars() {
+    static Stream getTypedListPropertyData_key_format_separatorChars() {
         Stream.of of('test.foo = 12,13,14', "foo", NumberFormat.getNumberInstance(), ",", [12l, 13l, 14l])
     }
 
@@ -81,7 +81,7 @@ class ContextPropertiesTest extends AbstractContextPropertiesTest {
         assertIterableEquals expected, properties.getTypedListProperty(key, format, separatorChars)
     }
 
-    static def getTypedListPropertyData_key_format_defaultValue_separatorChars() {
+    static Stream getTypedListPropertyData_key_format_defaultValue_separatorChars() {
         Stream.of of('', "foo", NumberFormat.getNumberInstance(), [12l, 13l, 14l], ",", [12l, 13l, 14l]),
         of('test.foo = 12,13,14', "foo", NumberFormat.getNumberInstance(), [], ",", [12l, 13l, 14l])
     }
@@ -94,8 +94,8 @@ class ContextPropertiesTest extends AbstractContextPropertiesTest {
     }
 
     static final STRING_TO_INT = [stringToType: { String v -> Integer.valueOf(v) }] as StringToType
-    
-    static def getTypedListPropertyData_key_stringToType_separatorChars() {
+
+    static Stream getTypedListPropertyData_key_stringToType_separatorChars() {
         Stream.of of('test.foo = 12,13,14', "foo", STRING_TO_INT, ",", [12, 13, 14])
     }
 
@@ -106,7 +106,7 @@ class ContextPropertiesTest extends AbstractContextPropertiesTest {
         assertIterableEquals expected, properties.getTypedListProperty(key, stringToType, separatorChars)
     }
 
-    static def getTypedListPropertyData_key_stringToType_defaultValue_separatorChars() {
+    static Stream getTypedListPropertyData_key_stringToType_defaultValue_separatorChars() {
         Stream.of of('', "foo", STRING_TO_INT, [12, 13, 14], ",", [12, 13, 14]),
         of('test.foo = 12,13,14', "foo", STRING_TO_INT, [], ",", [12, 13, 14])
     }
@@ -125,10 +125,10 @@ class ContextPropertiesTest extends AbstractContextPropertiesTest {
         assertTrue propertiesA.equals(propertiesB)
     }
 
-    static def getHashCodeData() {
+    static Stream getHashCodeData() {
         Stream.of of('', "test", "foo", 3579771),
-        of('test.foo = 12,13,14', "test", "foo", 3579771),
-        of('foo.bar = 12,13,14', "foo", "bar", 124847)
+                of('test.foo = 12,13,14', "test", "foo", 3579771),
+                of('foo.bar = 12,13,14', "foo", "bar", 124847)
     }
 
     @ParameterizedTest
@@ -137,5 +137,4 @@ class ContextPropertiesTest extends AbstractContextPropertiesTest {
         def properties = new ContextProperties(context, createParentProperties(input))
         assertEquals expected, properties.hashCode()
     }
-
 }
