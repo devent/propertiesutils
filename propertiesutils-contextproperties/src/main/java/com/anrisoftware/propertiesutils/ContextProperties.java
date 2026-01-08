@@ -16,8 +16,7 @@
 package com.anrisoftware.propertiesutils;
 
 import static java.lang.String.format;
-import static org.apache.commons.lang3.StringUtils.startsWith;
-import static org.apache.commons.lang3.Validate.notNull;
+import static java.util.Objects.requireNonNull;
 
 import java.io.File;
 import java.io.Serializable;
@@ -36,6 +35,7 @@ import java.util.Properties;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
+import org.apache.commons.lang3.Strings;
 import org.apache.commons.lang3.builder.EqualsBuilder;
 import org.apache.commons.lang3.builder.HashCodeBuilder;
 import org.apache.commons.lang3.builder.ToStringBuilder;
@@ -126,7 +126,7 @@ public class ContextProperties extends Properties {
      * @since 1.3
      */
     public ContextProperties withReplacements(Map<?, ?> map) {
-        notNull(map);
+        requireNonNull(map);
         Serializable replace;
         for (Map.Entry<?, ?> entry : map.entrySet()) {
             String key = entry.getKey().toString();
@@ -226,7 +226,7 @@ public class ContextProperties extends Properties {
     }
 
     private String keyWithContext(String key) {
-        if (!startsWith(key, context)) {
+        if (!Strings.CS.startsWith(key, context)) {
             key = String.format("%s.%s", context, key);
         }
         return key;
@@ -264,11 +264,11 @@ public class ContextProperties extends Properties {
         return typedProperties.getCharsetProperty(key, defaultValue);
     }
 
-    public URL getURLProperty(String key) throws MalformedURLException {
+    public URL getURLProperty(String key) throws MalformedURLException, URISyntaxException {
         return typedProperties.getURLProperty(key);
     }
 
-    public URL getURLProperty(String key, URL defaultValue) throws MalformedURLException {
+    public URL getURLProperty(String key, URL defaultValue) throws MalformedURLException, URISyntaxException {
         return typedProperties.getURLProperty(key, defaultValue);
     }
 

@@ -235,10 +235,11 @@ public class TypedProperties implements Serializable {
      *         the key was found.
      *
      * @throws MalformedURLException if the property value is not a valid URL.
+     * @throws URISyntaxException    if the property value is not a valid URL.
      */
-    public URL getURLProperty(String key) throws MalformedURLException {
+    public URL getURLProperty(String key) throws MalformedURLException, URISyntaxException {
         String property = getProperty(key);
-        return property == null ? null : new URL(property);
+        return property == null ? null : new URI(property).toURL();
     }
 
     /**
@@ -252,10 +253,11 @@ public class TypedProperties implements Serializable {
      *         with the key was found.
      *
      * @throws MalformedURLException if the property value is not a valid URL.
+     * @throws URISyntaxException    if the property value is not a valid URL.
      */
-    public URL getURLProperty(String key, URL defaultValue) throws MalformedURLException {
+    public URL getURLProperty(String key, URL defaultValue) throws MalformedURLException, URISyntaxException {
         String property = getProperty(key);
-        return property == null ? defaultValue : new URL(property);
+        return property == null ? defaultValue : new URI(property).toURL();
     }
 
     /**

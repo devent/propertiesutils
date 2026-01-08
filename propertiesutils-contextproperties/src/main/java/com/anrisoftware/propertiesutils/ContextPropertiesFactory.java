@@ -28,6 +28,7 @@ import java.io.Reader;
 import java.io.Serializable;
 import java.net.MalformedURLException;
 import java.net.URI;
+import java.net.URISyntaxException;
 import java.net.URL;
 import java.nio.charset.Charset;
 import java.util.Properties;
@@ -273,11 +274,16 @@ public class ContextPropertiesFactory implements Serializable {
      * @since 1.4
      */
     public ContextProperties fromUserResources(URL resource, String fileKey, String urlKey) throws IOException {
-        URL userResource = getUserResourceURL(fileKey, urlKey);
+        URL userResource = null;
+        try {
+            userResource = getUserResourceURL(fileKey, urlKey);
+        } catch (IllegalArgumentException | MalformedURLException | URISyntaxException e) {
+            throw new IOException(urlKey, e);
+        }
         return fromResource(userResource == null ? resource : userResource);
     }
 
-    private URL getUserResourceURL(String fileKey, String urlKey) throws MalformedURLException {
+    private URL getUserResourceURL(String fileKey, String urlKey) throws MalformedURLException, URISyntaxException {
         ContextProperties properties;
         properties = new ContextProperties(context, getProperties());
         File file = properties.getFileProperty(fileKey, null);
